@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import { SNP_CATALOG } from './snpCatalog';
+import { SNP_CATALOG, getRiskLevel } from './snpCatalog';
 import type { SNPResult } from './types';
 
 async function readFileText(file: File): Promise<string> {
@@ -83,14 +83,18 @@ export async function parseDNAFile(file: File): Promise<SNPResult[]> {
   for (const [rsid, def] of Object.entries(SNP_CATALOG)) {
     const data = snpMap.get(rsid);
     if (data) {
+      const riskLevel = getRiskLevel(data.genotype, def);
       results.push({
         rsid,
         chromosome: data.chromosome,
         position: data.position,
         genotype: data.genotype,
         gene: def.gene,
-        trait: def.trait,
+        topic: def.topic,
         category: def.category,
+        riskLevel,
+        insight: def.insights[riskLevel],
+        recommendation: def.recommendation,
       });
     }
   }

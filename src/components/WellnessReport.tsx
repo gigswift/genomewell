@@ -107,7 +107,7 @@ export function WellnessReport({ narrative, snps, onReset }: WellnessReportProps
                     <tr className="border-b border-stone-100 text-left">
                       <th className="pb-2 font-medium text-stone-500">rsID</th>
                       <th className="pb-2 font-medium text-stone-500">Gene</th>
-                      <th className="pb-2 font-medium text-stone-500 hidden sm:table-cell">Trait</th>
+                      <th className="pb-2 font-medium text-stone-500 hidden sm:table-cell">Topic</th>
                       <th className="pb-2 font-medium text-stone-500 text-right">Genotype</th>
                     </tr>
                   </thead>
@@ -116,7 +116,7 @@ export function WellnessReport({ narrative, snps, onReset }: WellnessReportProps
                       <tr key={snp.rsid} className="border-b border-stone-50 last:border-0">
                         <td className="py-1.5 font-mono text-emerald-700">{snp.rsid}</td>
                         <td className="py-1.5 font-semibold">{snp.gene}</td>
-                        <td className="py-1.5 hidden sm:table-cell text-stone-500">{snp.trait}</td>
+                        <td className="py-1.5 hidden sm:table-cell text-stone-500">{snp.topic}</td>
                         <td className="py-1.5 text-right font-mono font-bold text-stone-800">{snp.genotype}</td>
                       </tr>
                     ))}

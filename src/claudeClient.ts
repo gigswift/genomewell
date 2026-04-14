@@ -19,7 +19,7 @@ export async function generateWellnessNarrative(snps: SNPResult[]): Promise<stri
   const snpSummary = Object.entries(byCategory)
     .map(([cat, items]) => {
       const lines = items
-        .map((s) => `  • ${s.rsid} (${s.gene}): ${s.trait} — Genotype: ${s.genotype}`)
+        .map((s) => `  • ${s.rsid} (${s.gene}): ${s.topic} — Genotype: ${s.genotype}`)
         .join('\n');
       return `${cat}:\n${lines}`;
     })
