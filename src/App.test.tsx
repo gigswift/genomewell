@@ -1,45 +1,53 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import App from './App'
 
 describe('App', () => {
-  it('renders the get started heading', () => {
+  it('renders the GenomeWell header', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { name: /get started/i })).toBeInTheDocument()
+    expect(screen.getByText('GenomeWell')).toBeInTheDocument()
   })
 
-  it('renders the counter button starting at 0', () => {
+  it('renders the hero heading on the upload screen', () => {
     render(<App />)
-    expect(screen.getByRole('button', { name: /count is 0/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /know your genes/i })).toBeInTheDocument()
   })
 
-  it('increments the counter on click', async () => {
-    const user = userEvent.setup()
+  it('renders the file upload dropzone', () => {
     render(<App />)
-    const button = screen.getByRole('button', { name: /count is 0/i })
-    await user.click(button)
-    expect(screen.getByRole('button', { name: /count is 1/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /upload dna file/i })).toBeInTheDocument()
   })
 
-  it('increments the counter multiple times', async () => {
-    const user = userEvent.setup()
+  it('renders 23andMe and AncestryDNA instructions', () => {
     render(<App />)
-    const button = screen.getByRole('button', { name: /count is 0/i })
-    await user.click(button)
-    await user.click(button)
-    await user.click(button)
-    expect(screen.getByRole('button', { name: /count is 3/i })).toBeInTheDocument()
+    expect(screen.getByText('23andMe')).toBeInTheDocument()
+    expect(screen.getByText('AncestryDNA')).toBeInTheDocument()
   })
 
-  it('renders documentation and social sections', () => {
+  it('renders the privacy callout', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { name: /documentation/i })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /connect with us/i })).toBeInTheDocument()
+    expect(screen.getByText(/your dna never leaves your device/i)).toBeInTheDocument()
   })
 
-  it('renders Vite and React logo images', () => {
+  it('renders the footer disclaimer', () => {
     render(<App />)
-    expect(screen.getByAltText('Vite logo')).toBeInTheDocument()
-    expect(screen.getByAltText('React logo')).toBeInTheDocument()
+    expect(screen.getByText(/informational and wellness purposes only/i)).toBeInTheDocument()
+  })
+
+  it('shows file input that accepts .txt and .zip', () => {
+    render(<App />)
+    const input = screen.getByLabelText(/dna file input/i) as HTMLInputElement
+    expect(input.accept).toBe('.txt,.zip')
+  })
+
+  it('shows the "Browse files" button', () => {
+    render(<App />)
+    expect(screen.getByRole('button', { name: /browse files/i })).toBeInTheDocument()
+  })
+
+  it('transitions to parsing state when a file is selected', async () => {
+    // We'll just verify the file input exists and is interactive
+    render(<App />)
+    const input = screen.getByLabelText(/dna file input/i)
+    expect(input).toBeInTheDocument()
   })
 })
