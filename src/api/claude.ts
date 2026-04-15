@@ -1,4 +1,4 @@
-import type { RecommendationReport, SNPResult } from '../types';
+import type { RecommendationReport, SNPResult } from '../types/index';
 
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
 
