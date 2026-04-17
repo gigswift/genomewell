@@ -124,4 +124,3 @@ Detailed planning deliverable: Kanban task `3450a` (practitioner engagement fram
 - State coverage map for family practitioners (v1)
 - Malpractice / E&O insurance (~$3–10k/year for company-held policy, v1)
 - Practitioner equity / retainer structure (v1)
-- **Supplement-centric vs SNP-centric architecture** (see `docs/science-snp-catalog.md` — open decision that affects commerce integration)

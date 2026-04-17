@@ -121,45 +121,78 @@ Tier 3 supplements can still be in the stack — tied to user **goals**, not DNA
 
 ---
 
-## ⚠ OPEN DECISION: Supplement-centric architecture
+## ✅ DECIDED 2026-04-17: Supplement-centric architecture
 
-**Status: Under discussion — not yet decided. Review before implementation.**
+The recommender engine is supplement-centric. Each `SupplementRule` owns a set of primary drivers (1–3 SNPs) and supporting modulators (3–10 SNPs) and evaluates them against the user's genotype map. One rule produces one card.
 
-### The problem with SNP-centric recommendations
+### Rationale
 
-The current prototype iterates SNPs → each produces a recommendation → deduplicates supplements at the end. This breaks down when 12 SNPs all say something about Omega-3 with varying confidence and direction.
+- **Commerce alignment.** v0 revenue is Thorne affiliate. Supplement-centric produces one card per supplement → one affiliate link per card. SNP-centric produces N cards that must be deduped into supplements anyway, losing reasoning along the way.
+- **Collapses the multi-SNP-one-supplement problem.** Omega-3 is informed by ~12 SNPs. Iterating SNPs produces conflicting, repetitive output. Iterating supplements produces one card that synthesizes primary drivers + supporting context.
+- **Richer reasoning = higher purchase confidence.** "Your FADS1 + APOE + IL6 profile together suggest X" converts better than three separate SNP cards pointing at the same bottle.
+- **Escape hatch for conflicts.** Conflicting primary drivers → flag for practitioner discussion (v1 Fullscript / family-practitioner path). SNP-centric has nowhere to surface "these signals disagree."
+- **Editorial moat.** Curating supplement rules — which SNPs drive, which modulate, how — is the editorial moat called out in `product-strategy.md`. The parsing engine is not a moat; the rule authorship is.
+- **Keeps Tier 2/3 supplements addressable.** Goal-driven supplements (Urolithin A, adaptogens) slot in as rules with no primary SNPs and surface via goals, not DNA, without forcing a second code path.
 
-### The proposed alternative: supplement-centric evaluation
+### TypeScript interface sketch (doc artifact — not yet in `src/`)
 
-Instead of `SNPRule → interpret(genotype) → recommendation`, flip it:
+```ts
+// Shape reference for the engine rebuild. src/ is rewritten against this shape
+// in a separate task; this block is documentation, not authoritative code.
 
-```
-SupplementRule {
-  supplement: name, default dosage, category
-  primarySNPs: [rsid, gene, how it affects this supplement]
-  supportingSNPs: [rsid, gene, how it modulates]
-  evaluate(snpMap) → { recommend, priority, dosage, reasoning }
+type Genotype = string;                    // e.g. "CT", "GG", "--" for no-call
+type Priority = 'essential' | 'recommended' | 'consider' | 'skip';
+type Confidence = 'high' | 'medium' | 'flagged-conflict' | 'insufficient-data';
+type Category =
+  | 'daily-wellness'
+  | 'healthy-aging'
+  | 'body-optimization'
+  | 'food-sensitivity';
+
+interface SNPReference {
+  rsid: string;
+  gene: string;
+  role: 'primary' | 'supporting';
+  effect: string;                           // human-readable; shown in reasoning
 }
+
+interface SupplementEvaluation {
+  recommend: boolean;
+  priority: Priority;
+  dosage: string;                           // e.g. "2g combined EPA/DHA daily"
+  reasoning: string[];                      // user-facing sentences
+  firedPrimary: string[];                   // rsids of primaries that contributed
+  firedSupporting: string[];                // rsids of supporting SNPs that modulated
+  confidence: Confidence;
+}
+
+interface SupplementRule {
+  supplement: string;                       // display name
+  category: Category;
+  defaultDosage: string;
+  primarySNPs: SNPReference[];              // 1–3 drivers
+  supportingSNPs: SNPReference[];           // 3–10 modulators
+  evaluate(snpMap: Map<string, Genotype>): SupplementEvaluation;
+}
+
+// Engine shape: iterate SupplementRule[], not SNPRule[].
+// const stack = SUPPLEMENT_RULES
+//   .map(rule => ({ rule, result: rule.evaluate(snpMap) }))
+//   .filter(({ result }) => result.recommend);
 ```
 
-For each supplement in the catalog:
-1. **Primary drivers** (1–3 SNPs) set the base recommendation
-2. **Supporting SNPs** (3–10) modulate priority and dosage
-3. If primaries agree → clear recommendation with confidence
-4. If supporting SNPs reinforce → increase priority/dosage
-5. If primaries conflict (rare) → flag as "discuss with practitioner"
-6. Output one unified card per supplement, not one card per SNP
-
-### Example: Omega-3 supplement rule
+### Worked example 1: Omega-3 (EPA/DHA)
 
 **Primary drivers (3 SNPs):**
+
 | rsid | Gene | Signal |
 |---|---|---|
 | rs174537 | FADS1 | ALA→EPA conversion — GG = poor converter, must supplement |
 | rs1535 | FADS2 | Same desaturase pathway, reinforces FADS1 |
 | rs953413 | ELOVL2 | EPA→DHA elongation step |
 
-**Supporting context (8–12 SNPs):**
+**Supporting context (8–9 SNPs):**
+
 | rsid | Gene | How it modulates |
 |---|---|---|
 | rs429358 + rs7412 | APOE | E4 carriers benefit more (neuro + lipid) → increases priority |
@@ -182,6 +215,44 @@ For each supplement in the catalog:
 > **Suggested:** 2g combined EPA/DHA daily
 > *Based on: FADS1, FADS2, ELOVL2 (primary) + APOE, IL6, PPARG (supporting)*
 
+### Worked example 2: Vitamin D3 + K2
+
+Chosen as the second worked example for African-ancestry relevance: rs2282679 (GC) has a strong effect and the target audience is meaningfully impacted.
+
+**Primary drivers (3 SNPs):**
+
+| rsid | Gene | Signal |
+|---|---|---|
+| rs1544410 | VDR | Receptor efficiency — AA/GA reduces vitamin D utilization at the cellular level |
+| rs2282679 | GC | Vitamin D binding protein — minor allele reduces circulating 25(OH)D; effect size is elevated in African-ancestry populations |
+| rs10741657 | CYP2R1 | 25-hydroxylase — variants reduce conversion of D3 to active 25(OH)D |
+
+**Supporting context (4 SNPs):**
+
+| rsid | Gene | How it modulates |
+|---|---|---|
+| rs12785878 | DHCR7 | 7-dehydrocholesterol reductase — affects cutaneous D3 synthesis; reinforces supplementation case |
+| rs4988235 | LCT | Lactase persistence — lactose non-persistence implies reduced dairy/calcium intake → K2 co-factor matters more |
+| rs1800795 | IL6 | Pro-inflammatory genotype → vitamin D's immunomodulatory effect becomes higher-value → increases priority |
+| rs7903146 | TCF7L2 | T2D risk → vitamin D's insulin-sensitivity contribution becomes higher-value → increases priority |
+
+**Evaluation logic:**
+1. Any primary firing → `recommend: true`, `priority: recommended`.
+2. Two or more primaries firing → `priority: essential`.
+3. GC minor allele carried (African-ancestry context) → dosage bumped from baseline (e.g. 2000 IU → 4000–5000 IU D3), K2 MK-7 paired by default.
+4. Supporting SNPs do not change `recommend`, only priority / dosage / reasoning text.
+5. All three primaries wild-type and no supporting SNPs firing → `recommend: false`, `confidence: insufficient-data`. Winter / latitude guidance still lives at the product layer; the engine stays silent.
+
+**User sees one card:**
+> **Vitamin D3 + K2** — Essential
+>
+> Your GC and VDR profile indicates both lower circulating vitamin D and reduced receptor efficiency. The GC variant you carry has a stronger effect in people of African ancestry, so standard-dose D3 is unlikely to get you into the optimal range.
+>
+> Your inflammation and metabolic profile (IL6, TCF7L2) make vitamin D's anti-inflammatory and insulin-sensitizing effects especially relevant for you.
+>
+> **Suggested:** 5000 IU D3 + 100 mcg MK-7 (K2) daily, with fat
+> *Based on: VDR, GC, CYP2R1 (primary) + IL6, TCF7L2 (supporting)*
+
 ### Multi-SNP supplement map (draft — top supplements)
 
 | Supplement | Primary SNPs | Supporting SNPs | Total SNPs |
@@ -198,16 +269,17 @@ For each supplement in the catalog:
 | L-carnitine | ADRB2 | PPARGC1A, ACE, CPT1A | ~4–5 |
 | Berberine / chromium | TCF7L2, PPARG | FTO, IRS1, SLC2A2 | ~4–6 |
 
-### Why this matters for the business model
+### Edge cases
 
-The supplement-centric model aligns directly with the affiliate commerce model:
-- Each supplement card IS a product recommendation → affiliate link
-- One card per supplement → one buy button per recommendation
-- Richer reasoning → higher purchase confidence → higher conversion
-- The "12 SNPs all mention omega-3 in different ways" problem goes away
+**(a) One SNP informs multiple supplements.** APOE (rs429358 + rs7412) is a *supporting* SNP for Omega-3 (E4 carriers → increased priority via neuro + lipid benefit) and a *primary* SNP for Phosphatidylserine (E4-specific driver). This is expected, not a conflict. Each `SupplementRule.evaluate()` consumes the shared `snpMap` independently; the same genotype legitimately carries different weight in different supplement contexts. The dedupe problem from SNP-centric disappears because iteration is over supplements, so APOE never produces two separate cards.
 
-### Decision needed
-Should the recommender engine be rebuilt as supplement-centric before implementation? Or should the MVP ship with the current SNP-centric model and refactor later?
+**(b) Conflicting primary drivers.** Example shape: one primary says "poor converter, supplement" and another primary in the same rule implies "elevated baseline, supplementation unnecessary." Resolution: return `confidence: 'flagged-conflict'`, downgrade `priority` to `consider`, and include both sides in `reasoning`. In v0 (no practitioner) this surfaces as a "discuss with a clinician before supplementing" note on the card; in v1 it routes into the Fullscript / practitioner flow. The engine never silently picks a winner between conflicting primaries.
+
+**(c) Supplements with only supporting SNPs firing (no primaries).** If `firedPrimary` is empty but `firedSupporting` is non-empty, return `recommend: false`. The engine does not promote Tier 2/3 supplements on supporting signal alone — those remain goal-driven per the existing Tier 2/3 framing. This preserves the "tied to goals, not DNA" honesty line from the *Selling trendy supplements honestly* section above.
+
+### Migration note
+
+`src/engine/snpRules.ts` (17 SNPs, orphan) and `src/snpCatalog.ts` (31 SNPs, active) both iterate SNPs and dedupe supplements downstream. Both are replaced by a new module (e.g. `src/engine/supplementRules.ts`) that exports a `SupplementRule[]` keyed on the multi-SNP map above, growing toward the 42-supplement catalog. `snpCatalog.ts` demotes to a reference dataset — rsid → gene → description — used by `SupplementRule.evaluate()` implementations for genotype lookup and reasoning strings, but no longer the iteration driver. The results page renders `supplementRules.map(r => r.evaluate(userSnpMap)).filter(x => x.recommend)` as one card per supplement, matching the commerce surface one-to-one. Engine rebuild is a separate task; this section records the decision and the shape the rebuild must hit.
 
 ---
 
