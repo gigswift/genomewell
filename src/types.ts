@@ -53,3 +53,68 @@ export interface RecommendationReport {
   fitnessProtocols: FitnessProtocol[];
   narrativeSummary: string;
 }
+
+export type Genotype = string;
+
+export interface SNPInput {
+  rsid: string;
+  genotype: Genotype;
+}
+
+export type Partner = 'thorne' | 'biotrust' | 'organifi';
+
+export interface PartnerOption {
+  partner: Partner;
+  productSlug: string;
+  displayName?: string;
+}
+
+export type SupplementCategory =
+  | 'daily-wellness'
+  | 'healthy-aging'
+  | 'body-optimization'
+  | 'food-sensitivity';
+
+export type SupplementPriorityTier =
+  | 'essential'
+  | 'recommended'
+  | 'consider'
+  | 'skip';
+
+export type SupplementConfidence =
+  | 'high'
+  | 'medium'
+  | 'flagged-conflict'
+  | 'insufficient-data';
+
+export interface SNPReference {
+  rsid: string;
+  gene: string;
+  role: 'primary' | 'supporting';
+  effect: string;
+}
+
+export interface Supplement {
+  name: string;
+  category: SupplementCategory;
+  defaultDosage: string;
+  partnerOptions: PartnerOption[];
+}
+
+export interface SupplementRule {
+  supplement: Supplement;
+  primarySNPs: SNPReference[];
+  supportingSNPs: SNPReference[];
+  evaluate(snpMap: Map<string, Genotype>): SupplementRecommendation | null;
+}
+
+export interface SupplementRecommendation {
+  supplement: Supplement;
+  priority: SupplementPriorityTier;
+  dosage: string;
+  reasoning: string[];
+  firedPrimary: string[];
+  firedSupporting: string[];
+  confidence: SupplementConfidence;
+  partnerOptions: PartnerOption[];
+}
