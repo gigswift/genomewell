@@ -92,6 +92,7 @@ export interface SNPReference {
   gene: string;
   role: 'primary' | 'supporting';
   effect: string;
+  riskGenotypes: readonly string[];
 }
 
 export interface Supplement {
@@ -101,11 +102,21 @@ export interface Supplement {
   partnerOptions: PartnerOption[];
 }
 
+export type EvidenceTier = 'SNP-driven' | 'SNP-informed';
+
 export interface SupplementRule {
   supplement: Supplement;
+  evidenceTier: EvidenceTier;
   primarySNPs: SNPReference[];
   supportingSNPs: SNPReference[];
-  evaluate(snpMap: Map<string, Genotype>): SupplementRecommendation | null;
+  // Skip-only rules (e.g. Iron + HFE carrier) force priority = 'skip' when any primary fires.
+  avoidanceRule?: boolean;
+  // Haplotype gate — if present, a rule only fires when this predicate is true
+  // (used by PS which requires APOE E4 haplotype across rs429358 + rs7412).
+  customGate?: (snpMap: Map<string, Genotype>) => boolean;
+  // Dose modulator — applied after firing to bump dosage for specific genotypes
+  // (e.g. Vitamin D GC minor allele → 5000 IU).
+  doseModulator?: (snpMap: Map<string, Genotype>, defaultDosage: string) => string;
 }
 
 export interface SupplementRecommendation {
@@ -118,3 +129,5 @@ export interface SupplementRecommendation {
   confidence: SupplementConfidence;
   partnerOptions: PartnerOption[];
 }
+
+export type GroupedRecommendations = Record<SupplementCategory, SupplementRecommendation[]>;

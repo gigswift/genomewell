@@ -80,3 +80,28 @@ To resume: tell Claude "unpark [title]" or "resume the [title] thread."
 **Next action when unparked:** Prototype the chat interface, define the system prompt, set up the structured-context handoff from results to chat, test with sample SNP profiles.
 
 **Dependencies:** v0 results dashboard must be functional. Anthropic API key or proxy required. Practitioner sign-off on the chat disclaimer language (could be part of task `3450a`).
+
+---
+
+## Tier 2 supplement expansion
+**Parked:** 2026-04-18
+
+**Context:** During the supplement-engine port (v0 catalog = 18 supplements), the question surfaced whether Tier 2 supplements (Ashwagandha, Curcumin, Chromium — and possibly Resveratrol) should be included with a UI-surfaced confidence label. The architecture already supports this: `SupplementRecommendation.confidence` has a `'medium'` tier, and `SupplementRule.evidenceTier` distinguishes `SNP-driven` from `SNP-informed`. No code changes needed to surface them.
+
+**What blocks inclusion today:** `CLAUDE.md` evidence-discipline rule: *"Evidence strength labeled honestly — if previously labeled 'weak,' it cannot be included."* All three current Tier 2 entries are labeled weak in `docs/science-snp-catalog.md:171-174` ("plausible, not proven" / "mechanistic, not prescription" / "weaker clinical effect").
+
+**Three resolution paths considered:**
+1. **Amend the CLAUDE.md rule** — replace "weak evidence excluded" with "weak evidence allowed if `confidence='medium'` and UI labels it." User leaning toward this; wants to review evidence per supplement first before deciding.
+2. **Case-by-case promotion** — individually re-evaluate each Tier 2 candidate against the inclusion checklist via PharmGKB / PubMed WebSearch. Chromium likely still fails (redundancy with berberine, not evidence).
+3. **Tier 2 as goal-driven only** — rules with empty `primarySNPs`, surfaced only when user selects matching goal (Inflammation → Curcumin, Energy → Ashwagandha). Mirrors the Tier 3 pattern.
+
+**Research needed before decision:**
+- WebSearch-verified evidence summary for each Tier 2 candidate, following the CLAUDE.md citation rule (never cite PMIDs from memory).
+- User noted Resveratrol stood out as weaker than other Tier 2 options — Resveratrol is **not currently in any tier** in `docs/science-snp-catalog.md`. If it's being considered it needs to be added to the evaluation set.
+- Open-ended question: scan for other SNP-hooked supplements not yet tiered (quercetin, milk thistle / CYP metabolism, etc.).
+
+**Rough cost estimate for evidence research:** ~6-9 WebSearches + 2-4 WebFetches on PharmGKB/PubMed. Single-digit dollars at most.
+
+**Next action when unparked:** Run the targeted WebSearch pass, record verified findings in `docs/science-snp-catalog.md` (per "verify once, record in docs" rule), then choose path 1/2/3 with user.
+
+**Architecture headroom confirmed:** No code changes required — `SupplementRule` already accepts empty `primarySNPs`, `SupplementConfidence` already includes `'medium'`, and the rules array is the only file that grows.

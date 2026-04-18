@@ -1,6 +1,12 @@
 import JSZip from 'jszip';
+import { ENGINE_RSIDS } from './engine/supplementRules';
 import { SNP_CATALOG, getRiskLevel } from './snpCatalog';
-import type { SNPResult } from './types';
+import type { Genotype, SNPResult } from './types';
+
+export interface ParsedDNA {
+  results: SNPResult[];
+  engineSnpMap: Map<string, Genotype>;
+}
 
 async function readFileText(file: File): Promise<string> {
   if (file.name.endsWith('.zip') || file.type === 'application/zip' || file.type === 'application/x-zip-compressed') {
@@ -74,7 +80,7 @@ function extractSnpMap(text: string): Map<string, { chromosome: string; position
   return snpMap;
 }
 
-export async function parseDNAFile(file: File): Promise<SNPResult[]> {
+export async function parseDNAFile(file: File): Promise<ParsedDNA> {
   const text = await readFileText(file);
   const snpMap = extractSnpMap(text);
 
@@ -99,5 +105,13 @@ export async function parseDNAFile(file: File): Promise<SNPResult[]> {
     }
   }
 
-  return results;
+  // Side-channel map for the supplement engine: only rsids referenced by any rule.
+  // Keeps the engine independent of SNP_CATALOG (which remains the legacy UI source).
+  const engineSnpMap = new Map<string, Genotype>();
+  for (const rsid of ENGINE_RSIDS) {
+    const data = snpMap.get(rsid);
+    if (data) engineSnpMap.set(rsid, data.genotype);
+  }
+
+  return { results, engineSnpMap };
 }

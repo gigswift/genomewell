@@ -4,11 +4,39 @@ import { ResultsDashboard } from './components/ResultsDashboard';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { parseRawDNA } from './services/parseRawDNA';
 import { runRecommendations } from './services/runRecommendations';
-import { buildSupplementStack } from './services/buildSupplementStack';
+import { recommendSupplements } from './services/recommendSupplements';
 import { generateNarrativeSummary } from './services/generateNarrativeSummary';
 import { NARRATIVE_FALLBACK } from './types';
-import type { AppStep, SNPResult, RecommendationReport } from './types';
+import type {
+  AppStep,
+  RecommendationReport,
+  SNPResult,
+  SupplementItem,
+  SupplementPriority,
+  SupplementPriorityTier,
+  SupplementRecommendation,
+} from './types';
 import './App.css';
+
+// Task-5 TODO: replace this adapter with a dashboard that renders
+// SupplementRecommendation directly (priority tiers, reasoning arrays, partner options).
+// For now the adapter keeps the existing UI rendering so the port doesn't block on polish.
+const PRIORITY_MAP: Record<SupplementPriorityTier, SupplementPriority> = {
+  essential: 'essential',
+  recommended: 'beneficial',
+  consider: 'optional',
+  skip: 'optional',
+};
+
+function toSupplementItem(rec: SupplementRecommendation): SupplementItem {
+  return {
+    name: rec.supplement.name,
+    dosage: rec.dosage,
+    timing: 'As directed',
+    priority: PRIORITY_MAP[rec.priority],
+    reason: rec.reasoning.join(' • '),
+  };
+}
 
 const WELLNESS_GOALS = [
   'Heart Health',
@@ -29,12 +57,13 @@ export default function App() {
     setErrorMsg('');
     setStep('parsing');
     try {
-      // 1. Parse DNA file locally
-      const snps = await parseRawDNA(file);
+      // 1. Parse DNA file locally (legacy SNPResult[] + raw map for the new engine)
+      const { results: snps, engineSnpMap } = await parseRawDNA(file);
       setParsedDNA(snps);
 
-      // 2. Build recommendations synchronously
-      const supplementStack = buildSupplementStack(snps);
+      // 2. Build recommendations synchronously via supplement-centric engine
+      const { flat } = recommendSupplements(engineSnpMap);
+      const supplementStack = flat.map(toSupplementItem);
       const fitnessProtocols = runRecommendations(snps);
 
       // 3. Set partial report (with fallback narrative) and go to results
