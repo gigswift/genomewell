@@ -22,7 +22,7 @@ This is an ethical line, not a disclaimer formality.
 ## Current catalog state (prototype)
 - `src/engine/snpRules.ts` — 17 brief-curated SNPs (orphan code from parallel build)
 - `src/snpCatalog.ts` — 31 SNPs (active in app)
-- Both need to be replaced with the MVP catalog defined below
+- Both need to be replaced with the v0 supplement catalog defined below
 
 ## Categories (decided 2026-04-16)
 
@@ -33,81 +33,147 @@ This is an ethical line, not a disclaimer formality.
 | **Body Optimization** | Exercise physiology, muscle fiber, fat oxidation, recovery, injury risk. Supplement context only — no fitness programming | Moderate — supplement-informed, not workout-informed |
 | **Food Sensitivity** | Lactose, caffeine, histamine, alcohol, bitter taste, gluten-related | Limited — more informational than supplement-driven |
 
-## SNP tiers
+## Supplement Catalog (v0)
 
-| Tier | Target count | Principle |
-|---|---|---|
-| **MVP (lean)** | ~20 | Highest-confidence, every SNP ties to a concrete supplement action |
-| **Rich (recommended v1)** | ~40 | Adds second-tier SNPs that genuinely change recommendations beyond MVP |
-| **Exhaustive** | ~95–150 | Academic completeness; includes weaker/specialized effects |
+Every row passes the supplement inclusion checklist in `CLAUDE.md`: explicit evidence tier, at least one primary SNP with published evidence, honest labeling, partner disclosed (or gap noted), not contradicted by a prior decision. Count is driven by the evidence bar — no target. Within each category, rows are ordered by evidence strength: SNP-driven (strong primary) first, SNP-informed (partial hooks) second.
 
-### Per-category breakdown
+Partner convention: `Thorne: <slug>` for the 8 supplements confirmed in `commerce-practitioner.md` (methylfolate, methyl-B12, D3+K2, omega-3, CoQ10, magnesium, NAC, berberine). All other rows use `Thorne: <slug-tbd>` — slug verification is deferred to the affiliate-integration task. `gap — no v0 partner` when no partner is evident. `n/a (avoidance, no commerce)` for skip-priority cards. BioTrust and Organifi don't overlap this catalog and aren't speculated into any row.
 
-| Category | MVP | Rich | Exhaustive |
+### Daily Wellness
+
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+|---|---|---|---|---|---|
+| **Methylfolate (L-5-MTHF)** | rs1801133 MTHFR C677T; rs1801131 MTHFR A1298C; rs2236225 MTHFD1 | rs1805087 MTR; rs1801394 MTRR; rs4680 COMT; rs234706 CBS; rs3733890 BHMT; rs601338 FUT2 | 400–1000 mcg daily | Thorne: 5-mthf | SNP-driven |
+| **Methyl-B12 (methylcobalamin)** | rs601338 FUT2; rs1805087 MTR; rs1801394 MTRR | rs1801133 MTHFR; rs234706 CBS; rs1801198 TCN2 | 1000 mcg daily | Thorne: methyl-b12 | SNP-driven |
+| **Vitamin D3 + K2** | rs1544410 VDR BsmI; rs2282679 GC; rs10741657 CYP2R1 | rs12785878 DHCR7; rs4988235 LCT; rs1800795 IL6; rs7903146 TCF7L2 | 2000–5000 IU D3 + 100 mcg MK-7 daily, with fat (GC minor allele → 5000 IU) | Thorne: d3-k2 | SNP-driven |
+| **Omega-3 (EPA/DHA, marine)** | rs174537 FADS1; rs1535 FADS2; rs953413 ELOVL2 | rs429358 + rs7412 APOE; rs7903146 TCF7L2; rs1801282 PPARG; rs1800795 IL6; rs1800629 TNFA; rs17238540 HMGCR; rs708272 CETP; rs1042713 ADRB2; rs8192678 PPARGC1A | 2 g combined EPA/DHA daily, with food | Thorne: omega-3 | SNP-driven |
+| **NAC (N-acetyl cysteine)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs4880 SOD2; rs1050450 GPX1; rs1799930 NAT2 | 600 mg twice daily | Thorne: nac | SNP-driven |
+| **Berberine** | rs7903146 TCF7L2; rs1801282 PPARG | rs9939609 FTO; rs1801278 IRS1; rs5400 SLC2A2 | 500 mg 2–3× daily with meals | Thorne: berberine | SNP-driven |
+| **Magnesium (glycinate)** | rs11144134 TRPM6 | rs4680 COMT; rs1801133 MTHFR; rs1544410 VDR | 200–400 mg elemental daily | Thorne: magnesium-bisglycinate | SNP-informed |
+| **Sulforaphane (broccoli sprout)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs6721961 NFE2L2 | 10–30 mg SGS daily | Thorne: \<slug-tbd\> | SNP-informed |
+
+### Healthy Aging
+
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+|---|---|---|---|---|---|
+| **CoQ10 (ubiquinol)** | rs1800566 NQO1; rs4880 SOD2 | rs17238540 HMGCR; rs4693570 COQ2; rs8192678 PPARGC1A | 100–200 mg ubiquinol daily with fat | Thorne: coq10 | SNP-driven |
+| **Phosphatidylserine (PS)** | rs429358 + rs7412 APOE (E4 carriers only) | rs6265 BDNF; rs1800795 IL6 | 100 mg 3× daily (E4 carriers) | Thorne: \<slug-tbd\> | SNP-driven (E4-gated) |
+| **NMN / NR (NAD⁺ precursor)** | rs1800566 NQO1 | rs4880 SOD2; rs2802292 FOXO3; rs3758391 SIRT1 | 300 mg NR or 500 mg NMN daily | Thorne: \<slug-tbd\> | SNP-informed |
+
+### Body Optimization
+
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+|---|---|---|---|---|---|
+| **Creatine monohydrate** | rs1815739 ACTN3 | rs4343 ACE; rs8192678 PPARGC1A | 3–5 g daily | Thorne: creatine | SNP-driven (ACTN3 XX genotype benefits most; dose not genotype-titrated) |
+| **L-carnitine (tartrate)** | rs1042713 ADRB2 | rs8192678 PPARGC1A; rs4343 ACE; rs762551 CYP1A2 | 1–2 g daily | Thorne: \<slug-tbd\> | SNP-driven |
+| **PQQ** | rs8192678 PPARGC1A | rs4880 SOD2 | 10–20 mg daily | Thorne: \<slug-tbd\> | SNP-informed |
+
+### Food Sensitivity
+
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+|---|---|---|---|---|---|
+| **Lactase enzyme** | rs4988235 LCT | — | 3000–9000 FCC units with dairy meals | Thorne: \<slug-tbd\> | SNP-driven |
+| **Non-dairy calcium (citrate)** | rs4988235 LCT | rs1544410 VDR; rs2282679 GC | 500–1000 mg daily | Thorne: \<slug-tbd\> | SNP-driven |
+| **DAO enzyme (histamine intolerance)** | rs10156191 AOC1; rs1049742 AOC1 | rs1800629 TNFA | 10,000 HDU before histamine-rich meals | gap — no v0 partner | SNP-driven |
+| **Iron — SKIP if HFE carrier** | rs1799945 HFE H63D; rs1800562 HFE C282Y | — | Skip priority; no supplementation recommended | n/a (avoidance, no commerce) | SNP-driven |
+
+## SNP Reference (v0 ceiling: 60)
+
+v0 catalog uses 60 SNPs — the union of all primary and supporting SNPs referenced in the supplement catalog above. SNPs beyond 60 are out-of-scope for v0.
+
+**Current catalog references 51 unique variants** (49 rsids + GSTM1-null and GSTT1-null CNVs). Padding toward 60 is explicitly disallowed — additional SNPs must come from new evidence-gated supplement rules, not from bolting more supporting SNPs onto existing rules.
+
+Each SNP is listed once, under the category where its primary role sits (or, for supporting-only SNPs, under the category of the supplement they most prominently inform).
+
+### Daily Wellness (33 variants)
+
+| rsid | Gene | Role | Informs |
 |---|---|---|---|
-| Daily Wellness | 10 | 20 | 50–80 |
-| Healthy Aging | 3 | 6 | 15–25 |
-| Body Optimization | 4 | 8 | 20–30 |
-| Food Sensitivity | 3 | 6 | 10–15 |
+| rs1801133 | MTHFR C677T | primary | Methylfolate (supporting: Methyl-B12, Magnesium) |
+| rs1801131 | MTHFR A1298C | primary | Methylfolate |
+| rs2236225 | MTHFD1 | primary | Methylfolate |
+| rs601338 | FUT2 | primary | Methyl-B12 (supporting: Methylfolate) |
+| rs1805087 | MTR | primary | Methyl-B12 (supporting: Methylfolate) |
+| rs1801394 | MTRR | primary | Methyl-B12 (supporting: Methylfolate) |
+| rs1544410 | VDR BsmI | primary | D3+K2 (supporting: Magnesium, Non-dairy calcium) |
+| rs2282679 | GC | primary | D3+K2 (supporting: Non-dairy calcium) |
+| rs10741657 | CYP2R1 | primary | D3+K2 |
+| rs174537 | FADS1 | primary | Omega-3 |
+| rs1535 | FADS2 | primary | Omega-3 |
+| rs953413 | ELOVL2 | primary | Omega-3 |
+| rs1695 | GSTP1 | primary | NAC, Sulforaphane |
+| rs7903146 | TCF7L2 | primary | Berberine (supporting: D3+K2, Omega-3) |
+| rs1801282 | PPARG | primary | Berberine (supporting: Omega-3) |
+| rs11144134 | TRPM6 | primary | Magnesium |
+| rs4680 | COMT | supporting | Methylfolate, Magnesium |
+| rs234706 | CBS | supporting | Methylfolate, Methyl-B12 |
+| rs3733890 | BHMT | supporting | Methylfolate |
+| rs1801198 | TCN2 | supporting | Methyl-B12 |
+| rs12785878 | DHCR7 | supporting | D3+K2 |
+| rs1800795 | IL6 | supporting | D3+K2, Omega-3, Phosphatidylserine |
+| rs1800629 | TNFA | supporting | Omega-3, DAO enzyme |
+| rs17238540 | HMGCR | supporting | Omega-3, CoQ10 |
+| rs708272 | CETP | supporting | Omega-3 |
+| rs1050450 | GPX1 | supporting | NAC |
+| rs1799930 | NAT2 | supporting | NAC |
+| rs9939609 | FTO | supporting | Berberine |
+| rs1801278 | IRS1 | supporting | Berberine |
+| rs5400 | SLC2A2 | supporting | Berberine |
+| rs6721961 | NFE2L2 | supporting | Sulforaphane |
+| GSTM1-null¹ | GSTM1 | supporting | NAC, Sulforaphane |
+| GSTT1-null¹ | GSTT1 | supporting | NAC, Sulforaphane |
 
-### MVP SNP set (decided)
+### Healthy Aging (8 variants)
 
-**Daily Wellness (10):**
-
-| rsid | Gene | What it tells you | Supplement tie |
+| rsid | Gene | Role | Informs |
 |---|---|---|---|
-| rs1801133 | MTHFR | Folate metabolism efficiency | Methylfolate vs folic acid |
-| rs1805087 | MTR | B12 utilization | Methylcobalamin |
-| rs1801394 | MTRR | B12 recycling | Methyl-B12 dosing |
-| rs4680 | COMT | Methylation + stress response | Magnesium, SAMe caution |
-| rs1544410 | VDR | Vitamin D receptor efficiency | Higher D3 dose |
-| rs2282679 | GC | Vitamin D binding protein (**strong African ancestry effect**) | Significantly higher D3 + K2 |
-| rs174537 | FADS1 | Omega-3 ALA→EPA conversion | Preformed marine omega-3 |
-| rs7903146 | TCF7L2 | T2D risk (**T allele more common in African ancestry**) | Berberine, chromium |
-| rs1801282 | PPARG | Insulin sensitivity | Omega-3, lower carb response |
-| rs1695 | GSTP1 | Glutathione / detox capacity | NAC, sulforaphane |
+| rs429358 | APOE (ε4 tag) | primary | Phosphatidylserine (supporting: Omega-3) |
+| rs7412 | APOE (ε2 tag) | primary | Phosphatidylserine (supporting: Omega-3) |
+| rs1800566 | NQO1 | primary | CoQ10, NMN/NR |
+| rs4880 | SOD2 | primary | CoQ10 (supporting: NAC, NMN/NR, PQQ) |
+| rs4693570 | COQ2 | supporting | CoQ10 |
+| rs6265 | BDNF | supporting | Phosphatidylserine |
+| rs2802292 | FOXO3 | supporting | NMN/NR |
+| rs3758391 | SIRT1 | supporting | NMN/NR |
 
-**Healthy Aging (3):**
+### Body Optimization (5 variants)
 
-| rsid | Gene | What it tells you | Supplement tie |
+| rsid | Gene | Role | Informs |
 |---|---|---|---|
-| rs429358 + rs7412 | APOE | Lipid metabolism / APOE genotype | Low sat fat, phosphatidylserine if E4 |
-| rs4880 | SOD2 | Mitochondrial antioxidant defense | CoQ10, MitoQ |
-| rs1800566 | NQO1 | CoQ10 / NAD pathway | CoQ10, NMN / NR |
+| rs1815739 | ACTN3 | primary | Creatine |
+| rs1042713 | ADRB2 | primary | L-carnitine (supporting: Omega-3) |
+| rs8192678 | PPARGC1A | primary | PQQ (supporting: Omega-3, CoQ10, Creatine, L-carnitine) |
+| rs4343 | ACE | supporting | Creatine, L-carnitine |
+| rs762551 | CYP1A2 | supporting | L-carnitine (exercise context) |
 
-**Body Optimization (4):**
+### Food Sensitivity (5 variants)
 
-| rsid | Gene | What it tells you | Supplement tie |
+| rsid | Gene | Role | Informs |
 |---|---|---|---|
-| rs1815739 | ACTN3 | Muscle fiber composition | Creatine, recovery protocol |
-| rs1799752 | ACE | Cardiovascular / endurance efficiency | L-carnitine, electrolytes |
-| rs8192678 | PPARGC1A | Mitochondrial biogenesis | CoQ10, PQQ |
-| rs1042713 | ADRB2 | Fat oxidation during exercise | L-carnitine, fasted cardio protocol |
+| rs4988235 | LCT | primary | Lactase enzyme, Non-dairy calcium (supporting: D3+K2) |
+| rs10156191 | AOC1 | primary | DAO enzyme |
+| rs1049742 | AOC1 | primary | DAO enzyme |
+| rs1799945 | HFE H63D | primary | Iron (skip if carrier) |
+| rs1800562 | HFE C282Y | primary | Iron (skip if carrier) |
 
-**Food Sensitivity (3):**
+¹ GSTM1-null and GSTT1-null are copy-number variants (full gene deletions), not SNPs. 23andMe and AncestryDNA chip coverage of these CNVs is inconsistent; when genotype data is unavailable, the engine should fall back to neutral reasoning rather than assume one call or the other. Treat chip coverage as a verification task, not an assumed given.
 
-| rsid | Gene | What it tells you | Supplement tie |
-|---|---|---|---|
-| rs4988235 | LCT | Lactose persistence | Non-dairy calcium sources |
-| rs1799945 | HFE | Iron absorption | **Avoid** iron supplementation |
-| rs762551 | CYP1A2 | Caffeine metabolism speed | Caffeine timing guidance |
+### Excluded for v0
 
-### Rich tier additions (draft — pending full 150-SNP catalog review)
+The following SNPs from earlier drafts do not appear in any v0 catalog row and are out-of-scope:
 
-**Daily Wellness (+10):** MTHFD1, CBS, BHMT, FUT2, PEMT, CYP2R1, DHCR7, TMPRSS6, IL6, TNFA
-**Healthy Aging (+3):** FOXO3, KLOTHO, BDNF
-**Body Optimization (+4):** MSTN, CYP1A2 (exercise context), COL1A1, UCP2
-**Food Sensitivity (+3):** ADORA2A, TAS2R38, DAO/AOC1
-
-### Exhaustive tier
-Full ~150-SNP reference catalog being compiled separately via Claude. Will be integrated after review.
+- **Rich-tier draft additions** (PEMT, TMPRSS6, KLOTHO, MSTN, COL1A1, UCP2, ADORA2A, TAS2R38) — no v0 supplement rule references them.
+- **CYP1A2 caffeine-timing** — caffeine timing guidance is not a supplement purchase; CYP1A2 is retained as supporting-only for L-carnitine (exercise context).
+- **ACE I/D indel (rs1799752)** — the SNP-form tag (rs4343) is used instead; rs1799752 is an insertion/deletion polymorphism with inconsistent chip coverage.
 
 ## Supplement evidence tiers (for non-SNP-driven supplements)
 
 ### Tier 2 — Mechanistic rationale (not prescription)
-- **Creatine:** CKM / CKMT2 variants exist; no SNP-guided dosing validated
-- **Ashwagandha / adaptogens:** FKBP5, NR3C1 (cortisol pathway) — plausible, not proven
-- **Curcumin:** IL6, TNFA, CRP as inflammation hooks
+- **Ashwagandha / adaptogens:** FKBP5, NR3C1 (cortisol pathway) — plausible, not proven; excluded from v0
+- **Curcumin:** IL6, TNFA, CRP as inflammation hooks — mechanistic, not prescription; excluded from v0
+- **Chromium:** TCF7L2, PPARG overlap with berberine but clinical effect is weaker; excluded from v0 to avoid double-counting the glycemic signal
+
+Note: Creatine has CKM/CKMT2 dose-titration variants that are not validated, but ACTN3 R577X (rs1815739) has published evidence that XX-genotype carriers benefit most. Creatine is therefore included in the v0 catalog as SNP-driven for inclusion-gating only, with a fixed 3–5 g daily dose rather than a genotype-titrated one.
 
 ### Tier 3 — NOT SNP-guided (be honest)
 - **Urolithin A:** gut microbiome-dependent, not genetic (~40% are "producers"). Requires stool test, not DNA.
@@ -267,7 +333,7 @@ Chosen as the second worked example for African-ancestry relevance: rs2282679 (G
 | Phosphatidylserine | APOE (E4 specific) | BDNF, IL6 | ~3–4 |
 | NMN / NR (NAD precursor) | NQO1 | SOD2, FOXO3, SIRT1 | ~4–5 |
 | L-carnitine | ADRB2 | PPARGC1A, ACE, CPT1A | ~4–5 |
-| Berberine / chromium | TCF7L2, PPARG | FTO, IRS1, SLC2A2 | ~4–6 |
+| Berberine | TCF7L2, PPARG | FTO, IRS1, SLC2A2 | ~4–6 |
 
 ### Edge cases
 
@@ -279,7 +345,7 @@ Chosen as the second worked example for African-ancestry relevance: rs2282679 (G
 
 ### Migration note
 
-`src/engine/snpRules.ts` (17 SNPs, orphan) and `src/snpCatalog.ts` (31 SNPs, active) both iterate SNPs and dedupe supplements downstream. Both are replaced by a new module (e.g. `src/engine/supplementRules.ts`) that exports a `SupplementRule[]` keyed on the multi-SNP map above, growing toward the 42-supplement catalog. `snpCatalog.ts` demotes to a reference dataset — rsid → gene → description — used by `SupplementRule.evaluate()` implementations for genotype lookup and reasoning strings, but no longer the iteration driver. The results page renders `supplementRules.map(r => r.evaluate(userSnpMap)).filter(x => x.recommend)` as one card per supplement, matching the commerce surface one-to-one. Engine rebuild is a separate task; this section records the decision and the shape the rebuild must hit.
+`src/engine/snpRules.ts` (17 SNPs, orphan) and `src/snpCatalog.ts` (31 SNPs, active) both iterate SNPs and dedupe supplements downstream. Both are replaced by a new module (e.g. `src/engine/supplementRules.ts`) that exports a `SupplementRule[]` populated from the Supplement Catalog (v0) section above. `snpCatalog.ts` demotes to a reference dataset — rsid → gene → description — used by `SupplementRule.evaluate()` implementations for genotype lookup and reasoning strings, but no longer the iteration driver. The results page renders `supplementRules.map(r => r.evaluate(userSnpMap)).filter(x => x.recommend)` as one card per supplement, matching the commerce surface one-to-one. Engine rebuild is a separate task; this section records the decision and the shape the rebuild must hit.
 
 ---
 
@@ -288,4 +354,4 @@ Chosen as the second worked example for African-ancestry relevance: rs2282679 (G
 - **Add pharmacogenomics as v2 feature** — high trust, high value, low regulatory risk
 - **Skip or heavily caveat cancer/longevity** until a clinical advisor is in place
 - **Categories are final:** Daily Wellness, Healthy Aging, Body Optimization, Food Sensitivity
-- **MVP = 20 SNPs** across 4 categories; Rich = ~40; Exhaustive = ~150
+- **v0 SNP set** = the union of primary + supporting SNPs referenced by the supplement catalog (see Supplement Catalog (v0) section). Current count: 51 variants. Ceiling: 60.

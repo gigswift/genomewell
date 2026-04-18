@@ -40,9 +40,9 @@ Before adding any supplement to the catalog, verify ALL of the following:
 
 ## Catalog constraints
 - **4 categories:** Daily Wellness, Healthy Aging, Body Optimization, Food Sensitivity
-- **42 supplements**, each with at least partial SNP backing. No goal-only filler.
-- **~55–60 unique SNPs** to evaluate the supplement catalog
-- Supplements with "weak" or no SNP evidence have been explicitly excluded. Do not re-add them.
+- **Supplement count = whatever the evidence supports**; no padding to a target. Each included supplement must pass the supplement inclusion checklist (above).
+- **60 unique SNPs total for v0**, referenced by the supplement catalog
+- Supplements with "weak" or no SNP evidence are explicitly excluded. See `docs/science-snp-catalog.md` Tier 3 section for the full exclusion list. Do not re-add them.
 
 ## Architecture
 - Supplement-centric model (OPEN DECISION — check docs for current status before implementing)
