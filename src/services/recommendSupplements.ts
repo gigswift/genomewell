@@ -1,19 +1,12 @@
 import { SUPPLEMENT_RULES } from '../engine/supplementRules';
+import { CATEGORY_ORDER } from '../lib/supplementLabels';
 import type {
   Genotype,
   GroupedRecommendations,
-  SupplementCategory,
   SupplementPriorityTier,
   SupplementRecommendation,
 } from '../types';
 import { evaluate } from './supplementEngine';
-
-const CATEGORY_ORDER: SupplementCategory[] = [
-  'daily-wellness',
-  'healthy-aging',
-  'body-optimization',
-  'food-sensitivity',
-];
 
 const PRIORITY_ORDER: Record<SupplementPriorityTier, number> = {
   essential: 0,

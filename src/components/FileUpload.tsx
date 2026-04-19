@@ -22,6 +22,35 @@ export function FileUpload({ onFile }: FileUploadProps) {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
+      {/* Privacy promise — above the drop zone so users see it before they upload */}
+      <div className="mb-6 bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex gap-3">
+        <svg
+          className="w-6 h-6 text-emerald-700 flex-shrink-0 mt-0.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+          />
+        </svg>
+        <div>
+          <p className="text-base font-semibold text-emerald-900">
+            Your DNA never leaves your device.
+          </p>
+          <p className="text-sm text-emerald-800 mt-1">
+            All file parsing happens locally in your browser. Only structured
+            genetic marker results (not your raw file) are sent to Claude to
+            generate your wellness narrative. No genetic data is stored or
+            transmitted to any server.
+          </p>
+        </div>
+      </div>
+
       {/* Drop zone */}
       <div
         role="button"
@@ -100,21 +129,6 @@ export function FileUpload({ onFile }: FileUploadProps) {
         </div>
       </div>
 
-      {/* Privacy callout */}
-      <div className="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex gap-3">
-        <svg className="w-5 h-5 text-emerald-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-        </svg>
-        <div>
-          <p className="text-sm font-semibold text-emerald-800">Your DNA never leaves your device</p>
-          <p className="text-xs text-emerald-700 mt-0.5">
-            All file parsing happens locally in your browser. Only structured genetic marker results
-            (not your raw file) are sent to Claude to generate your wellness narrative.
-            No genetic data is stored or transmitted to any server.
-          </p>
-        </div>
-      </div>
     </div>
   );
 }

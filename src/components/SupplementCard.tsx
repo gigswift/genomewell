@@ -1,16 +1,9 @@
 import type {
-  SupplementCategory,
   SupplementPriorityTier,
   SupplementRecommendation,
 } from '../types';
 import { buildAffiliateUrl, getPartnerDisplayName } from '../lib/affiliateLinks';
-
-const CATEGORY_LABELS: Record<SupplementCategory, string> = {
-  'daily-wellness': 'Daily Wellness',
-  'healthy-aging': 'Healthy Aging',
-  'body-optimization': 'Body Optimization',
-  'food-sensitivity': 'Food Sensitivity',
-};
+import { CATEGORY_LABELS } from '../lib/supplementLabels';
 
 const PRIORITY_STYLES: Record<
   SupplementPriorityTier,
