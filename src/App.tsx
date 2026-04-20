@@ -7,7 +7,6 @@ import { recommendSupplements } from './services/recommendSupplements';
 import type {
   Genotype,
   GroupedRecommendations,
-  SNPResult,
 } from './types';
 
 const PROGRESS_DURATION_MS = 1800;
@@ -17,9 +16,9 @@ const DONE_HOLD_MS = 650;
 export default function App() {
   const [parseState, setParseState] = useState<ParseState>('idle');
   const [progress, setProgress] = useState(0);
-  const [parsedDNA, setParsedDNA] = useState<SNPResult[]>([]);
   const [snpMap, setSnpMap] = useState<Map<string, Genotype> | null>(null);
   const [grouped, setGrouped] = useState<GroupedRecommendations | null>(null);
+  const [totalRowsParsed, setTotalRowsParsed] = useState(0);
   const [errorMsg, setErrorMsg] = useState('');
   const [showResults, setShowResults] = useState(false);
 
@@ -75,12 +74,12 @@ export default function App() {
     startProgressAnimation();
 
     try {
-      const { results: snps, engineSnpMap } = await parseRawDNA(file);
+      const { engineSnpMap, totalRowsParsed: total } = await parseRawDNA(file);
       const { grouped: g } = recommendSupplements(engineSnpMap);
 
-      setParsedDNA(snps);
       setSnpMap(engineSnpMap);
       setGrouped(g);
+      setTotalRowsParsed(total);
 
       stopProgressAndFinalize();
       setParseState('done');
@@ -104,9 +103,9 @@ export default function App() {
     }
     setParseState('idle');
     setProgress(0);
-    setParsedDNA([]);
     setSnpMap(null);
     setGrouped(null);
+    setTotalRowsParsed(0);
     setShowResults(false);
     setErrorMsg('');
   }
@@ -124,8 +123,8 @@ export default function App() {
       <ErrorBoundary>
         <Dashboard
           grouped={grouped}
-          parsedDNA={parsedDNA}
           snpMap={snpMap}
+          totalRowsParsed={totalRowsParsed}
           onReset={reset}
         />
       </ErrorBoundary>

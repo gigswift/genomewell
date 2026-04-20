@@ -3,18 +3,18 @@ import { GWLogo, GWPrivacyLockup } from './ui';
 import { SupplementCard } from './SupplementCard';
 import { toDesignCards } from '../lib/designDataAdapter';
 import { CATEGORY_LABELS, CATEGORY_ORDER } from '../lib/supplementLabels';
+import { deriveArchetype, type Archetype } from '../lib/archetype';
 import type {
   Genotype,
   GroupedRecommendations,
-  SNPResult,
   SupplementCategory,
   SupplementRecommendation,
 } from '../types';
 
 interface DashboardProps {
   grouped: GroupedRecommendations;
-  parsedDNA: SNPResult[];
   snpMap: Map<string, Genotype>;
+  totalRowsParsed: number;
   onReset: () => void;
 }
 
@@ -30,16 +30,19 @@ function useIsMobile(breakpoint = 780): boolean {
   return isMobile;
 }
 
-export function Dashboard({ grouped, parsedDNA, snpMap, onReset }: DashboardProps) {
+export function Dashboard({
+  grouped,
+  snpMap,
+  totalRowsParsed,
+  onReset,
+}: DashboardProps) {
   const isMobile = useIsMobile();
   const [tab, setTab] = useState<SupplementCategory>('daily-wellness');
 
   const allRecs: SupplementRecommendation[] = CATEGORY_ORDER.flatMap(
     (c) => grouped[c],
   );
-  const snpsAnalyzed = parsedDNA.length;
-  const variantsMatched = new Set(allRecs.flatMap((r) => r.firedPrimary)).size;
-  const essentialPicks = allRecs.filter((r) => r.priority === 'essential').length;
+  const archetype = deriveArchetype(snpMap, allRecs, totalRowsParsed);
 
   const recsForTab = grouped[tab];
   const cards = toDesignCards(recsForTab, snpMap);
@@ -72,12 +75,7 @@ export function Dashboard({ grouped, parsedDNA, snpMap, onReset }: DashboardProp
         </div>
       </header>
 
-      <PlaceholderHero
-        isMobile={isMobile}
-        snpsAnalyzed={snpsAnalyzed}
-        variantsMatched={variantsMatched}
-        essentialPicks={essentialPicks}
-      />
+      <ArchetypeHero isMobile={isMobile} archetype={archetype} />
 
       <div style={{
         padding: isMobile ? '0 22px' : '0 48px',
@@ -126,23 +124,11 @@ export function Dashboard({ grouped, parsedDNA, snpMap, onReset }: DashboardProp
 
 interface HeroProps {
   isMobile: boolean;
-  snpsAnalyzed: number;
-  variantsMatched: number;
-  essentialPicks: number;
+  archetype: Archetype;
 }
 
-function PlaceholderHero({
-  isMobile,
-  snpsAnalyzed,
-  variantsMatched,
-  essentialPicks,
-}: HeroProps) {
-  const stats = [
-    { k: 'SNPs analyzed', v: snpsAnalyzed.toLocaleString() },
-    { k: 'Variants matched', v: variantsMatched.toString() },
-    { k: 'Essential picks', v: essentialPicks.toString() },
-    { k: 'Processed locally', v: '100%' },
-  ];
+function ArchetypeHero({ isMobile, archetype }: HeroProps) {
+  const { primary, secondary, subtitle, stats } = archetype;
   return (
     <section style={{
       padding: isMobile ? '28px 22px 24px' : '48px 48px 32px',
@@ -155,7 +141,7 @@ function PlaceholderHero({
         letterSpacing: '0.12em', textTransform: 'uppercase',
         color: 'var(--gw-ink-soft)', marginBottom: isMobile ? 14 : 20,
       }}>
-        <span>Your results</span>
+        <span>Your archetype</span>
         <span style={{ color: 'var(--gw-accent)' }}>● Ready</span>
       </div>
       <h1 style={{
@@ -167,8 +153,15 @@ function PlaceholderHero({
         letterSpacing: 'var(--gw-display-letter)',
         color: 'var(--gw-ink)',
       }}>
-        Your DNA analysis is{' '}
-        <em style={{ fontStyle: 'italic', color: 'var(--gw-accent)' }}>complete.</em>
+        <em style={{ fontStyle: 'italic', color: 'var(--gw-accent)' }}>{primary}</em>
+        {secondary ? (
+          <>
+            ,<br />
+            <span>{secondary}.</span>
+          </>
+        ) : (
+          '.'
+        )}
       </h1>
       <p style={{
         marginTop: isMobile ? 14 : 18,
@@ -176,7 +169,7 @@ function PlaceholderHero({
         fontSize: isMobile ? 15 : 17,
         lineHeight: 1.55, color: 'var(--gw-ink-muted)',
       }}>
-        We read your file on this device and ranked every supplement by how clearly your variants support it. Start with the essentials — the rest is honest context.
+        {subtitle}
       </p>
 
       <div style={{

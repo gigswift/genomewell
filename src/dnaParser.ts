@@ -6,6 +6,7 @@ import type { Genotype, SNPResult } from './types';
 export interface ParsedDNA {
   results: SNPResult[];
   engineSnpMap: Map<string, Genotype>;
+  totalRowsParsed: number;
 }
 
 async function readFileText(file: File): Promise<string> {
@@ -113,5 +114,5 @@ export async function parseDNAFile(file: File): Promise<ParsedDNA> {
     if (data) engineSnpMap.set(rsid, data.genotype);
   }
 
-  return { results, engineSnpMap };
+  return { results, engineSnpMap, totalRowsParsed: snpMap.size };
 }
