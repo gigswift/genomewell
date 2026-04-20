@@ -12,7 +12,8 @@ const PRIORITY_ORDER: Record<SupplementPriorityTier, number> = {
   essential: 0,
   recommended: 1,
   consider: 2,
-  skip: 3,
+  gap: 3,
+  skip: 4,
 };
 
 function emptyGrouped(): GroupedRecommendations {
@@ -36,8 +37,15 @@ export function recommendSupplements(
   for (const rule of SUPPLEMENT_RULES) {
     const rec = evaluate(rule, snpMap);
     if (!rec) continue;
-    flat.push(rec);
-    grouped[rec.supplement.category].push(rec);
+    // Remap fired supplements with no partner to 'gap' so the UI shows the
+    // "no shop yet" state instead of hiding them. Avoidance ('skip') rules
+    // are preserved — they're a warning, not a commerce gap.
+    const gapped: SupplementRecommendation =
+      rec.priority !== 'skip' && rec.partnerOptions.length === 0
+        ? { ...rec, priority: 'gap' }
+        : rec;
+    flat.push(gapped);
+    grouped[gapped.supplement.category].push(gapped);
   }
 
   for (const cat of CATEGORY_ORDER) {

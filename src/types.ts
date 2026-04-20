@@ -58,7 +58,8 @@ export type SupplementPriorityTier =
   | 'essential'
   | 'recommended'
   | 'consider'
-  | 'skip';
+  | 'skip'
+  | 'gap';
 
 export type SupplementConfidence =
   | 'high'

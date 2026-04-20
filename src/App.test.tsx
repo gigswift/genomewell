@@ -1,53 +1,47 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
 
-describe('App', () => {
-  it('renders the GenomeWell header', () => {
+describe('App (Landing state)', () => {
+  it('renders the genomewell wordmark', () => {
     render(<App />)
-    expect(screen.getByText('GenomeWell')).toBeInTheDocument()
+    expect(screen.getByText('genomewell')).toBeInTheDocument()
   })
 
-  it('renders the hero heading on the upload screen', () => {
+  it('renders the Hero C split headline', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { name: /know your genes/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /supplements,.*picked by your.*actual genome/i }),
+    ).toBeInTheDocument()
   })
 
-  it('renders the file upload dropzone', () => {
+  it('renders the upload dropzone heading', () => {
     render(<App />)
-    expect(screen.getByRole('button', { name: /upload dna file/i })).toBeInTheDocument()
+    expect(screen.getByText(/drop your raw dna file/i)).toBeInTheDocument()
   })
 
-  it('renders 23andMe and AncestryDNA instructions', () => {
+  it('mentions 23andMe and AncestryDNA file support', () => {
     render(<App />)
-    expect(screen.getByText('23andMe')).toBeInTheDocument()
-    expect(screen.getByText('AncestryDNA')).toBeInTheDocument()
+    expect(
+      screen.getByText(/23andMe or AncestryDNA/i),
+    ).toBeInTheDocument()
   })
 
-  it('renders the privacy callout', () => {
+  it('renders the privacy rule lockup', () => {
     render(<App />)
-    expect(screen.getByText(/your dna never leaves your device/i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/your dna never leaves your device/i),
+    ).toBeInTheDocument()
   })
 
-  it('renders the footer disclaimer', () => {
+  it('exposes a "Choose a file" primary CTA', () => {
     render(<App />)
-    expect(screen.getByText(/informational and wellness purposes only/i)).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /choose a file/i }),
+    ).toBeInTheDocument()
   })
 
-  it('shows file input that accepts .txt and .zip', () => {
+  it('renders the not-a-medical-device footer disclaimer', () => {
     render(<App />)
-    const input = screen.getByLabelText(/dna file input/i) as HTMLInputElement
-    expect(input.accept).toBe('.txt,.zip')
-  })
-
-  it('shows the "Browse files" button', () => {
-    render(<App />)
-    expect(screen.getByRole('button', { name: /browse files/i })).toBeInTheDocument()
-  })
-
-  it('transitions to parsing state when a file is selected', async () => {
-    // We'll just verify the file input exists and is interactive
-    render(<App />)
-    const input = screen.getByLabelText(/dna file input/i)
-    expect(input).toBeInTheDocument()
+    expect(screen.getByText(/not a medical device/i)).toBeInTheDocument()
   })
 })

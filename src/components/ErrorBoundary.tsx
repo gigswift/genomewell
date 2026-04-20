@@ -10,6 +10,8 @@ interface State {
   error: Error | null;
 }
 
+const AVOID_RED = '#C25B3F';
+
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -27,21 +29,48 @@ export class ErrorBoundary extends Component<Props, State> {
   override render() {
     if (this.state.hasError) {
       return (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
-          <svg className="w-10 h-10 text-red-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-          <h3 className="font-semibold text-red-800 mb-2">Something went wrong</h3>
-          <p className="text-sm text-red-700 font-mono bg-red-100 rounded p-2 text-left break-words">
+        <div style={{
+          margin: 40,
+          padding: 32,
+          background: 'var(--gw-surface)',
+          border: `1px solid ${AVOID_RED}`,
+          borderRadius: 20,
+          textAlign: 'center',
+          fontFamily: 'var(--gw-font-body)',
+        }}>
+          <h3 style={{
+            margin: '0 0 12px',
+            fontFamily: 'var(--gw-font-display)',
+            fontSize: 28,
+            fontWeight: 400,
+            color: 'var(--gw-ink)',
+            letterSpacing: 'var(--gw-display-letter)',
+          }}>Something went wrong.</h3>
+          <p style={{
+            margin: '0 auto',
+            maxWidth: 520,
+            fontSize: 14,
+            lineHeight: 1.55,
+            color: 'var(--gw-ink-muted)',
+          }}>
             {this.state.error?.message ?? 'Unknown error'}
           </p>
           <button
+            type="button"
             onClick={() => this.setState({ hasError: false, error: null })}
-            className="mt-4 px-4 py-2 bg-emerald-700 text-white rounded-lg text-sm hover:bg-emerald-800 transition-colors"
-          >
-            Try again
-          </button>
+            style={{
+              marginTop: 20,
+              padding: '10px 18px',
+              borderRadius: 999,
+              border: '1px solid var(--gw-ink)',
+              background: 'var(--gw-ink)',
+              color: 'var(--gw-surface)',
+              fontFamily: 'var(--gw-font-body)',
+              fontSize: 14,
+              fontWeight: 500,
+              cursor: 'pointer',
+            }}
+          >Try again</button>
         </div>
       );
     }
