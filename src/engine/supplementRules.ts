@@ -36,7 +36,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Methylfolate (L-5-MTHF)',
       category: 'daily-wellness',
       defaultDosage: '400–1000 mcg daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: '5-mthf' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: '5-mthf-1-mg',
+          productName: '5-MTHF 1 mg',
+          productUrl: 'https://www.thorne.com/products/dp/5-mthf-1-mg',
+          priceDisplay: '$24',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/b129__v9e2dcbdfca9045f29cc531eca894e0722dd58f27.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -58,7 +67,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Methyl-B12 (methylcobalamin)',
       category: 'daily-wellness',
       defaultDosage: '1000 mcg daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'methyl-b12' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'methylcobalamin',
+          productName: 'Vitamin B12',
+          productUrl: 'https://www.thorne.com/products/dp/methylcobalamin',
+          priceDisplay: '$24',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/b125__vdc2295bdfd7f57713849ab8693465dc3ee2e45a0.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -77,7 +95,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Vitamin D3 + K2',
       category: 'daily-wellness',
       defaultDosage: '2000 IU D3 + 100 mcg MK-7 daily, with fat',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'd3-k2' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'vitamin-d-k2-liquid',
+          productName: 'Vitamin D + K2 Liquid',
+          productUrl: 'https://www.thorne.com/products/dp/vitamin-d-k2-liquid',
+          priceDisplay: '$34',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/kd500__v1f2f6991180c90d1d7e83b441748f077d3d853d8.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -104,7 +131,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Omega-3 (EPA/DHA, marine)',
       category: 'daily-wellness',
       defaultDosage: '2 g combined EPA/DHA daily, with food',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'omega-3' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'super-epa-sp608nc',
+          productName: 'Super EPA - 90 Servings',
+          productUrl: 'https://www.thorne.com/products/dp/super-epa-sp608nc',
+          priceDisplay: '$41',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp608nc__v85ffd3158c5fcd199d35f8f66966125217d62306.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -130,7 +166,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'NAC (N-acetyl cysteine)',
       category: 'daily-wellness',
       defaultDosage: '600 mg twice daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'nac' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'cysteplus-reg',
+          productName: 'NAC - N-Acetylcysteine - 90 Servings',
+          productUrl: 'https://www.thorne.com/products/dp/cysteplus-reg',
+          priceDisplay: '$33',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sa560__v9249e43d5234140b60ada72238c5fb10f53ee558.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -147,7 +192,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Berberine',
       category: 'daily-wellness',
       defaultDosage: '500 mg 2–3× daily with meals',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'berberine' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'berberine-500',
+          productName: 'Berberine',
+          productUrl: 'https://www.thorne.com/products/dp/berberine-500',
+          priceDisplay: '$44',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sf800__vd424273289116ed602cb97bcef5ca314e2b9ff03.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -165,7 +219,33 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Magnesium (glycinate)',
       category: 'daily-wellness',
       defaultDosage: '200–400 mg elemental daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'magnesium-bisglycinate' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'magnesium-glycinate',
+          productName: 'Magnesium Glycinate',
+          productUrl: 'https://www.thorne.com/products/dp/magnesium-glycinate',
+          priceDisplay: '$26',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/m284__v722511088310a527d9bd4f32ff1f8a38e3e4fa0f.png',
+        },
+        {
+          partner: 'biotrust',
+          productSlug: 'ageless-multi-magnesium',
+          productName: 'Ageless Multi Magnesium',
+          productUrl: 'https://www.biotrust.com/products/ageless-multi-magnesium',
+          priceDisplay: '$37',
+          originalPriceDisplay: '$39',
+          imageUrl: 'https://www.biotrust.com/cdn/shop/files/ageless_magnesium-primary_thumbnail.png',
+        },
+        {
+          partner: 'organifi',
+          productSlug: 'magnesium',
+          productName: 'Essential Magnesium',
+          productUrl: 'https://www.organifishop.com/products/magnesium',
+          priceDisplay: '$30',
+          imageUrl: 'https://www.organifishop.com/cdn/shop/products/Organifi-Magnesium-3DRender-Mast_533x.png?v=1681857279',
+        },
+      ],
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -182,7 +262,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Sulforaphane (broccoli sprout)',
       category: 'daily-wellness',
       defaultDosage: '10–30 mg SGS daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'crucera-sgs',
+          productName: 'Broccoli Seed Extract',
+          productUrl: 'https://www.thorne.com/products/dp/crucera-sgs',
+          priceDisplay: '$67',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp660__v0bc92c7bbc38958c3e6b1cf6d7516e9133de907f.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -199,7 +288,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'CoQ10 (ubiquinol)',
       category: 'healthy-aging',
       defaultDosage: '100–200 mg ubiquinol daily with fat',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'coq10' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'q-best-100',
+          productName: 'CoQ10',
+          productUrl: 'https://www.thorne.com/products/dp/q-best-100',
+          priceDisplay: '$53',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp624__v0e9c43db03041def65f6aef69118044fc2cc0839.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -217,7 +315,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Phosphatidylserine (PS)',
       category: 'healthy-aging',
       defaultDosage: '100 mg 3× daily (E4 carriers)',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'iso-phos-reg',
+          productName: 'Phosphatidylserine',
+          productUrl: 'https://www.thorne.com/products/dp/iso-phos-reg',
+          priceDisplay: '$68',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sf715__va829b08aa2703b779ace7a4b83e7c2bc143e1d06.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -235,7 +342,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'NMN / NR (NAD⁺ precursor)',
       category: 'healthy-aging',
       defaultDosage: '300 mg NR or 500 mg NMN daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'niacel-400',
+          productName: 'NiaCel® 400',
+          productUrl: 'https://www.thorne.com/products/dp/niacel-400',
+          priceDisplay: '$74',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp654__va5a0653d7b868a8ef96b8912e5dc924178efd56f.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -254,7 +370,24 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Creatine monohydrate',
       category: 'body-optimization',
       defaultDosage: '3–5 g daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'creatine' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'creatine',
+          productName: 'Creatine - 90 Servings',
+          productUrl: 'https://www.thorne.com/products/dp/creatine',
+          priceDisplay: '$44',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sf903__ve8382489c6ce9fb7f28cdddef00e6f1ece146591.png',
+        },
+        {
+          partner: 'organifi',
+          productSlug: 'creatine-cherry-chews',
+          productName: 'Creatine Cherry Chews',
+          productUrl: 'https://www.organifishop.com/products/creatine-cherry-chews',
+          priceDisplay: '$42.99',
+          imageUrl: 'https://www.organifishop.com/cdn/shop/files/Organifi_Cherry_Chews_TP_533x.png?v=1736450167',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -270,7 +403,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'L-carnitine (tartrate)',
       category: 'body-optimization',
       defaultDosage: '1–2 g daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'carnityl-reg',
+          productName: 'Acetyl-L-Carnitine',
+          productUrl: 'https://www.thorne.com/products/dp/carnityl-reg',
+          priceDisplay: '$32',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sa520__v9e769c15ab53497dd06ad1359dd34903eba54714.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -287,7 +429,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'PQQ',
       category: 'body-optimization',
       defaultDosage: '10–20 mg daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [],
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -304,7 +446,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Lactase enzyme',
       category: 'food-sensitivity',
       defaultDosage: '3000–9000 FCC units with dairy meals',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -317,7 +459,16 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       name: 'Non-dairy calcium (citrate)',
       category: 'food-sensitivity',
       defaultDosage: '500–1000 mg daily',
-      partnerOptions: [{ partner: 'thorne', productSlug: 'tbd' }],
+      partnerOptions: [
+        {
+          partner: 'thorne',
+          productSlug: 'dicalcium-malate',
+          productName: 'Calcium',
+          productUrl: 'https://www.thorne.com/products/dp/dicalcium-malate',
+          priceDisplay: '$28',
+          imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/m281__v0eba4b643c65deb5775ba03a5b2644494e4918b7.png',
+        },
+      ],
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [

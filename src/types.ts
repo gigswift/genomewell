@@ -46,6 +46,12 @@ export interface PartnerOption {
   partner: Partner;
   productSlug: string;
   displayName?: string;
+  productName: string;
+  productUrl: string;
+  priceDisplay: string;
+  // BioTrust-only: pre-sale price; render as strike-through when present and ≠ priceDisplay.
+  originalPriceDisplay?: string;
+  imageUrl: string;
 }
 
 export type SupplementCategory =

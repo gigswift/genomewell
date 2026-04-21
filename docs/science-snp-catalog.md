@@ -37,43 +37,43 @@ This is an ethical line, not a disclaimer formality.
 
 Every row passes the supplement inclusion checklist in `CLAUDE.md`: explicit evidence tier, at least one primary SNP with published evidence, honest labeling, partner disclosed (or gap noted), not contradicted by a prior decision. Count is driven by the evidence bar — no target. Within each category, rows are ordered by evidence strength: SNP-driven (strong primary) first, SNP-informed (partial hooks) second.
 
-Partner convention: `Thorne: <slug>` for the 8 supplements confirmed in `commerce-practitioner.md` (methylfolate, methyl-B12, D3+K2, omega-3, CoQ10, magnesium, NAC, berberine). All other rows use `Thorne: <slug-tbd>` — slug verification is deferred to the affiliate-integration task. `gap — no v0 partner` when no partner is evident. `n/a (avoidance, no commerce)` for skip-priority cards. BioTrust and Organifi don't overlap this catalog and aren't speculated into any row.
+Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per row, semicolon-joined when multiple partners carry a match. Slugs and display data are wired from the CSVs in `docs/catalogue/` (Thorne 201 rows, BioTrust 20 rows, Organifi 31 rows). Where a partner lacks a matching SKU by product name/form, that partner is omitted from the row. `gap — no v0 partner` when no partner on any CSV matches. `n/a (avoidance, no commerce)` for skip-priority cards. Affiliate IDs remain env-var placeholders — wiring real IDs is deferred to a separate task.
 
 ### Daily Wellness
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **Methylfolate (L-5-MTHF)** | rs1801133 MTHFR C677T; rs1801131 MTHFR A1298C; rs2236225 MTHFD1 | rs1805087 MTR; rs1801394 MTRR; rs4680 COMT; rs234706 CBS; rs3733890 BHMT; rs601338 FUT2 | 400–1000 mcg daily | Thorne: 5-mthf | SNP-driven |
-| **Methyl-B12 (methylcobalamin)** | rs601338 FUT2; rs1805087 MTR; rs1801394 MTRR | rs1801133 MTHFR; rs234706 CBS; rs1801198 TCN2 | 1000 mcg daily | Thorne: methyl-b12 | SNP-driven |
-| **Vitamin D3 + K2** | rs1544410 VDR BsmI; rs2282679 GC; rs10741657 CYP2R1 | rs12785878 DHCR7; rs4988235 LCT; rs1800795 IL6; rs7903146 TCF7L2 | 2000–5000 IU D3 + 100 mcg MK-7 daily, with fat (GC minor allele → 5000 IU) | Thorne: d3-k2 | SNP-driven |
-| **Omega-3 (EPA/DHA, marine)** | rs174537 FADS1; rs1535 FADS2; rs953413 ELOVL2 | rs429358 + rs7412 APOE; rs7903146 TCF7L2; rs1801282 PPARG; rs1800795 IL6; rs1800629 TNFA; rs17238540 HMGCR; rs708272 CETP; rs1042713 ADRB2; rs8192678 PPARGC1A | 2 g combined EPA/DHA daily, with food | Thorne: omega-3 | SNP-driven |
-| **NAC (N-acetyl cysteine)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs4880 SOD2; rs1050450 GPX1; rs1799930 NAT2 | 600 mg twice daily | Thorne: nac | SNP-driven |
-| **Berberine** | rs7903146 TCF7L2; rs1801282 PPARG | rs9939609 FTO; rs1801278 IRS1; rs5400 SLC2A2 | 500 mg 2–3× daily with meals | Thorne: berberine | SNP-driven |
-| **Magnesium (glycinate)** | rs11144134 TRPM6 | rs4680 COMT; rs1801133 MTHFR; rs1544410 VDR | 200–400 mg elemental daily | Thorne: magnesium-bisglycinate | SNP-informed |
-| **Sulforaphane (broccoli sprout)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs6721961 NFE2L2 | 10–30 mg SGS daily | Thorne: \<slug-tbd\> | SNP-informed |
+| **Methylfolate (L-5-MTHF)** | rs1801133 MTHFR C677T; rs1801131 MTHFR A1298C; rs2236225 MTHFD1 | rs1805087 MTR; rs1801394 MTRR; rs4680 COMT; rs234706 CBS; rs3733890 BHMT; rs601338 FUT2 | 400–1000 mcg daily | Thorne: 5-mthf-1-mg | SNP-driven |
+| **Methyl-B12 (methylcobalamin)** | rs601338 FUT2; rs1805087 MTR; rs1801394 MTRR | rs1801133 MTHFR; rs234706 CBS; rs1801198 TCN2 | 1000 mcg daily | Thorne: methylcobalamin | SNP-driven |
+| **Vitamin D3 + K2** | rs1544410 VDR BsmI; rs2282679 GC; rs10741657 CYP2R1 | rs12785878 DHCR7; rs4988235 LCT; rs1800795 IL6; rs7903146 TCF7L2 | 2000–5000 IU D3 + 100 mcg MK-7 daily, with fat (GC minor allele → 5000 IU) | Thorne: vitamin-d-k2-liquid | SNP-driven |
+| **Omega-3 (EPA/DHA, marine)** | rs174537 FADS1; rs1535 FADS2; rs953413 ELOVL2 | rs429358 + rs7412 APOE; rs7903146 TCF7L2; rs1801282 PPARG; rs1800795 IL6; rs1800629 TNFA; rs17238540 HMGCR; rs708272 CETP; rs1042713 ADRB2; rs8192678 PPARGC1A | 2 g combined EPA/DHA daily, with food | Thorne: super-epa-sp608nc | SNP-driven |
+| **NAC (N-acetyl cysteine)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs4880 SOD2; rs1050450 GPX1; rs1799930 NAT2 | 600 mg twice daily | Thorne: cysteplus-reg | SNP-driven |
+| **Berberine** | rs7903146 TCF7L2; rs1801282 PPARG | rs9939609 FTO; rs1801278 IRS1; rs5400 SLC2A2 | 500 mg 2–3× daily with meals | Thorne: berberine-500 | SNP-driven |
+| **Magnesium (glycinate)** | rs11144134 TRPM6 | rs4680 COMT; rs1801133 MTHFR; rs1544410 VDR | 200–400 mg elemental daily | Thorne: magnesium-glycinate; BioTrust: ageless-multi-magnesium; Organifi: magnesium | SNP-informed |
+| **Sulforaphane (broccoli sprout)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs6721961 NFE2L2 | 10–30 mg SGS daily | Thorne: crucera-sgs | SNP-informed |
 
 ### Healthy Aging
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **CoQ10 (ubiquinol)** | rs1800566 NQO1; rs4880 SOD2 | rs17238540 HMGCR; rs4693570 COQ2; rs8192678 PPARGC1A | 100–200 mg ubiquinol daily with fat | Thorne: coq10 | SNP-driven |
-| **Phosphatidylserine (PS)** | rs429358 + rs7412 APOE (E4 carriers only) | rs6265 BDNF; rs1800795 IL6 | 100 mg 3× daily (E4 carriers) | Thorne: \<slug-tbd\> | SNP-driven (E4-gated) |
-| **NMN / NR (NAD⁺ precursor)** | rs1800566 NQO1 | rs4880 SOD2; rs2802292 FOXO3; rs3758391 SIRT1 | 300 mg NR or 500 mg NMN daily | Thorne: \<slug-tbd\> | SNP-informed |
+| **CoQ10 (ubiquinol)** | rs1800566 NQO1; rs4880 SOD2 | rs17238540 HMGCR; rs4693570 COQ2; rs8192678 PPARGC1A | 100–200 mg ubiquinol daily with fat | Thorne: q-best-100 | SNP-driven |
+| **Phosphatidylserine (PS)** | rs429358 + rs7412 APOE (E4 carriers only) | rs6265 BDNF; rs1800795 IL6 | 100 mg 3× daily (E4 carriers) | Thorne: iso-phos-reg | SNP-driven (E4-gated) |
+| **NMN / NR (NAD⁺ precursor)** | rs1800566 NQO1 | rs4880 SOD2; rs2802292 FOXO3; rs3758391 SIRT1 | 300 mg NR or 500 mg NMN daily | Thorne: niacel-400 | SNP-informed |
 
 ### Body Optimization
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **Creatine monohydrate** | rs1815739 ACTN3 | rs4343 ACE; rs8192678 PPARGC1A | 3–5 g daily | Thorne: creatine | SNP-driven (ACTN3 XX genotype benefits most; dose not genotype-titrated) |
-| **L-carnitine (tartrate)** | rs1042713 ADRB2 | rs8192678 PPARGC1A; rs4343 ACE; rs762551 CYP1A2 | 1–2 g daily | Thorne: \<slug-tbd\> | SNP-driven |
-| **PQQ** | rs8192678 PPARGC1A | rs4880 SOD2 | 10–20 mg daily | Thorne: \<slug-tbd\> | SNP-informed |
+| **Creatine monohydrate** | rs1815739 ACTN3 | rs4343 ACE; rs8192678 PPARGC1A | 3–5 g daily | Thorne: creatine; Organifi: creatine-cherry-chews | SNP-driven (ACTN3 XX genotype benefits most; dose not genotype-titrated) |
+| **L-carnitine (tartrate)** | rs1042713 ADRB2 | rs8192678 PPARGC1A; rs4343 ACE; rs762551 CYP1A2 | 1–2 g daily | Thorne: carnityl-reg | SNP-driven |
+| **PQQ** | rs8192678 PPARGC1A | rs4880 SOD2 | 10–20 mg daily | gap — no v0 partner | SNP-informed |
 
 ### Food Sensitivity
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **Lactase enzyme** | rs4988235 LCT | — | 3000–9000 FCC units with dairy meals | Thorne: \<slug-tbd\> | SNP-driven |
-| **Non-dairy calcium (citrate)** | rs4988235 LCT | rs1544410 VDR; rs2282679 GC | 500–1000 mg daily | Thorne: \<slug-tbd\> | SNP-driven |
+| **Lactase enzyme** | rs4988235 LCT | — | 3000–9000 FCC units with dairy meals | gap — no v0 partner | SNP-driven |
+| **Non-dairy calcium (citrate)** | rs4988235 LCT | rs1544410 VDR; rs2282679 GC | 500–1000 mg daily | Thorne: dicalcium-malate | SNP-driven |
 | **DAO enzyme (histamine intolerance)** | rs10156191 AOC1; rs1049742 AOC1 | rs1800629 TNFA | 10,000 HDU before histamine-rich meals | gap — no v0 partner | SNP-driven |
 | **Iron — SKIP if HFE carrier** | rs1799945 HFE H63D; rs1800562 HFE C282Y | — | Skip priority; no supplementation recommended | n/a (avoidance, no commerce) | SNP-driven |
 

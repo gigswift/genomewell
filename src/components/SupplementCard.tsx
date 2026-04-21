@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { GWPartnerButton, GWPriorityChip } from './ui';
-import { buildAffiliateUrl } from '../lib/affiliateLinks';
+import { GWPriorityChip } from './ui';
+import { getPartnerDisplayName } from '../lib/affiliateLinks';
+import type { PartnerOption } from '../types';
 import type { DesignCardSupplement } from '../lib/designDataAdapter';
 
 interface SupplementCardProps {
@@ -8,17 +9,10 @@ interface SupplementCardProps {
 }
 
 export function SupplementCard({ supp }: SupplementCardProps) {
-  const { name, tag, priority, dose, snps, reason, partners, partnerOptions } = supp;
+  const { name, tag, priority, dose, snps, reason, partnerOptions } = supp;
   const isGap = priority === 'gap';
   const isAvoid = priority === 'avoid';
   const suppressShop = isGap || isAvoid;
-
-  function openPartner(index: number) {
-    const opt = partnerOptions[index];
-    if (!opt) return;
-    const url = buildAffiliateUrl(opt.partner, opt.productSlug);
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
 
   return (
     <article style={{
@@ -62,20 +56,121 @@ export function SupplementCard({ supp }: SupplementCardProps) {
           margin: 0, fontFamily: 'var(--gw-font-body)',
           fontSize: 14, lineHeight: 1.6, color: 'var(--gw-ink-muted)',
         }}>{reason}</p>
-        {!suppressShop && partners.length > 0 && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${partners.length}, 1fr)`,
-            gap: 8,
-          }}>
-            {partners.map((p, i) => (
-              <GWPartnerButton key={`${p}-${i}`} partner={p} onClick={() => openPartner(i)} />
+        {!suppressShop && partnerOptions.length > 0 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {partnerOptions.map((opt, i) => (
+              <PartnerRow key={`${opt.partner}-${i}`} opt={opt} />
             ))}
           </div>
         )}
         {isGap && <GapNote />}
       </div>
     </article>
+  );
+}
+
+function PartnerRow({ opt }: { opt: PartnerOption }) {
+  const partnerLabel = getPartnerDisplayName(opt.partner);
+  const hasStrike =
+    !!opt.originalPriceDisplay && opt.originalPriceDisplay !== opt.priceDisplay;
+
+  function openProduct() {
+    window.open(opt.productUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 14,
+      padding: 10,
+      border: '1px solid var(--gw-line)',
+      borderRadius: 14,
+      background: 'var(--gw-surface)',
+    }}>
+      <div style={{
+        width: 60, height: 60,
+        flexShrink: 0,
+        borderRadius: 10,
+        background: 'var(--gw-surface-alt)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        overflow: 'hidden',
+      }}>
+        <img
+          src={opt.imageUrl}
+          alt=""
+          style={{
+            maxWidth: '100%', maxHeight: '100%',
+            objectFit: 'contain',
+            display: 'block',
+          }}
+          loading="lazy"
+        />
+      </div>
+      <div style={{
+        flex: 1, minWidth: 0,
+        display: 'flex', flexDirection: 'column', gap: 2,
+      }}>
+        <span style={{
+          fontFamily: 'var(--gw-font-mono)', fontSize: 10,
+          letterSpacing: '0.1em', textTransform: 'uppercase',
+          color: 'var(--gw-ink-soft)',
+        }}>{partnerLabel}</span>
+        <span
+          title={opt.productName}
+          style={{
+            fontFamily: 'var(--gw-font-body)', fontSize: 13.5,
+            color: 'var(--gw-ink)', fontWeight: 500,
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+          }}
+        >{opt.productName}</span>
+        <span style={{
+          display: 'flex', alignItems: 'baseline', gap: 6,
+          fontFamily: 'var(--gw-font-body)',
+        }}>
+          <span style={{ fontSize: 14, color: 'var(--gw-ink)', fontWeight: 500 }}>
+            {opt.priceDisplay}
+          </span>
+          {hasStrike && (
+            <span style={{
+              fontSize: 12,
+              color: 'var(--gw-ink-soft)',
+              textDecoration: 'line-through',
+            }}>
+              {opt.originalPriceDisplay}
+            </span>
+          )}
+        </span>
+      </div>
+      <button
+        type="button"
+        onClick={openProduct}
+        style={{
+          flexShrink: 0,
+          padding: '9px 16px',
+          borderRadius: 999,
+          border: '1px solid var(--gw-ink)',
+          background: 'transparent',
+          color: 'var(--gw-ink)',
+          fontFamily: 'var(--gw-font-body)',
+          fontSize: 13, fontWeight: 500,
+          cursor: 'pointer',
+          display: 'inline-flex', alignItems: 'center', gap: 6,
+          transition: 'background 0.15s ease, color 0.15s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'var(--gw-ink)';
+          e.currentTarget.style.color = 'var(--gw-surface)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.color = 'var(--gw-ink)';
+        }}
+      >
+        <span>Shop</span>
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M4 10 L10 4 M5 4 H10 V9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </button>
+    </div>
   );
 }
 
