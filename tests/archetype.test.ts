@@ -9,6 +9,7 @@ function rec(priority: SupplementRecommendation['priority'], fired: string[] = [
       category: 'daily-wellness',
       defaultDosage: '',
       partnerOptions: [],
+      healthEffect: '',
     },
     priority,
     dosage: '',

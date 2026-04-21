@@ -46,6 +46,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/b129__v9e2dcbdfca9045f29cc531eca894e0722dd58f27.png',
         },
       ],
+      healthEffect: "When methylation runs slow, it usually shows up as mood dips you can't pin to anything, stress that lingers longer than the trigger, and a foggy kind of tired that coffee doesn't fix.",
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -77,6 +78,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/b125__vdc2295bdfd7f57713849ab8693465dc3ee2e45a0.png',
         },
       ],
+      healthEffect: 'Low-functioning B12 tends to read as a slow mental engine — harder to find the right word mid-sentence, heavier fatigue by late afternoon, and over time, occasional numbness or tingling in the hands and feet.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -105,6 +107,8 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/kd500__v1f2f6991180c90d1d7e83b441748f077d3d853d8.png',
         },
       ],
+      healthEffect: 'Running low often feels like low-grade immune sluggishness, colds that keep circling back, aches that don\'t tie to a workout, and the flatter mood that creeps in through winter.',
+      culturalContext: 'Most people with more melanin run below optimal vitamin D year-round, not just in winter — and the GC variant many in this audience carry stacks on top of that, so standard-dose recommendations usually undershoot.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -141,6 +145,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp608nc__v85ffd3158c5fcd199d35f8f66966125217d62306.png',
         },
       ],
+      healthEffect: 'Slow conversion tends to show up as joint stiffness, sluggish post-workout recovery, drier skin, and the kind of mid-afternoon mental fog that sneaks up on you.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -176,6 +181,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sa560__v9249e43d5234140b60ada72238c5fb10f53ee558.png',
         },
       ],
+      healthEffect: 'Sluggish detox often shows up as hangovers that feel disproportionate to what you drank, feeling wiped out after smoke or fume exposure, and skin that takes longer to bounce back from stress.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -202,6 +208,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sf800__vd424273289116ed602cb97bcef5ca314e2b9ff03.png',
         },
       ],
+      healthEffect: 'These variants tend to show up as afternoon energy crashes after carb-heavy meals, sweet cravings that aren\'t really hunger, and weight that holds on around the midsection even when the rest is moving.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -246,6 +253,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://www.organifishop.com/cdn/shop/products/Organifi-Magnesium-3DRender-Mast_533x.png?v=1681857279',
         },
       ],
+      healthEffect: 'Low magnesium tends to show up as trouble falling asleep, muscle tightness or calf cramps at night, and a nervous system that takes longer than it should to come down after stress.',
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -272,6 +280,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp660__v0bc92c7bbc38958c3e6b1cf6d7516e9133de907f.png',
         },
       ],
+      healthEffect: 'This one\'s more preventative than felt in the moment — steadier recovery from environmental exposures, and a body that handles everyday oxidative load without you having to think about it.',
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -298,6 +307,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp624__v0e9c43db03041def65f6aef69118044fc2cc0839.png',
         },
       ],
+      healthEffect: 'Low CoQ10 usually reads as low-octane energy — workouts that feel harder than they should, recovery that drags, and a heart that works noticeably more on stairs or inclines.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -325,6 +335,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sf715__va829b08aa2703b779ace7a4b83e7c2bc143e1d06.png',
         },
       ],
+      healthEffect: 'When the brain needs more structural support, it tends to show up as names and words slipping mid-conversation, harder-to-hold focus when you\'re juggling things, and more mental friction late in the day.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -352,6 +363,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sp654__va5a0653d7b868a8ef96b8912e5dc924178efd56f.png',
         },
       ],
+      healthEffect: 'Aging mitochondria tend to read as a slower metabolic engine overall — workouts that take longer to recover from, energy that doesn\'t return to baseline the way it used to, and sleep that feels less restorative.',
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -388,6 +400,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://www.organifishop.com/cdn/shop/files/Organifi_Cherry_Chews_TP_533x.png?v=1736450167',
         },
       ],
+      healthEffect: 'If you carry the XX genotype, creatine tends to show up as a real lift — more reps left in the tank, faster between-set recovery, and strength that builds sooner than you\'d expect for the effort you\'re putting in.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -413,6 +426,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/sa520__v9e769c15ab53497dd06ad1359dd34903eba54714.png',
         },
       ],
+      healthEffect: 'Slower fat oxidation often shows up as exercise that feels like it\'s running on sugar before fat — energy that crashes sooner than expected, and weight that\'s harder to shift even with consistent cardio.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -430,6 +444,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       category: 'body-optimization',
       defaultDosage: '10–20 mg daily',
       partnerOptions: [],
+      healthEffect: 'The payoff here is subtle and slow — more stamina across long days, better-quality sleep, and a brain that doesn\'t hit its afternoon wall as hard.',
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
@@ -447,6 +462,8 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       category: 'food-sensitivity',
       defaultDosage: '3000–9000 FCC units with dairy meals',
       partnerOptions: [],
+      healthEffect: 'If dairy reliably gives you bloating, cramping, or looser stools within an hour or two of the meal, that\'s exactly the pattern this targets.',
+      culturalContext: 'The LCT persistence genotype — being able to digest dairy into adulthood — is uncommon outside Northern European ancestry, which is why lactose issues are the norm rather than the exception for most of us.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -469,6 +486,8 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
           imageUrl: 'https://d1vo8zfysxy97v.cloudfront.net/media/product/m281__v0eba4b643c65deb5775ba03a5b2644494e4918b7.png',
         },
       ],
+      healthEffect: 'If you\'ve cut or reduced dairy, the gap usually isn\'t felt day to day — it shows up long-term in bone density, and near-term you might notice more nighttime muscle cramping.',
+      culturalContext: 'Because lactose non-persistence is the default for most non-Northern-European populations, many people in this audience have been quietly running below the calcium-intake assumptions that most nutrition guidance is built on.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -485,6 +504,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       category: 'food-sensitivity',
       defaultDosage: '10,000 HDU before histamine-rich meals',
       partnerOptions: [],
+      healthEffect: 'Low DAO tends to show up as flushing after wine or aged cheese, unexplained headaches, hives, or a runny nose that kicks in after meals — histamine building up faster than your body can clear it.',
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
@@ -501,6 +521,8 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       category: 'food-sensitivity',
       defaultDosage: 'Skip iron supplementation',
       partnerOptions: [],
+      healthEffect: 'If you\'re a carrier, extra iron doesn\'t make you feel anything different in the moment — it quietly accumulates over years. Skipping iron in multis and not "just topping up" is the move.',
+      culturalContext: 'HFE hemochromatosis is largely a Northern European founder variant and is much less common in people of African descent, so this card fires for fewer users in our audience than the general population rate would suggest.',
     },
     evidenceTier: 'SNP-driven',
     avoidanceRule: true,

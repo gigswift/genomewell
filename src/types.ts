@@ -86,6 +86,8 @@ export interface Supplement {
   category: SupplementCategory;
   defaultDosage: string;
   partnerOptions: PartnerOption[];
+  healthEffect: string;
+  culturalContext?: string;
 }
 
 export type EvidenceTier = 'SNP-driven' | 'SNP-informed';

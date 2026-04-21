@@ -9,7 +9,7 @@ interface SupplementCardProps {
 }
 
 export function SupplementCard({ supp }: SupplementCardProps) {
-  const { name, tag, priority, dose, snps, reason, partnerOptions } = supp;
+  const { name, tag, priority, dose, snps, reason, healthEffect, culturalContext, partnerOptions } = supp;
   const isGap = priority === 'gap';
   const isAvoid = priority === 'avoid';
   const suppressShop = isGap || isAvoid;
@@ -56,6 +56,23 @@ export function SupplementCard({ supp }: SupplementCardProps) {
           margin: 0, fontFamily: 'var(--gw-font-body)',
           fontSize: 14, lineHeight: 1.6, color: 'var(--gw-ink-muted)',
         }}>{reason}</p>
+        {healthEffect && (
+          <p style={{
+            margin: 0, fontFamily: 'var(--gw-font-body)',
+            fontSize: 14, lineHeight: 1.6, color: 'var(--gw-ink)',
+          }}>{healthEffect}</p>
+        )}
+        {culturalContext && (
+          <p style={{
+            margin: 0,
+            paddingLeft: 12,
+            borderLeft: '2px solid var(--gw-accent-soft)',
+            fontFamily: 'var(--gw-font-body)',
+            fontSize: 13, lineHeight: 1.6,
+            fontStyle: 'italic',
+            color: 'var(--gw-ink-muted)',
+          }}>{culturalContext}</p>
+        )}
         {!suppressShop && partnerOptions.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {partnerOptions.map((opt, i) => (

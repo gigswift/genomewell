@@ -16,6 +16,8 @@ export interface DesignCardSupplement {
   dose: string;
   snps: string[];
   reason: string;
+  healthEffect: string;
+  culturalContext?: string;
   partners: string[];
   partnerOptions: PartnerOption[];
 }
@@ -89,6 +91,8 @@ export function toDesignCard(
     dose: rec.dosage,
     snps: snpLabels,
     reason,
+    healthEffect: rec.supplement.healthEffect,
+    culturalContext: rec.supplement.culturalContext,
     partners: rec.partnerOptions.map((p) => getPartnerDisplayName(p.partner)),
     partnerOptions: rec.partnerOptions,
   };
