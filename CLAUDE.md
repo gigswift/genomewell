@@ -1,4 +1,4 @@
-# GenomeWell — Project Rules
+# Chronic Wellness — Project Rules
 
 ## What this project is
 Privacy-first genetic wellness app for the Black American community. Users upload 23andMe/AncestryDNA files → browser-side parsing → personalized supplement recommendations → Thorne affiliate commerce.

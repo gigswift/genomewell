@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react'
 import App from './App'
 
 describe('App (Landing state)', () => {
-  it('renders the genomewell wordmark', () => {
+  it('renders the Chronic Wellness wordmark', () => {
     render(<App />)
-    expect(screen.getByText('genomewell')).toBeInTheDocument()
+    expect(screen.getByText('Chronic Wellness')).toBeInTheDocument()
   })
 
   it('renders the Hero C split headline', () => {

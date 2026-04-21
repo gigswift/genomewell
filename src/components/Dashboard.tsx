@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GWLogo, GWPrivacyLockup, GWTooltip, SNP_DEF } from './ui';
+import { CWLogo, CWPrivacyLockup, CWTooltip, SNP_DEF } from './ui';
 import { SupplementCard } from './SupplementCard';
 import { toDesignCards } from '../lib/designDataAdapter';
 import { CATEGORY_LABELS, CATEGORY_ORDER } from '../lib/supplementLabels';
@@ -49,26 +49,26 @@ export function Dashboard({
 
   return (
     <div style={{
-      background: 'var(--gw-bg)', color: 'var(--gw-ink)',
-      fontFamily: 'var(--gw-font-body)', minHeight: '100vh',
+      background: 'var(--cw-bg)', color: 'var(--cw-ink)',
+      fontFamily: 'var(--cw-font-body)', minHeight: '100vh',
     }}>
       <header style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: isMobile ? '28px 22px 14px' : '20px 48px',
-        borderBottom: '1px solid var(--gw-line)',
-        background: 'var(--gw-bg)',
+        borderBottom: '1px solid var(--cw-line)',
+        background: 'var(--cw-bg)',
         position: 'sticky', top: 0, zIndex: 5,
       }}>
-        <GWLogo size={isMobile ? 16 : 18} />
+        <CWLogo size={isMobile ? 16 : 18} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <GWPrivacyLockup variant="badge" dense />
+          <CWPrivacyLockup variant="badge" dense />
           <button
             type="button"
             onClick={onReset}
             style={{
               padding: '6px 14px', borderRadius: 999,
-              border: '1px solid var(--gw-line)', background: 'var(--gw-surface)',
-              fontFamily: 'var(--gw-font-body)', fontSize: 13, color: 'var(--gw-ink)',
+              border: '1px solid var(--cw-line)', background: 'var(--cw-surface)',
+              fontFamily: 'var(--cw-font-body)', fontSize: 13, color: 'var(--cw-ink)',
               cursor: 'pointer',
             }}
           >Re-analyze</button>
@@ -82,7 +82,7 @@ export function Dashboard({
         maxWidth: isMobile ? '100%' : 980,
         margin: '0 auto 8px',
       }}>
-        <GWPrivacyLockup variant="rule" />
+        <CWPrivacyLockup variant="rule" />
       </div>
 
       <TabNav
@@ -106,9 +106,9 @@ export function Dashboard({
           <div style={{
             padding: '40px 22px',
             textAlign: 'center',
-            border: '1px dashed var(--gw-line)',
+            border: '1px dashed var(--cw-line)',
             borderRadius: 20,
-            color: 'var(--gw-ink-muted)',
+            color: 'var(--cw-ink-muted)',
             fontSize: 14,
           }}>
             No recommendations in this category from your variants.
@@ -127,7 +127,7 @@ function renderStatKey(label: string) {
   if (parts.length === 1) return label;
   return parts.map((part, i) =>
     part === 'SNPs' ? (
-      <GWTooltip key={i} content={SNP_DEF}>SNPs</GWTooltip>
+      <CWTooltip key={i} content={SNP_DEF}>SNPs</CWTooltip>
     ) : (
       <span key={i}>{part}</span>
     ),
@@ -149,23 +149,23 @@ function ArchetypeHero({ isMobile, archetype }: HeroProps) {
     }}>
       <div style={{
         display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap',
-        fontFamily: 'var(--gw-font-mono)', fontSize: 11,
+        fontFamily: 'var(--cw-font-mono)', fontSize: 11,
         letterSpacing: '0.12em', textTransform: 'uppercase',
-        color: 'var(--gw-ink-soft)', marginBottom: isMobile ? 14 : 20,
+        color: 'var(--cw-ink-soft)', marginBottom: isMobile ? 14 : 20,
       }}>
         <span>Your archetype</span>
-        <span style={{ color: 'var(--gw-accent)' }}>● Ready</span>
+        <span style={{ color: 'var(--cw-accent)' }}>● Ready</span>
       </div>
       <h1 style={{
         margin: 0,
-        fontFamily: 'var(--gw-font-display)',
+        fontFamily: 'var(--cw-font-display)',
         fontWeight: 400,
         fontSize: isMobile ? 36 : 56,
         lineHeight: 1.02,
-        letterSpacing: 'var(--gw-display-letter)',
-        color: 'var(--gw-ink)',
+        letterSpacing: 'var(--cw-display-letter)',
+        color: 'var(--cw-ink)',
       }}>
-        <em style={{ fontStyle: 'italic', color: 'var(--gw-accent)' }}>{primary}</em>
+        <em style={{ fontStyle: 'italic', color: 'var(--cw-accent)' }}>{primary}</em>
         {secondary ? (
           <>
             ,<br />
@@ -179,7 +179,7 @@ function ArchetypeHero({ isMobile, archetype }: HeroProps) {
         marginTop: isMobile ? 14 : 18,
         maxWidth: isMobile ? '100%' : 640,
         fontSize: isMobile ? 15 : 17,
-        lineHeight: 1.55, color: 'var(--gw-ink-muted)',
+        lineHeight: 1.55, color: 'var(--cw-ink-muted)',
       }}>
         {subtitle}
       </p>
@@ -189,8 +189,8 @@ function ArchetypeHero({ isMobile, archetype }: HeroProps) {
         display: 'grid',
         gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
         gap: isMobile ? '18px 18px' : 0,
-        borderTop: '1px solid var(--gw-line)',
-        borderBottom: isMobile ? 'none' : '1px solid var(--gw-line)',
+        borderTop: '1px solid var(--cw-line)',
+        borderBottom: isMobile ? 'none' : '1px solid var(--cw-line)',
         paddingTop: 18,
         paddingBottom: isMobile ? 0 : 18,
       }}>
@@ -198,19 +198,19 @@ function ArchetypeHero({ isMobile, archetype }: HeroProps) {
           <div key={s.k} style={{
             display: 'flex', flexDirection: 'column', gap: 4,
             paddingLeft: !isMobile && i > 0 ? 24 : 0,
-            borderLeft: !isMobile && i > 0 ? '1px solid var(--gw-line)' : 'none',
+            borderLeft: !isMobile && i > 0 ? '1px solid var(--cw-line)' : 'none',
           }}>
             <span style={{
-              fontFamily: 'var(--gw-font-display)',
+              fontFamily: 'var(--cw-font-display)',
               fontWeight: 400,
               fontSize: isMobile ? 26 : 32,
-              letterSpacing: 'var(--gw-display-letter)',
-              color: 'var(--gw-ink)', lineHeight: 1,
+              letterSpacing: 'var(--cw-display-letter)',
+              color: 'var(--cw-ink)', lineHeight: 1,
             }}>{s.v}</span>
             <span style={{
-              fontFamily: 'var(--gw-font-mono)', fontSize: 10,
+              fontFamily: 'var(--cw-font-mono)', fontSize: 10,
               letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'var(--gw-ink-soft)',
+              color: 'var(--cw-ink-soft)',
             }}>{renderStatKey(s.k)}</span>
           </div>
         ))}
@@ -235,8 +235,8 @@ function TabNav({ isMobile, tab, setTab, counts }: TabNavProps) {
     }}>
       <div style={{
         display: 'flex',
-        background: 'var(--gw-surface-alt)',
-        border: '1px solid var(--gw-line)',
+        background: 'var(--cw-surface-alt)',
+        border: '1px solid var(--cw-line)',
         borderRadius: 14,
         padding: 4,
         gap: 2,
@@ -251,11 +251,11 @@ function TabNav({ isMobile, tab, setTab, counts }: TabNavProps) {
               flex: 1, minWidth: 'max-content',
               padding: isMobile ? '10px 12px' : '10px 16px',
               borderRadius: 10, border: 'none',
-              background: tab === id ? 'var(--gw-surface)' : 'transparent',
+              background: tab === id ? 'var(--cw-surface)' : 'transparent',
               boxShadow: tab === id ? '0 1px 2px rgba(0,0,0,0.22)' : 'none',
-              fontFamily: 'var(--gw-font-body)',
+              fontFamily: 'var(--cw-font-body)',
               fontSize: isMobile ? 12.5 : 13.5,
-              color: tab === id ? 'var(--gw-ink)' : 'var(--gw-ink-muted)',
+              color: tab === id ? 'var(--cw-ink)' : 'var(--cw-ink-muted)',
               fontWeight: tab === id ? 500 : 400,
               cursor: 'pointer', whiteSpace: 'nowrap',
               transition: 'all 0.15s ease',
@@ -265,8 +265,8 @@ function TabNav({ isMobile, tab, setTab, counts }: TabNavProps) {
           >
             <span>{CATEGORY_LABELS[id]}</span>
             <span style={{
-              fontFamily: 'var(--gw-font-mono)',
-              fontSize: 10, color: 'var(--gw-ink-soft)',
+              fontFamily: 'var(--cw-font-mono)',
+              fontSize: 10, color: 'var(--cw-ink-soft)',
             }}>{counts[id]}</span>
           </button>
         ))}

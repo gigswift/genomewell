@@ -1,4 +1,4 @@
-# GenomeWell — Design handoff
+# Chronic Wellness — Design handoff
 
 **Locked selections (your choices, April 2026):**
 
@@ -18,28 +18,28 @@
 ```css
 :root {
   /* Surfaces */
-  --gw-bg:          #201813;   /* page */
-  --gw-surface:     #2A2019;   /* card */
-  --gw-surfaceAlt:  #34281F;   /* inset / muted surface */
-  --gw-line:        #3E3024;   /* hairline */
+  --cw-bg:          #201813;   /* page */
+  --cw-surface:     #2A2019;   /* card */
+  --cw-surfaceAlt:  #34281F;   /* inset / muted surface */
+  --cw-line:        #3E3024;   /* hairline */
 
   /* Ink */
-  --gw-ink:         #F5EBD8;   /* primary text */
-  --gw-inkMuted:    #C8B99E;   /* body */
-  --gw-inkSoft:     #8E806B;   /* meta / mono labels */
+  --cw-ink:         #F5EBD8;   /* primary text */
+  --cw-inkMuted:    #C8B99E;   /* body */
+  --cw-inkSoft:     #8E806B;   /* meta / mono labels */
 
   /* Accents */
-  --gw-accent:      #E6A04A;   /* amber — priority, links */
-  --gw-accentSoft:  #4A3520;
-  --gw-secondary:   #9CAE88;   /* sage — success */
-  --gw-secondarySoft:#2E3527;
+  --cw-accent:      #E6A04A;   /* amber — priority, links */
+  --cw-accentSoft:  #4A3520;
+  --cw-secondary:   #9CAE88;   /* sage — success */
+  --cw-secondarySoft:#2E3527;
 
   /* Semantic */
-  --gw-essential:   var(--gw-accent);
-  --gw-recommended: var(--gw-inkMuted);
-  --gw-optional:    var(--gw-inkSoft);
-  --gw-gap:         var(--gw-inkSoft);
-  --gw-success:     var(--gw-secondary);
+  --cw-essential:   var(--cw-accent);
+  --cw-recommended: var(--cw-inkMuted);
+  --cw-optional:    var(--cw-inkSoft);
+  --cw-gap:         var(--cw-inkSoft);
+  --cw-success:     var(--cw-secondary);
 }
 ```
 
@@ -47,11 +47,11 @@
 
 ```css
 :root {
-  --gw-font-display: "Instrument Serif", "EB Garamond", Georgia, serif;
-  --gw-font-body:    "Figtree", "Inter", system-ui, sans-serif;
-  --gw-font-mono:    "JetBrains Mono", ui-monospace, monospace;
-  --gw-display-weight: 400;
-  --gw-display-letter: -0.01em;
+  --cw-font-display: "Instrument Serif", "EB Garamond", Georgia, serif;
+  --cw-font-body:    "Figtree", "Inter", system-ui, sans-serif;
+  --cw-font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --cw-display-weight: 400;
+  --cw-display-letter: -0.01em;
 }
 ```
 
@@ -77,17 +77,17 @@
 ## Radius, spacing, shadow
 
 ```css
---gw-r-sm:  10px;
---gw-r-md:  14px;
---gw-r-lg:  20px;   /* cards */
---gw-r-xl:  24px;   /* hero surfaces */
---gw-r-pill: 999px;
+--cw-r-sm:  10px;
+--cw-r-md:  14px;
+--cw-r-lg:  20px;   /* cards */
+--cw-r-xl:  24px;   /* hero surfaces */
+--cw-r-pill: 999px;
 
 /* 4pt grid — use 4, 8, 12, 16, 20, 24, 32, 48, 64 */
 
---gw-shadow-sm: 0 1px 2px rgba(0,0,0,0.18);
---gw-shadow-md: 0 2px 8px rgba(0,0,0,0.22);
---gw-shadow-lg: 0 12px 40px rgba(0,0,0,0.3);
+--cw-shadow-sm: 0 1px 2px rgba(0,0,0,0.18);
+--cw-shadow-md: 0 2px 8px rgba(0,0,0,0.22);
+--cw-shadow-lg: 0 12px 40px rgba(0,0,0,0.3);
 ```
 
 ---
@@ -105,7 +105,7 @@ Two-column desktop (1.3fr / 1fr), stacked on mobile. Headline uses italicized em
 
 ## Results — segmented nav
 
-Four tabs inside a pill-shaped container: Daily Wellness · Healthy Aging · Body Optimization · Food Sensitivity. Active tab uses `--gw-surface` with subtle shadow; inactive is transparent over `--gw-surfaceAlt`.
+Four tabs inside a pill-shaped container: Daily Wellness · Healthy Aging · Body Optimization · Food Sensitivity. Active tab uses `--cw-surface` with subtle shadow; inactive is transparent over `--cw-surfaceAlt`.
 
 ## Supplement card — stacked layout
 
@@ -129,10 +129,10 @@ Two-zone card with a muted header strip (surfaceAlt) and a body section:
 
 | State | Chip | Color |
 |---|---|---|
-| Essential | filled pill, amber bg | `--gw-accent` on `--gw-surface` text |
-| Recommended | filled pill, neutral | `--gw-surfaceAlt` bg, `--gw-ink` text |
-| Optional | filled pill, muted | `--gw-surfaceAlt` bg, `--gw-inkMuted` text |
-| Gap | outlined pill + dashed note | `--gw-line` border, `--gw-inkSoft` text |
+| Essential | filled pill, amber bg | `--cw-accent` on `--cw-surface` text |
+| Recommended | filled pill, neutral | `--cw-surfaceAlt` bg, `--cw-ink` text |
+| Optional | filled pill, muted | `--cw-surfaceAlt` bg, `--cw-inkMuted` text |
+| Gap | outlined pill + dashed note | `--cw-line` border, `--cw-inkSoft` text |
 
 **Gap state:** replace partner buttons with a dashed-border note: *"No shop yet — we'll email when a partner we trust carries a third-party-tested version."*
 
@@ -167,7 +167,7 @@ Two-zone card with a muted header strip (surfaceAlt) and a body section:
 
 ## File inventory
 
-- `GenomeWell.html` — entry point
+- `ChronicWellness.html` — entry point
 - `components/tokens.jsx` — palettes + font registries, `applyPalette` / `applyFont`
 - `components/data.jsx` — archetype + supplement fixture data
 - `components/ui.jsx` — logo, privacy lockups, buttons, partner button, priority chip

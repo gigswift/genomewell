@@ -9,27 +9,27 @@ interface LogoProps {
   color?: string;
 }
 
-export const GWMark = ({ size = 22, color }: LogoProps) => {
+export const CWMark = ({ size = 22, color }: LogoProps) => {
   const s = size;
   return (
     <svg width={s} height={s} viewBox="0 0 22 22" fill="none" style={{ display: 'block', flexShrink: 0 }}>
-      <circle cx="11" cy="11" r="10" stroke={color || 'var(--gw-ink)'} strokeWidth="1.2" />
-      <path d="M3 8 C 8 8, 14 14, 19 14" stroke={color || 'var(--gw-ink)'} strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M3 14 C 8 14, 14 8, 19 8" stroke={color || 'var(--gw-ink)'} strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="11" cy="11" r="10" stroke={color || 'var(--cw-ink)'} strokeWidth="1.2" />
+      <path d="M3 8 C 8 8, 14 14, 19 14" stroke={color || 'var(--cw-ink)'} strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M3 14 C 8 14, 14 8, 19 8" stroke={color || 'var(--cw-ink)'} strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 };
 
-export const GWLogo = ({ size = 20, color }: LogoProps) => (
+export const CWLogo = ({ size = 20, color }: LogoProps) => (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 10,
-    fontFamily: 'var(--gw-font-display)',
+    fontFamily: 'var(--cw-font-display)',
     fontWeight: 400,
-    fontSize: size, letterSpacing: 'var(--gw-display-letter)',
-    color: color || 'var(--gw-ink)', lineHeight: 1,
+    fontSize: size, letterSpacing: 'var(--cw-display-letter)',
+    color: color || 'var(--cw-ink)', lineHeight: 1,
   }}>
-    <GWMark size={Math.round(size * 1.1)} color={color} />
-    <span>genomewell</span>
+    <CWMark size={Math.round(size * 1.1)} color={color} />
+    <span>Chronic Wellness</span>
   </div>
 );
 
@@ -39,7 +39,7 @@ interface PrivacyLockupProps {
   dense?: boolean;
 }
 
-export const GWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLockupProps) => {
+export const CWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLockupProps) => {
   const lockIcon = (
     <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
       <rect x="1" y="6" width="10" height="7" rx="1" stroke="currentColor" strokeWidth="1.2" />
@@ -53,11 +53,11 @@ export const GWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLo
       <span style={{
         display: 'inline-flex', alignItems: 'center', gap: 8,
         padding: dense ? '4px 9px' : '6px 12px',
-        border: '1px solid var(--gw-line)',
+        border: '1px solid var(--cw-line)',
         borderRadius: 999,
-        fontFamily: 'var(--gw-font-mono)',
+        fontFamily: 'var(--cw-font-mono)',
         fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase',
-        color: 'var(--gw-ink-muted)', background: 'transparent',
+        color: 'var(--cw-ink-muted)', background: 'transparent',
       }}>
         {lockIcon}
         <span>Processed locally</span>
@@ -68,23 +68,23 @@ export const GWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLo
     return (
       <div style={{
         display: 'flex', alignItems: 'center', gap: 12,
-        fontFamily: 'var(--gw-font-mono)',
+        fontFamily: 'var(--cw-font-mono)',
         fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase',
-        color: 'var(--gw-ink-soft)',
+        color: 'var(--cw-ink-soft)',
       }}>
-        <span style={{ flex: 1, height: 1, background: 'var(--gw-line)' }} />
+        <span style={{ flex: 1, height: 1, background: 'var(--cw-line)' }} />
         {lockIcon}
         <span>Your DNA never leaves your device</span>
-        <span style={{ flex: 1, height: 1, background: 'var(--gw-line)' }} />
+        <span style={{ flex: 1, height: 1, background: 'var(--cw-line)' }} />
       </div>
     );
   }
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 8,
-      fontFamily: 'var(--gw-font-mono)',
+      fontFamily: 'var(--cw-font-mono)',
       fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase',
-      color: 'var(--gw-ink-muted)',
+      color: 'var(--cw-ink-muted)',
     }}>
       {lockIcon}
       <span>100% on-device</span>
@@ -105,7 +105,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-export const GWButton = ({
+export const CWButton = ({
   variant = 'primary',
   size = 'md',
   children,
@@ -122,7 +122,7 @@ export const GWButton = ({
   };
   const s = sizes[size];
   const base: CSSProperties = {
-    fontFamily: 'var(--gw-font-body)',
+    fontFamily: 'var(--cw-font-body)',
     fontSize: s.fs,
     padding: s.p,
     borderRadius: 999,
@@ -136,11 +136,11 @@ export const GWButton = ({
     transition: 'transform 0.12s ease, background 0.18s ease, border-color 0.18s ease',
   };
   const variants: Record<ButtonVariant, CSSProperties> = {
-    primary: { background: 'var(--gw-ink)', color: 'var(--gw-surface)', borderColor: 'var(--gw-ink)' },
-    accent: { background: 'var(--gw-accent)', color: 'var(--gw-surface)', borderColor: 'var(--gw-accent)' },
-    outline: { background: 'transparent', color: 'var(--gw-ink)', borderColor: 'var(--gw-ink)' },
-    ghost: { background: 'transparent', color: 'var(--gw-ink)', borderColor: 'var(--gw-line)' },
-    quiet: { background: 'var(--gw-surface-alt)', color: 'var(--gw-ink)', borderColor: 'transparent' },
+    primary: { background: 'var(--cw-ink)', color: 'var(--cw-surface)', borderColor: 'var(--cw-ink)' },
+    accent: { background: 'var(--cw-accent)', color: 'var(--cw-surface)', borderColor: 'var(--cw-accent)' },
+    outline: { background: 'transparent', color: 'var(--cw-ink)', borderColor: 'var(--cw-ink)' },
+    ghost: { background: 'transparent', color: 'var(--cw-ink)', borderColor: 'var(--cw-line)' },
+    quiet: { background: 'var(--cw-surface-alt)', color: 'var(--cw-ink)', borderColor: 'transparent' },
   };
   return (
     <button
@@ -157,9 +157,9 @@ export const GWButton = ({
 };
 
 const GW_PARTNER_META: Record<string, { tint: string; initial: string }> = {
-  Thorne: { tint: 'var(--gw-surface-alt)', initial: 'T' },
-  BioTrust: { tint: 'var(--gw-surface-alt)', initial: 'B' },
-  Organifi: { tint: 'var(--gw-surface-alt)', initial: 'O' },
+  Thorne: { tint: 'var(--cw-surface-alt)', initial: 'T' },
+  BioTrust: { tint: 'var(--cw-surface-alt)', initial: 'B' },
+  Organifi: { tint: 'var(--cw-surface-alt)', initial: 'O' },
 };
 
 interface PartnerButtonProps {
@@ -167,8 +167,8 @@ interface PartnerButtonProps {
   onClick?: () => void;
 }
 
-export const GWPartnerButton = ({ partner, onClick }: PartnerButtonProps) => {
-  const meta = GW_PARTNER_META[partner] || { tint: 'var(--gw-surface-alt)', initial: partner.charAt(0) };
+export const CWPartnerButton = ({ partner, onClick }: PartnerButtonProps) => {
+  const meta = GW_PARTNER_META[partner] || { tint: 'var(--cw-surface-alt)', initial: partner.charAt(0) };
   return (
     <button
       type="button"
@@ -176,25 +176,25 @@ export const GWPartnerButton = ({ partner, onClick }: PartnerButtonProps) => {
       style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         gap: 10, padding: '11px 14px 11px 11px',
-        borderRadius: 12, border: '1px solid var(--gw-line)',
-        background: 'var(--gw-surface)',
-        fontFamily: 'var(--gw-font-body)', fontSize: 13, color: 'var(--gw-ink)',
+        borderRadius: 12, border: '1px solid var(--cw-line)',
+        background: 'var(--cw-surface)',
+        fontFamily: 'var(--cw-font-body)', fontSize: 13, color: 'var(--cw-ink)',
         cursor: 'pointer', width: '100%', textAlign: 'left',
         transition: 'background 0.15s ease, border-color 0.15s ease',
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--gw-ink)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--gw-line)'; }}
+      onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--cw-ink)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--cw-line)'; }}
     >
       <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={{
           width: 26, height: 26, borderRadius: 6,
           background: meta.tint,
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--gw-font-display)', fontSize: 13,
-          color: 'var(--gw-ink)', letterSpacing: '-0.02em',
+          fontFamily: 'var(--cw-font-display)', fontSize: 13,
+          color: 'var(--cw-ink)', letterSpacing: '-0.02em',
         }}>{meta.initial}</span>
         <span style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <span style={{ fontSize: 10, fontFamily: 'var(--gw-font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--gw-ink-soft)' }}>Shop at</span>
+          <span style={{ fontSize: 10, fontFamily: 'var(--cw-font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--cw-ink-soft)' }}>Shop at</span>
           <span style={{ fontWeight: 500, fontSize: 13.5 }}>{partner}</span>
         </span>
       </span>
@@ -211,7 +211,7 @@ interface PriorityChipProps {
 
 const AVOID_RED = '#C25B3F';
 
-export const GWPriorityChip = ({ priority }: PriorityChipProps) => {
+export const CWPriorityChip = ({ priority }: PriorityChipProps) => {
   const labels: Record<DesignPriority, string> = {
     essential: 'Essential',
     recommended: 'Recommended',
@@ -220,24 +220,24 @@ export const GWPriorityChip = ({ priority }: PriorityChipProps) => {
     avoid: 'Avoid',
   };
   const bg: Record<DesignPriority, string> = {
-    essential: 'var(--gw-accent)',
-    recommended: 'var(--gw-surface-alt)',
-    optional: 'var(--gw-surface-alt)',
+    essential: 'var(--cw-accent)',
+    recommended: 'var(--cw-surface-alt)',
+    optional: 'var(--cw-surface-alt)',
     gap: 'transparent',
     avoid: 'transparent',
   };
   const fg: Record<DesignPriority, string> = {
-    essential: 'var(--gw-surface)',
-    recommended: 'var(--gw-ink)',
-    optional: 'var(--gw-ink-muted)',
-    gap: 'var(--gw-ink-soft)',
+    essential: 'var(--cw-surface)',
+    recommended: 'var(--cw-ink)',
+    optional: 'var(--cw-ink-muted)',
+    gap: 'var(--cw-ink-soft)',
     avoid: AVOID_RED,
   };
   const border: Record<DesignPriority, string> = {
-    essential: 'var(--gw-accent)',
+    essential: 'var(--cw-accent)',
     recommended: 'transparent',
     optional: 'transparent',
-    gap: 'var(--gw-line)',
+    gap: 'var(--cw-line)',
     avoid: AVOID_RED,
   };
   const markers: Record<DesignPriority, string> = {
@@ -255,7 +255,7 @@ export const GWPriorityChip = ({ priority }: PriorityChipProps) => {
       border: `1px solid ${border[priority]}`,
       background: bg[priority],
       color: fg[priority],
-      fontFamily: 'var(--gw-font-mono)',
+      fontFamily: 'var(--cw-font-mono)',
       fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 500,
     }}>
       <span>{markers[priority]}</span>
@@ -267,13 +267,13 @@ export const GWPriorityChip = ({ priority }: PriorityChipProps) => {
 export const SNP_DEF =
   'Single-nucleotide polymorphism — a spot in your DNA where people differ by one letter. Small change, sometimes big effect.';
 
-interface GWTooltipProps {
+interface CWTooltipProps {
   children: ReactNode;
   content: ReactNode;
   placement?: 'top' | 'bottom';
 }
 
-export const GWTooltip = ({ children, content, placement = 'top' }: GWTooltipProps) => {
+export const CWTooltip = ({ children, content, placement = 'top' }: CWTooltipProps) => {
   const [open, setOpen] = useState(false);
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
   const triggerRef = useRef<HTMLSpanElement>(null);
@@ -325,12 +325,12 @@ export const GWTooltip = ({ children, content, placement = 'top' }: GWTooltipPro
           placement === 'top'
             ? 'translate(-50%, calc(-100% - 8px))'
             : 'translate(-50%, 8px)',
-        background: 'var(--gw-surface)',
-        color: 'var(--gw-ink)',
-        border: '1px solid var(--gw-line)',
-        borderRadius: 'var(--gw-r-sm)',
-        boxShadow: 'var(--gw-shadow-md)',
-        fontFamily: 'var(--gw-font-body)',
+        background: 'var(--cw-surface)',
+        color: 'var(--cw-ink)',
+        border: '1px solid var(--cw-line)',
+        borderRadius: 'var(--cw-r-sm)',
+        boxShadow: 'var(--cw-shadow-md)',
+        fontFamily: 'var(--cw-font-body)',
         fontSize: 12.5,
         lineHeight: 1.5,
         padding: '8px 12px',
@@ -355,7 +355,7 @@ export const GWTooltip = ({ children, content, placement = 'top' }: GWTooltipPro
           setOpen((o) => !o);
         }}
         style={{
-          textDecoration: 'underline dotted var(--gw-ink-soft)',
+          textDecoration: 'underline dotted var(--cw-ink-soft)',
           textUnderlineOffset: 2,
           cursor: 'help',
         }}

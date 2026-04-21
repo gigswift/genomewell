@@ -1,8 +1,8 @@
-# GenomeWell
+# Chronic Wellness
 
 **Privacy-First Genetic Wellness App for the Black American Community**
 
-GenomeWell lets you upload your raw DNA file from 23andMe or AncestryDNA and receive a personalized, AI-powered wellness narrative — with a focus on the health landscape of the Black American community. All DNA parsing happens locally in your browser; only structured genetic marker results are ever sent to Claude.
+Chronic Wellness lets you upload your raw DNA file from 23andMe or AncestryDNA and receive a personalized, AI-powered wellness narrative — with a focus on the health landscape of the Black American community. All DNA parsing happens locally in your browser; only structured genetic marker results are ever sent to Claude.
 
 ---
 
@@ -42,26 +42,26 @@ Open [http://localhost:5173](http://localhost:5173).
 1. Log in to [23andMe](https://www.23andme.com)
 2. Go to **Settings → 23andMe Data**
 3. Click **Download Raw Data**
-4. Download as `.zip` or `.txt` and upload to GenomeWell
+4. Download as `.zip` or `.txt` and upload to Chronic Wellness
 
 ### From AncestryDNA
 
 1. Log in to [AncestryDNA](https://www.ancestry.com/dna/)
 2. Go to **Settings → Privacy**
 3. Click **Download Your Data**
-4. Download the `.zip` or `.txt` file and upload to GenomeWell
+4. Download the `.zip` or `.txt` file and upload to Chronic Wellness
 
 ---
 
 ## Privacy Architecture
 
-GenomeWell is built privacy-first:
+Chronic Wellness is built privacy-first:
 
 1. **Browser-only parsing** — your raw DNA file is read using the browser's [File API](https://developer.mozilla.org/en-US/docs/Web/API/File_API). For `.zip` files, JSZip extracts the inner `.txt` in memory. The file never leaves your device.
 
 2. **Structured extraction only** — the parser scans for ~30 curated SNPs (single nucleotide polymorphisms) relevant to Black American health. Only the matched `SNPResult[]` array — containing rsIDs, gene names, traits, and genotypes — is passed to the Claude API. No raw file bytes are transmitted.
 
-3. **No storage** — GenomeWell has no database and no backend server. Nothing is persisted between sessions. Closing the tab erases everything.
+3. **No storage** — Chronic Wellness has no database and no backend server. Nothing is persisted between sessions. Closing the tab erases everything.
 
 ```
 Raw DNA file (.txt / .zip)
@@ -124,4 +124,4 @@ Both are HIPAA-capable with appropriate configuration and business associate agr
 
 ## Disclaimer
 
-GenomeWell is for informational and wellness purposes only. It is not a medical device and does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional before making any health decisions based on genetic information.
+Chronic Wellness is for informational and wellness purposes only. It is not a medical device and does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional before making any health decisions based on genetic information.

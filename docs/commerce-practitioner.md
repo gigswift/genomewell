@@ -32,7 +32,7 @@
 ## v0 commerce strategy (decided 2026-04-16)
 
 ### Thorne affiliate as primary revenue
-Thorne covers most of the GenomeWell supplement stack: methylfolate, methyl-B12, D3+K2, omega-3, CoQ10, magnesium, NAC, berberine. One affiliate relationship covers the majority of recommendations.
+Thorne covers most of the Chronic Wellness supplement stack: methylfolate, methyl-B12, D3+K2, omega-3, CoQ10, magnesium, NAC, berberine. One affiliate relationship covers the majority of recommendations.
 
 **Unit economics at Thorne Gold tier (20%):**
 - Average recommended stack: ~$80/month
@@ -115,7 +115,7 @@ Available practitioners:
 ### Family dynamics note
 Formalize **more** with family, not less. Written agreements, fair compensation (discount OK; "free" is bad), malpractice coverage confirmation, clear scope of practice. Protecting their licenses and reputations is a founder-level responsibility.
 
-Detailed planning deliverable: Kanban task `3450a` (practitioner engagement framework) — held in backlog in genomewell workspace.
+Detailed planning deliverable: Kanban task `3450a` (practitioner engagement framework) — held in backlog in the genomewell workspace (workspace path rename handled separately; see `build-deployment.md`).
 
 ## Open questions to resolve
 - Thorne affiliate application and tier qualification timeline

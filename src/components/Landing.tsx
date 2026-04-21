@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { GWButton, GWLogo, GWPrivacyLockup, GWTooltip, SNP_DEF } from './ui';
+import { CWButton, CWLogo, CWPrivacyLockup, CWTooltip, SNP_DEF } from './ui';
 
 export type ParseState = 'idle' | 'parsing' | 'done';
 
@@ -35,18 +35,18 @@ export function Landing({
 
   return (
     <div style={{
-      background: 'var(--gw-bg)',
-      color: 'var(--gw-ink)',
+      background: 'var(--cw-bg)',
+      color: 'var(--cw-ink)',
       minHeight: '100vh',
-      fontFamily: 'var(--gw-font-body)',
+      fontFamily: 'var(--cw-font-body)',
     }}>
       <header style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: surface === 'mobile' ? '28px 22px 14px' : '22px 56px',
-        borderBottom: '1px solid var(--gw-line)',
+        borderBottom: '1px solid var(--cw-line)',
       }}>
-        <GWLogo size={surface === 'mobile' ? 17 : 19} />
-        <GWPrivacyLockup variant="inline" />
+        <CWLogo size={surface === 'mobile' ? 17 : 19} />
+        <CWPrivacyLockup variant="inline" />
       </header>
 
       <HeroSplit surface={surface} />
@@ -64,7 +64,7 @@ export function Landing({
             borderRadius: 12,
             background: 'transparent',
             color: '#C25B3F',
-            fontFamily: 'var(--gw-font-body)',
+            fontFamily: 'var(--cw-font-body)',
             fontSize: 13,
           }}>
             <strong>Couldn't parse that file.</strong> {errorMsg}
@@ -80,7 +80,7 @@ export function Landing({
         />
 
         <div style={{ margin: surface === 'mobile' ? '40px 0 28px' : '56px 0 36px' }}>
-          <GWPrivacyLockup variant="rule" />
+          <CWPrivacyLockup variant="rule" />
         </div>
 
         <div style={{
@@ -98,19 +98,19 @@ export function Landing({
           ].map((item) => (
             <div key={item.n} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <span style={{
-                fontFamily: 'var(--gw-font-mono)', fontSize: 11,
-                letterSpacing: '0.12em', color: 'var(--gw-ink-soft)',
+                fontFamily: 'var(--cw-font-mono)', fontSize: 11,
+                letterSpacing: '0.12em', color: 'var(--cw-ink-soft)',
               }}>{item.n}</span>
               <h4 style={{
-                margin: 0, fontFamily: 'var(--gw-font-display)',
+                margin: 0, fontFamily: 'var(--cw-font-display)',
                 fontWeight: 400,
                 fontSize: surface === 'mobile' ? 22 : 24,
-                letterSpacing: 'var(--gw-display-letter)',
-                color: 'var(--gw-ink)', lineHeight: 1.1,
+                letterSpacing: 'var(--cw-display-letter)',
+                color: 'var(--cw-ink)', lineHeight: 1.1,
               }}>{item.t}</h4>
               <p style={{
                 margin: 0, fontSize: 14, lineHeight: 1.55,
-                color: 'var(--gw-ink-muted)',
+                color: 'var(--cw-ink-muted)',
               }}>{item.d}</p>
             </div>
           ))}
@@ -119,15 +119,15 @@ export function Landing({
 
       <footer style={{
         padding: surface === 'mobile' ? '22px 22px 30px' : '28px 56px 36px',
-        borderTop: '1px solid var(--gw-line)',
+        borderTop: '1px solid var(--cw-line)',
         display: 'flex', flexDirection: surface === 'mobile' ? 'column' : 'row',
         justifyContent: 'space-between',
         alignItems: surface === 'mobile' ? 'flex-start' : 'center',
-        gap: 12, color: 'var(--gw-ink-soft)',
-        fontFamily: 'var(--gw-font-mono)', fontSize: 11,
+        gap: 12, color: 'var(--cw-ink-soft)',
+        fontFamily: 'var(--cw-font-mono)', fontSize: 11,
         letterSpacing: '0.06em', textTransform: 'uppercase',
       }}>
-        <span>© 2026 Genomewell · Evidence-ranked · Privacy-first</span>
+        <span>© 2026 Chronic Wellness · Evidence-ranked · Privacy-first</span>
         <span>Not a medical device. Educational use.</span>
       </footer>
     </div>
@@ -147,12 +147,12 @@ function HeroSplit({ surface }: { surface: 'mobile' | 'desktop' }) {
     }}>
       <h1 style={{
         margin: 0,
-        fontFamily: 'var(--gw-font-display)',
+        fontFamily: 'var(--cw-font-display)',
         fontWeight: 400,
         fontSize: surface === 'mobile' ? 40 : 72,
         lineHeight: 1,
-        letterSpacing: 'var(--gw-display-letter)',
-        color: 'var(--gw-ink)',
+        letterSpacing: 'var(--cw-display-letter)',
+        color: 'var(--cw-ink)',
       }}>
         Supplements,<br />picked by your<br />
         <em style={{ fontStyle: 'italic' }}>actual genome.</em>
@@ -160,17 +160,17 @@ function HeroSplit({ surface }: { surface: 'mobile' | 'desktop' }) {
       <div style={{
         display: 'flex', flexDirection: 'column', gap: 14,
         paddingLeft: surface === 'mobile' ? 0 : 24,
-        borderLeft: surface === 'mobile' ? 'none' : '1px solid var(--gw-line)',
+        borderLeft: surface === 'mobile' ? 'none' : '1px solid var(--cw-line)',
       }}>
         <p style={{
           margin: 0, fontSize: 15, lineHeight: 1.55,
-          color: 'var(--gw-ink-muted)',
+          color: 'var(--cw-ink-muted)',
         }}>
           Drop in your raw file from 23andMe or Ancestry. In about fifteen seconds you'll get a priority-ranked list of supplements — each tied to a specific variant in your file.
         </p>
         <p style={{
           margin: 0, fontSize: 15, lineHeight: 1.55,
-          color: 'var(--gw-ink-muted)',
+          color: 'var(--cw-ink-muted)',
         }}>
           The file is parsed in your browser. It isn't uploaded anywhere. It can't be — we don't have a place to put it.
         </p>
@@ -224,8 +224,8 @@ function UploadZone({
       style={{
         position: 'relative',
         padding: surface === 'mobile' ? '36px 22px' : '56px 40px',
-        background: 'var(--gw-surface)',
-        border: `1.5px dashed ${active ? 'var(--gw-accent)' : 'var(--gw-line)'}`,
+        background: 'var(--cw-surface)',
+        border: `1.5px dashed ${active ? 'var(--cw-accent)' : 'var(--cw-line)'}`,
         borderRadius: 24,
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
         textAlign: 'center',
@@ -237,18 +237,18 @@ function UploadZone({
         <>
           <div>
             <div style={{
-              fontFamily: 'var(--gw-font-display)',
+              fontFamily: 'var(--cw-font-display)',
               fontWeight: 400,
               fontSize: surface === 'mobile' ? 24 : 30,
-              letterSpacing: 'var(--gw-display-letter)',
-              color: 'var(--gw-ink)', marginBottom: 6,
+              letterSpacing: 'var(--cw-display-letter)',
+              color: 'var(--cw-ink)', marginBottom: 6,
             }}>Drop your raw DNA file</div>
-            <div style={{ fontSize: 13, color: 'var(--gw-ink-muted)' }}>
+            <div style={{ fontSize: 13, color: 'var(--cw-ink-muted)' }}>
               .txt or .zip from 23andMe or AncestryDNA · up to 30 MB
             </div>
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <GWButton variant="primary" onClick={handleBrowse}>Choose a file</GWButton>
+            <CWButton variant="primary" onClick={handleBrowse}>Choose a file</CWButton>
           </div>
           <input
             ref={fileInput}
@@ -263,22 +263,22 @@ function UploadZone({
       {active && (
         <div>
           <div style={{
-            fontFamily: 'var(--gw-font-display)',
+            fontFamily: 'var(--cw-font-display)',
             fontWeight: 400,
-            fontSize: 22, letterSpacing: 'var(--gw-display-letter)',
-            color: 'var(--gw-ink)', marginBottom: 6,
+            fontSize: 22, letterSpacing: 'var(--cw-display-letter)',
+            color: 'var(--cw-ink)', marginBottom: 6,
           }}>Reading on this device…</div>
           <div style={{
-            fontFamily: 'var(--gw-font-mono)', fontSize: 11,
+            fontFamily: 'var(--cw-font-mono)', fontSize: 11,
             letterSpacing: '0.1em', textTransform: 'uppercase',
-            color: 'var(--gw-ink-soft)',
+            color: 'var(--cw-ink-soft)',
           }}>
             {progress < 40 && (
-              <>Parsing 637,294 <GWTooltip content={SNP_DEF}>SNPs</GWTooltip></>
+              <>Parsing 637,294 <CWTooltip content={SNP_DEF}>SNPs</CWTooltip></>
             )}
             {progress >= 40 && progress < 80 && 'Matching your variants'}
             {progress >= 80 && 'Ranking recommendations'}
-            <span style={{ marginLeft: 8, color: 'var(--gw-accent)' }}>{Math.round(progress)}%</span>
+            <span style={{ marginLeft: 8, color: 'var(--cw-accent)' }}>{Math.round(progress)}%</span>
           </div>
         </div>
       )}
@@ -286,12 +286,12 @@ function UploadZone({
       {done && (
         <div>
           <div style={{
-            fontFamily: 'var(--gw-font-display)',
+            fontFamily: 'var(--cw-font-display)',
             fontWeight: 400,
-            fontSize: 22, letterSpacing: 'var(--gw-display-letter)',
-            color: 'var(--gw-ink)', marginBottom: 6,
+            fontSize: 22, letterSpacing: 'var(--cw-display-letter)',
+            color: 'var(--cw-ink)', marginBottom: 6,
           }}>Done. Nothing was transmitted.</div>
-          <div style={{ fontSize: 13, color: 'var(--gw-ink-muted)' }}>
+          <div style={{ fontSize: 13, color: 'var(--cw-ink-muted)' }}>
             {variantsMatched} variants matched · taking you to your results…
           </div>
         </div>
@@ -316,10 +316,10 @@ function LockRing({ progress, pulsing, done }: LockRingProps) {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
       <svg width="104" height="104" viewBox="0 0 104 104" style={{ position: 'absolute', inset: 0 }}>
-        <circle cx="52" cy="52" r={r} fill="none" stroke="var(--gw-line)" strokeWidth="2" />
+        <circle cx="52" cy="52" r={r} fill="none" stroke="var(--cw-line)" strokeWidth="2" />
         <circle
           cx="52" cy="52" r={r}
-          fill="none" stroke="var(--gw-accent)" strokeWidth="2"
+          fill="none" stroke="var(--cw-accent)" strokeWidth="2"
           strokeDasharray={c} strokeDashoffset={offset}
           strokeLinecap="round"
           transform="rotate(-90 52 52)"
@@ -328,15 +328,15 @@ function LockRing({ progress, pulsing, done }: LockRingProps) {
       </svg>
       <div style={{
         width: 64, height: 64, borderRadius: '50%',
-        background: 'var(--gw-surface-alt)',
+        background: 'var(--cw-surface-alt)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        animation: pulsing ? 'gwPulse 1.6s ease-in-out infinite' : 'none',
+        animation: pulsing ? 'cwPulse 1.6s ease-in-out infinite' : 'none',
       }}>
         <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
-          <rect x="2" y="12" width="20" height="14" rx="2" stroke="var(--gw-ink)" strokeWidth="1.5" />
-          <path d="M6 12 V8 a6 6 0 0 1 12 0 V12" stroke="var(--gw-ink)" strokeWidth="1.5" strokeLinecap="round" />
+          <rect x="2" y="12" width="20" height="14" rx="2" stroke="var(--cw-ink)" strokeWidth="1.5" />
+          <path d="M6 12 V8 a6 6 0 0 1 12 0 V12" stroke="var(--cw-ink)" strokeWidth="1.5" strokeLinecap="round" />
           {done && (
-            <path d="M8 18 L11 21 L16 15" stroke="var(--gw-accent)" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M8 18 L11 21 L16 15" stroke="var(--cw-accent)" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           )}
         </svg>
       </div>

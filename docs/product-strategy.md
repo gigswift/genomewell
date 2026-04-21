@@ -1,7 +1,7 @@
 # Product Strategy
 
 ## Core positioning
-**GenomeWell** is a privacy-first genetic wellness app for the Black American community. Users upload raw DNA files from 23andMe/AncestryDNA; parsing happens in the browser; results generate personalized supplement and fitness recommendations.
+**Chronic Wellness** is a privacy-first genetic wellness app for the Black American community. Users upload raw DNA files from 23andMe/AncestryDNA; parsing happens in the browser; results generate personalized supplement and fitness recommendations.
 
 ## Business model
 The DNA analysis is the **lead magnet**, not the product. The monetization funnel:
@@ -40,7 +40,7 @@ Recurring subscription + retention
 
 | Competitor | Position | Differentiation |
 |---|---|---|
-| GenoPalate | All-in-one testing → supplements | High fixed cost (runs own lab); GenomeWell inherits 30M+ existing raw files |
+| GenoPalate | All-in-one testing → supplements | High fixed cost (runs own lab); Chronic Wellness inherits 30M+ existing raw files |
 | Viome | Microbiome-based wellness | Different substrate (stool), different vertical |
 | Rootine | DNA + blood + lifestyle → custom pills | Struggled with multi-modal friction; high fixed cost per user |
 | Care/of | Quiz-based personalized packs | Shut down by Bayer (2024); gap in the market |

@@ -9,7 +9,7 @@ To resume: tell Claude "unpark [title]" or "resume the [title] thread."
 ## Multi-agent / ongoing automation
 **Parked:** 2026-04-16
 
-**Context:** Discussed standing up multiple agents with ongoing/scheduled work to augment the GenomeWell build. Three mechanisms were identified:
+**Context:** Discussed standing up multiple agents with ongoing/scheduled work to augment the Chronic Wellness build. Three mechanisms were identified:
 - **Kanban tasks** — one-shot parallel work in worktrees (already in use)
 - **Scheduled remote agents (`/schedule` skill)** — cron-based, run remotely without machine being on
 - **Dynamic `/loop`** — in-session recurring only
@@ -35,7 +35,7 @@ To resume: tell Claude "unpark [title]" or "resume the [title] thread."
 **Context:** After v0 launches (Thorne affiliate, free DNA analysis → supplement recommendations), v1 introduces user accounts. Four value propositions for account creation were identified:
 
 1. **Drill-down results** — gated deeper SNP detail behind account signup (free tier showed top-level; account unlocks full analysis, supporting SNP context, cross-category insights)
-2. **Cashback / discounts** — share affiliate margin back with users as a loyalty incentive. Funded from GenomeWell's affiliate commission, not from supplement pricing. Could be percentage-back, credits toward future purchases, or tiered rewards.
+2. **Cashback / discounts** — share affiliate margin back with users as a loyalty incentive. Funded from Chronic Wellness's affiliate commission, not from supplement pricing. Could be percentage-back, credits toward future purchases, or tiered rewards.
 3. **GLP-1 access** — future offering tying into the metabolic health positioning. Significant regulatory and practitioner requirements (GLP-1s are prescription medications). Would leverage the family practitioner network (PharmD aunt, MD aunt) established for Fullscript.
 4. **DNA-based content library** — fitness programs informed by Body Optimization SNPs, podcasts, curated health content. Subscription or membership-gated. Aligns with the "community and content" moat identified in product strategy.
 
@@ -47,7 +47,7 @@ To resume: tell Claude "unpark [title]" or "resume the [title] thread."
 
 ---
 
-## Chat with GenomeWell about your results
+## Chat with Chronic Wellness about your results
 **Parked:** 2026-04-16
 
 **Context:** After DNA analysis, let users have a conversation with Claude about their results — ask follow-up questions, get clarification on specific SNPs, understand how recommendations interact, explore "what if" scenarios (e.g., "what if I'm already taking magnesium?"), and get guidance in plain language tailored to their goals.

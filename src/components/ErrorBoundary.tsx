@@ -32,26 +32,26 @@ export class ErrorBoundary extends Component<Props, State> {
         <div style={{
           margin: 40,
           padding: 32,
-          background: 'var(--gw-surface)',
+          background: 'var(--cw-surface)',
           border: `1px solid ${AVOID_RED}`,
           borderRadius: 20,
           textAlign: 'center',
-          fontFamily: 'var(--gw-font-body)',
+          fontFamily: 'var(--cw-font-body)',
         }}>
           <h3 style={{
             margin: '0 0 12px',
-            fontFamily: 'var(--gw-font-display)',
+            fontFamily: 'var(--cw-font-display)',
             fontSize: 28,
             fontWeight: 400,
-            color: 'var(--gw-ink)',
-            letterSpacing: 'var(--gw-display-letter)',
+            color: 'var(--cw-ink)',
+            letterSpacing: 'var(--cw-display-letter)',
           }}>Something went wrong.</h3>
           <p style={{
             margin: '0 auto',
             maxWidth: 520,
             fontSize: 14,
             lineHeight: 1.55,
-            color: 'var(--gw-ink-muted)',
+            color: 'var(--cw-ink-muted)',
           }}>
             {this.state.error?.message ?? 'Unknown error'}
           </p>
@@ -62,10 +62,10 @@ export class ErrorBoundary extends Component<Props, State> {
               marginTop: 20,
               padding: '10px 18px',
               borderRadius: 999,
-              border: '1px solid var(--gw-ink)',
-              background: 'var(--gw-ink)',
-              color: 'var(--gw-surface)',
-              fontFamily: 'var(--gw-font-body)',
+              border: '1px solid var(--cw-ink)',
+              background: 'var(--cw-ink)',
+              color: 'var(--cw-surface)',
+              fontFamily: 'var(--cw-font-body)',
               fontSize: 14,
               fontWeight: 500,
               cursor: 'pointer',

@@ -1,0 +1,58 @@
+/* chronicwellness.css — locked design tokens
+ * Palette: Cocoa · Typography: Modernist
+ * Drop this into your app and reference the variables.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Cocoa palette */
+  --cw-bg:           #201813;
+  --cw-surface:      #2A2019;
+  --cw-surface-alt:  #34281F;
+  --cw-line:         #3E3024;
+
+  --cw-ink:          #F5EBD8;
+  --cw-ink-muted:    #C8B99E;
+  --cw-ink-soft:     #8E806B;
+
+  --cw-accent:       #E6A04A;
+  --cw-accent-soft:  #4A3520;
+  --cw-secondary:    #9CAE88;
+  --cw-secondary-soft:#2E3527;
+
+  /* Semantic */
+  --cw-essential:    var(--cw-accent);
+  --cw-recommended:  var(--cw-ink-muted);
+  --cw-optional:     var(--cw-ink-soft);
+  --cw-gap:          var(--cw-ink-soft);
+  --cw-success:      var(--cw-secondary);
+
+  /* Typography */
+  --cw-font-display: "Instrument Serif", "EB Garamond", Georgia, serif;
+  --cw-font-body:    "Figtree", "Inter", system-ui, sans-serif;
+  --cw-font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --cw-display-weight: 400;
+  --cw-display-letter: -0.01em;
+
+  /* Radius */
+  --cw-r-sm: 10px;
+  --cw-r-md: 14px;
+  --cw-r-lg: 20px;
+  --cw-r-xl: 24px;
+  --cw-r-pill: 999px;
+
+  /* Shadows */
+  --cw-shadow-sm: 0 1px 2px rgba(0,0,0,0.18);
+  --cw-shadow-md: 0 2px 8px rgba(0,0,0,0.22);
+  --cw-shadow-lg: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+/* Utility text roles */
+.cw-display-xl { font-family: var(--cw-font-display); font-weight: 400; font-size: 72px; line-height: 1.0; letter-spacing: -0.01em; color: var(--cw-ink); }
+.cw-display-l  { font-family: var(--cw-font-display); font-weight: 400; font-size: 56px; line-height: 1.02; letter-spacing: -0.01em; color: var(--cw-ink); }
+.cw-display-m  { font-family: var(--cw-font-display); font-weight: 400; font-size: 28px; line-height: 1.05; letter-spacing: -0.01em; color: var(--cw-ink); }
+.cw-body-l     { font-family: var(--cw-font-body); font-size: 17px; line-height: 1.55; color: var(--cw-ink-muted); }
+.cw-body-m     { font-family: var(--cw-font-body); font-size: 14.5px; line-height: 1.55; color: var(--cw-ink-muted); }
+.cw-body-s     { font-family: var(--cw-font-body); font-size: 13px; line-height: 1.5; color: var(--cw-ink-muted); }
+.cw-label      { font-family: var(--cw-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cw-ink-soft); }

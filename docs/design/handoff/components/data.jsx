@@ -1,4 +1,4 @@
-// Mock genomic result data for GenomeWell
+// Mock genomic result data for Chronic Wellness
 // Framed as "what the parsed SNP file produced"
 
 const GW_ARCHETYPE = {
