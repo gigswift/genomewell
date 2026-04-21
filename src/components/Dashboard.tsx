@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GWLogo, GWPrivacyLockup } from './ui';
+import { GWLogo, GWPrivacyLockup, GWTooltip, SNP_DEF } from './ui';
 import { SupplementCard } from './SupplementCard';
 import { toDesignCards } from '../lib/designDataAdapter';
 import { CATEGORY_LABELS, CATEGORY_ORDER } from '../lib/supplementLabels';
@@ -122,6 +122,18 @@ export function Dashboard({
   );
 }
 
+function renderStatKey(label: string) {
+  const parts = label.split(/(SNPs)/);
+  if (parts.length === 1) return label;
+  return parts.map((part, i) =>
+    part === 'SNPs' ? (
+      <GWTooltip key={i} content={SNP_DEF}>SNPs</GWTooltip>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+}
+
 interface HeroProps {
   isMobile: boolean;
   archetype: Archetype;
@@ -199,7 +211,7 @@ function ArchetypeHero({ isMobile, archetype }: HeroProps) {
               fontFamily: 'var(--gw-font-mono)', fontSize: 10,
               letterSpacing: '0.1em', textTransform: 'uppercase',
               color: 'var(--gw-ink-soft)',
-            }}>{s.k}</span>
+            }}>{renderStatKey(s.k)}</span>
           </div>
         ))}
       </div>

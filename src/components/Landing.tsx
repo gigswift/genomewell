@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { GWButton, GWLogo, GWPrivacyLockup } from './ui';
+import { GWButton, GWLogo, GWPrivacyLockup, GWTooltip, SNP_DEF } from './ui';
 
 export type ParseState = 'idle' | 'parsing' | 'done';
 
@@ -273,7 +273,9 @@ function UploadZone({
             letterSpacing: '0.1em', textTransform: 'uppercase',
             color: 'var(--gw-ink-soft)',
           }}>
-            {progress < 40 && 'Parsing 637,294 SNPs'}
+            {progress < 40 && (
+              <>Parsing 637,294 <GWTooltip content={SNP_DEF}>SNPs</GWTooltip></>
+            )}
             {progress >= 40 && progress < 80 && 'Matching your variants'}
             {progress >= 80 && 'Ranking recommendations'}
             <span style={{ marginLeft: 8, color: 'var(--gw-accent)' }}>{Math.round(progress)}%</span>

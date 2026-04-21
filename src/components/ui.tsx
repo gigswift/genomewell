@@ -1,4 +1,6 @@
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
 type DesignPriority = 'essential' | 'recommended' | 'optional' | 'gap' | 'avoid';
 
@@ -259,6 +261,116 @@ export const GWPriorityChip = ({ priority }: PriorityChipProps) => {
       <span>{markers[priority]}</span>
       <span style={{ marginLeft: 1 }}>{labels[priority]}</span>
     </span>
+  );
+};
+
+export const SNP_DEF =
+  'Single-nucleotide polymorphism — a spot in your DNA where people differ by one letter. Small change, sometimes big effect.';
+
+interface GWTooltipProps {
+  children: ReactNode;
+  content: ReactNode;
+  placement?: 'top' | 'bottom';
+}
+
+export const GWTooltip = ({ children, content, placement = 'top' }: GWTooltipProps) => {
+  const [open, setOpen] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+  const triggerRef = useRef<HTMLSpanElement>(null);
+  const tooltipId = useId();
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    const update = () => {
+      const el = triggerRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setCoords({
+        top: placement === 'top' ? r.top : r.bottom,
+        left: r.left + r.width / 2,
+      });
+    };
+    update();
+    window.addEventListener('scroll', update, true);
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update, true);
+      window.removeEventListener('resize', update);
+    };
+  }, [open, placement]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      const el = triggerRef.current;
+      if (el && !el.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [open]);
+
+  const popoverStyle: CSSProperties = coords
+    ? {
+        position: 'fixed',
+        top: coords.top,
+        left: coords.left,
+        transform:
+          placement === 'top'
+            ? 'translate(-50%, calc(-100% - 8px))'
+            : 'translate(-50%, 8px)',
+        background: 'var(--gw-surface)',
+        color: 'var(--gw-ink)',
+        border: '1px solid var(--gw-line)',
+        borderRadius: 'var(--gw-r-sm)',
+        boxShadow: 'var(--gw-shadow-md)',
+        fontFamily: 'var(--gw-font-body)',
+        fontSize: 12.5,
+        lineHeight: 1.5,
+        padding: '8px 12px',
+        maxWidth: 280,
+        zIndex: 100,
+        pointerEvents: 'none',
+      }
+    : { display: 'none' };
+
+  return (
+    <>
+      <span
+        ref={triggerRef}
+        tabIndex={0}
+        aria-describedby={open ? tooltipId : undefined}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen((o) => !o);
+        }}
+        style={{
+          textDecoration: 'underline dotted var(--gw-ink-soft)',
+          textUnderlineOffset: 2,
+          cursor: 'help',
+        }}
+      >
+        {children}
+      </span>
+      {open && typeof document !== 'undefined'
+        ? createPortal(
+            <span id={tooltipId} role="tooltip" style={popoverStyle}>
+              {content}
+            </span>,
+            document.body,
+          )
+        : null}
+    </>
   );
 };
 

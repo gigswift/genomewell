@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { GWPriorityChip } from './ui';
+import { GWPriorityChip, GWTooltip, SNP_DEF } from './ui';
 import { getPartnerDisplayName } from '../lib/affiliateLinks';
 import type { PartnerOption } from '../types';
 import type { DesignCardSupplement } from '../lib/designDataAdapter';
@@ -46,11 +46,17 @@ export function SupplementCard({ supp }: SupplementCardProps) {
         {!suppressShop && (
           <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
             <FieldPair label="Dose">{dose}</FieldPair>
-            {snps.length > 0 && <FieldPair label="Variants">{snps.join(' · ')}</FieldPair>}
+            {snps.length > 0 && (
+              <FieldPair label={<GWTooltip content={SNP_DEF}>Variants</GWTooltip>}>
+                {snps.join(' · ')}
+              </FieldPair>
+            )}
           </div>
         )}
         {suppressShop && snps.length > 0 && (
-          <FieldPair label="Variants">{snps.join(' · ')}</FieldPair>
+          <FieldPair label={<GWTooltip content={SNP_DEF}>Variants</GWTooltip>}>
+            {snps.join(' · ')}
+          </FieldPair>
         )}
         <p style={{
           margin: 0, fontFamily: 'var(--gw-font-body)',
@@ -191,7 +197,7 @@ function PartnerRow({ opt }: { opt: PartnerOption }) {
   );
 }
 
-function FieldPair({ label, children }: { label: string; children: ReactNode }) {
+function FieldPair({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
       <span style={{
