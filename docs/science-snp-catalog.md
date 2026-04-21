@@ -52,6 +52,26 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 | **Magnesium (glycinate)** | rs11144134 TRPM6 | rs4680 COMT; rs1801133 MTHFR; rs1544410 VDR | 200–400 mg elemental daily | Thorne: magnesium-glycinate; BioTrust: ageless-multi-magnesium; Organifi: magnesium | SNP-informed |
 | **Sulforaphane (broccoli sprout)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs6721961 NFE2L2 | 10–30 mg SGS daily | Thorne: crucera-sgs | SNP-informed |
 
+**Copy — felt effects & context**
+
+- **Methylfolate (L-5-MTHF)**
+  - *Feels like:* When methylation runs slow, it usually shows up as mood dips you can't pin to anything, stress that lingers longer than the trigger, and a foggy kind of tired that coffee doesn't fix.
+- **Methyl-B12 (methylcobalamin)**
+  - *Feels like:* Low-functioning B12 tends to read as a slow mental engine — harder to find the right word mid-sentence, heavier fatigue by late afternoon, and over time, occasional numbness or tingling in the hands and feet.
+- **Vitamin D3 + K2**
+  - *Feels like:* Running low often feels like low-grade immune sluggishness, colds that keep circling back, aches that don't tie to a workout, and the flatter mood that creeps in through winter.
+  - *Context:* Most people with more melanin run below optimal vitamin D year-round, not just in winter — and the GC variant many in this audience carry stacks on top of that, so standard-dose recommendations usually undershoot.
+- **Omega-3 (EPA/DHA, marine)**
+  - *Feels like:* Slow conversion tends to show up as joint stiffness, sluggish post-workout recovery, drier skin, and the kind of mid-afternoon mental fog that sneaks up on you.
+- **NAC (N-acetyl cysteine)**
+  - *Feels like:* Sluggish detox often shows up as hangovers that feel disproportionate to what you drank, feeling wiped out after smoke or fume exposure, and skin that takes longer to bounce back from stress.
+- **Berberine**
+  - *Feels like:* These variants tend to show up as afternoon energy crashes after carb-heavy meals, sweet cravings that aren't really hunger, and weight that holds on around the midsection even when the rest is moving.
+- **Magnesium (glycinate)**
+  - *Feels like:* Low magnesium tends to show up as trouble falling asleep, muscle tightness or calf cramps at night, and a nervous system that takes longer than it should to come down after stress.
+- **Sulforaphane (broccoli sprout)**
+  - *Feels like:* This one's more preventative than felt in the moment — steadier recovery from environmental exposures, and a body that handles everyday oxidative load without you having to think about it.
+
 ### Healthy Aging
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
@@ -59,6 +79,15 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 | **CoQ10 (ubiquinol)** | rs1800566 NQO1; rs4880 SOD2 | rs17238540 HMGCR; rs4693570 COQ2; rs8192678 PPARGC1A | 100–200 mg ubiquinol daily with fat | Thorne: q-best-100 | SNP-driven |
 | **Phosphatidylserine (PS)** | rs429358 + rs7412 APOE (E4 carriers only) | rs6265 BDNF; rs1800795 IL6 | 100 mg 3× daily (E4 carriers) | Thorne: iso-phos-reg | SNP-driven (E4-gated) |
 | **NMN / NR (NAD⁺ precursor)** | rs1800566 NQO1 | rs4880 SOD2; rs2802292 FOXO3; rs3758391 SIRT1 | 300 mg NR or 500 mg NMN daily | Thorne: niacel-400 | SNP-informed |
+
+**Copy — felt effects & context**
+
+- **CoQ10 (ubiquinol)**
+  - *Feels like:* Low CoQ10 usually reads as low-octane energy — workouts that feel harder than they should, recovery that drags, and a heart that works noticeably more on stairs or inclines.
+- **Phosphatidylserine (PS)**
+  - *Feels like:* When the brain needs more structural support, it tends to show up as names and words slipping mid-conversation, harder-to-hold focus when you're juggling things, and more mental friction late in the day.
+- **NMN / NR (NAD⁺ precursor)**
+  - *Feels like:* Aging mitochondria tend to read as a slower metabolic engine overall — workouts that take longer to recover from, energy that doesn't return to baseline the way it used to, and sleep that feels less restorative.
 
 ### Body Optimization
 
@@ -68,6 +97,15 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 | **L-carnitine (tartrate)** | rs1042713 ADRB2 | rs8192678 PPARGC1A; rs4343 ACE; rs762551 CYP1A2 | 1–2 g daily | Thorne: carnityl-reg | SNP-driven |
 | **PQQ** | rs8192678 PPARGC1A | rs4880 SOD2 | 10–20 mg daily | gap — no v0 partner | SNP-informed |
 
+**Copy — felt effects & context**
+
+- **Creatine monohydrate**
+  - *Feels like:* If you carry the XX genotype, creatine tends to show up as a real lift — more reps left in the tank, faster between-set recovery, and strength that builds sooner than you'd expect for the effort you're putting in.
+- **L-carnitine (tartrate)**
+  - *Feels like:* Slower fat oxidation often shows up as exercise that feels like it's running on sugar before fat — energy that crashes sooner than expected, and weight that's harder to shift even with consistent cardio.
+- **PQQ**
+  - *Feels like:* The payoff here is subtle and slow — more stamina across long days, better-quality sleep, and a brain that doesn't hit its afternoon wall as hard.
+
 ### Food Sensitivity
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
@@ -76,6 +114,20 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 | **Non-dairy calcium (citrate)** | rs4988235 LCT | rs1544410 VDR; rs2282679 GC | 500–1000 mg daily | Thorne: dicalcium-malate | SNP-driven |
 | **DAO enzyme (histamine intolerance)** | rs10156191 AOC1; rs1049742 AOC1 | rs1800629 TNFA | 10,000 HDU before histamine-rich meals | gap — no v0 partner | SNP-driven |
 | **Iron — SKIP if HFE carrier** | rs1799945 HFE H63D; rs1800562 HFE C282Y | — | Skip priority; no supplementation recommended | n/a (avoidance, no commerce) | SNP-driven |
+
+**Copy — felt effects & context**
+
+- **Lactase enzyme**
+  - *Feels like:* If dairy reliably gives you bloating, cramping, or looser stools within an hour or two of the meal, that's exactly the pattern this targets.
+  - *Context:* The LCT persistence genotype — being able to digest dairy into adulthood — is uncommon outside Northern European ancestry, which is why lactose issues are the norm rather than the exception for most of us.
+- **Non-dairy calcium (citrate)**
+  - *Feels like:* If you've cut or reduced dairy, the gap usually isn't felt day to day — it shows up long-term in bone density, and near-term you might notice more nighttime muscle cramping.
+  - *Context:* Because lactose non-persistence is the default for most non-Northern-European populations, many people in this audience have been quietly running below the calcium-intake assumptions that most nutrition guidance is built on.
+- **DAO enzyme (histamine intolerance)**
+  - *Feels like:* Low DAO tends to show up as flushing after wine or aged cheese, unexplained headaches, hives, or a runny nose that kicks in after meals — histamine building up faster than your body can clear it.
+- **Iron — SKIP if HFE carrier**
+  - *Feels like:* If you're a carrier, extra iron doesn't make you feel anything different in the moment — it quietly accumulates over years. Skipping iron in multis and not "just topping up" is the move.
+  - *Context:* HFE hemochromatosis is largely a Northern European founder variant and is much less common in people of African descent, so this card fires for fewer users in our audience than the general population rate would suggest.
 
 ## SNP Reference (v0 ceiling: 60)
 
