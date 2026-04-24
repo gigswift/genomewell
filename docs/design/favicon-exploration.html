@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chronic Wellness favicon — 3 variants for review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cw-bg: #201813;
+      --cw-surface: #2A2019;
+      --cw-surface-alt: #34281F;
+      --cw-line: #3E3024;
+      --cw-ink: #F5EBD8;
+      --cw-ink-muted: #C8B99E;
+      --cw-ink-soft: #8E806B;
+      --cw-accent: #E6A04A;
+      --cw-font-display: "Instrument Serif", "EB Garamond", Georgia, serif;
+      --cw-font-body: "Figtree", "Inter", system-ui, sans-serif;
+      --cw-font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: var(--cw-bg);
+      color: var(--cw-ink);
+      font-family: var(--cw-font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+    body { padding: 48px 32px 96px; }
+    header { max-width: 1200px; margin: 0 auto 40px; }
+    h1 {
+      font-family: var(--cw-font-display);
+      font-weight: 400;
+      font-size: 48px;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    h1 em { font-style: italic; color: var(--cw-accent); }
+    .lede {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--cw-ink-muted);
+      max-width: 640px;
+      margin: 0;
+    }
+    .grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--cw-surface);
+      border: 1px solid var(--cw-line);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .variant-label {
+      font-family: var(--cw-font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cw-ink-soft);
+      margin: 0;
+    }
+    .variant-name {
+      font-family: var(--cw-font-display);
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin: 4px 0 0;
+    }
+    .rationale {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--cw-ink-muted);
+      margin: 0;
+    }
+    .sizes {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .size-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      border-top: 1px solid var(--cw-line);
+    }
+    .size-row:first-child { border-top: none; padding-top: 0; }
+    .size-label {
+      font-family: var(--cw-font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cw-ink-soft);
+      min-width: 112px;
+    }
+    .render {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+    .render img { display: block; image-rendering: auto; }
+    .render.apple {
+      background: var(--cw-bg);
+      border: 1px solid var(--cw-line);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .path {
+      font-family: var(--cw-font-mono);
+      font-size: 11px;
+      color: var(--cw-ink-soft);
+      background: var(--cw-surface-alt);
+      border: 1px solid var(--cw-line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      overflow-x: auto;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chronic Wellness favicon — <em>three variants for review</em></h1>
+    <p class="lede">Each variant is a standalone SVG in <code>public/</code>. The 16 × 16 size is what actually renders in a browser tab — judge there first. The 180 × 180 is the apple-touch-icon size, shown against the real app background <code>#201813</code>.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Variant A -->
+    <div class="card">
+      <div>
+        <p class="variant-label">Variant A</p>
+        <p class="variant-name">Solid amber badge</p>
+      </div>
+      <p class="rationale">Filled amber <em>cw</em> in italic serif on dark Cocoa. Reads loudest at tab size — closest to how Stripe's S or Notion's N announces itself in the tab strip.</p>
+      <div class="sizes">
+        <div class="size-row">
+          <span class="size-label">16 · tab</span>
+          <div class="render"><img src="../../public/favicon-variant-a.svg" width="16" height="16" alt="Variant A at 16px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">32 · retina tab</span>
+          <div class="render"><img src="../../public/favicon-variant-a.svg" width="32" height="32" alt="Variant A at 32px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">64 · comparison</span>
+          <div class="render"><img src="../../public/favicon-variant-a.svg" width="64" height="64" alt="Variant A at 64px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">180 · apple-touch</span>
+          <div class="render apple"><img src="../../public/favicon-variant-a.svg" width="180" height="180" alt="Variant A at 180px" /></div>
+        </div>
+      </div>
+      <div class="path">public/favicon-variant-a.svg</div>
+    </div>
+
+    <!-- Variant B -->
+    <div class="card">
+      <div>
+        <p class="variant-label">Variant B</p>
+        <p class="variant-name">Outline stroke</p>
+      </div>
+      <p class="rationale">Cream stroked <em>cw</em> on dark Cocoa. Matches the stroke-only personality of the existing <code>CWMark</code>. Lighter and more editorial — the risk is thin strokes at 16 × 16.</p>
+      <div class="sizes">
+        <div class="size-row">
+          <span class="size-label">16 · tab</span>
+          <div class="render"><img src="../../public/favicon-variant-b.svg" width="16" height="16" alt="Variant B at 16px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">32 · retina tab</span>
+          <div class="render"><img src="../../public/favicon-variant-b.svg" width="32" height="32" alt="Variant B at 32px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">64 · comparison</span>
+          <div class="render"><img src="../../public/favicon-variant-b.svg" width="64" height="64" alt="Variant B at 64px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">180 · apple-touch</span>
+          <div class="render apple"><img src="../../public/favicon-variant-b.svg" width="180" height="180" alt="Variant B at 180px" /></div>
+        </div>
+      </div>
+      <div class="path">public/favicon-variant-b.svg</div>
+    </div>
+
+    <!-- Variant C -->
+    <div class="card">
+      <div>
+        <p class="variant-label">Variant C</p>
+        <p class="variant-name">Monogram inside CWMark</p>
+      </div>
+      <p class="rationale">Italic serif <em>cw</em> centered inside the CWMark circle. The conceptual move: the letters <em>are</em> the crossing curves. Tightest cohesion with the app masthead.</p>
+      <div class="sizes">
+        <div class="size-row">
+          <span class="size-label">16 · tab</span>
+          <div class="render"><img src="../../public/favicon-variant-c.svg" width="16" height="16" alt="Variant C at 16px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">32 · retina tab</span>
+          <div class="render"><img src="../../public/favicon-variant-c.svg" width="32" height="32" alt="Variant C at 32px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">64 · comparison</span>
+          <div class="render"><img src="../../public/favicon-variant-c.svg" width="64" height="64" alt="Variant C at 64px" /></div>
+        </div>
+        <div class="size-row">
+          <span class="size-label">180 · apple-touch</span>
+          <div class="render apple"><img src="../../public/favicon-variant-c.svg" width="180" height="180" alt="Variant C at 180px" /></div>
+        </div>
+      </div>
+      <div class="path">public/favicon-variant-c.svg</div>
+    </div>
+  </div>
+</body>
+</html>
