@@ -56,21 +56,63 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 
 - **Methylfolate (L-5-MTHF)**
   - *Feels like:* When methylation runs slow, it usually shows up as mood dips you can't pin to anything, stress that lingers longer than the trigger, and a foggy kind of tired that coffee doesn't fix.
+  - **Primary SNP details:**
+    - **MTHFR C677T (CT or TT — slow methylator)** — Reduces MTHFR enzyme activity ~30–65%, lowering conversion of folate to active 5-methyl-THF; supplementing the methylated form bypasses the bottleneck.
+      - Source: PharmGKB clinical annotation — https://www.pharmgkb.org/clinicalAnnotation/1450814430
+    - **MTHFR A1298C (AC or CC — moderate methylation drag)** — Sits in MTHFR's regulatory region, modestly reducing folate-handling capacity especially when stacked with C677T; methylated folate is the form that reaches the methylation cycle.
+      - Source: PharmGKB clinical annotation — https://www.pharmgkb.org/clinicalAnnotation/1450814424
+    - **MTHFD1 G1958A (GA or AA — reduced folate-cycle stability)** — Destabilizes MTHFD1, the upstream enzyme that supplies the folate forms MTHFR acts on, increasing the burden on the methyl cycle and the case for pre-converted methylfolate.
+      - Source: SNPedia — https://www.snpedia.com/index.php/Rs2236225
 - **Methyl-B12 (methylcobalamin)**
   - *Feels like:* Low-functioning B12 tends to read as a slow mental engine — harder to find the right word mid-sentence, heavier fatigue by late afternoon, and over time, occasional numbness or tingling in the hands and feet.
+  - **Primary SNP details:**
+    - **FUT2 non-secretor (AA)** — Non-secretor genotype alters gut mucosal glycosylation and shifts holo-haptocorrin handling, raising B12 intra-organismal recycling demand and the case for direct methylcobalamin supplementation.
+      - Source: PubMed (PMC seminal paper) — https://pmc.ncbi.nlm.nih.gov/articles/PMC2673801/
+    - **MTR A2756G (AG or GG — accelerated B12 turnover)** — Alters methionine synthase activity at the homocysteine→methionine step, increasing methylcobalamin turnover and the ongoing B12 cofactor requirement.
+      - Source: PubMed (meta-analysis) — https://pmc.ncbi.nlm.nih.gov/articles/PMC3990204/
+    - **MTRR A66G (AG or GG — slower B12 reactivation)** — Reduces methionine synthase reductase activity, the enzyme that regenerates the active B12 cofactor on MTR, so methylcobalamin reserves deplete faster; direct supplementation eases the recycling load.
+      - Source: PubMed — https://pubmed.ncbi.nlm.nih.gov/24261678/
 - **Vitamin D3 + K2**
   - *Feels like:* Running low often feels like low-grade immune sluggishness, colds that keep circling back, aches that don't tie to a workout, and the flatter mood that creeps in through winter.
   - *Context:* Most people with more melanin run below optimal vitamin D year-round, not just in winter — and the GC variant many in this audience carry stacks on top of that, so standard-dose recommendations usually undershoot.
+  - **Primary SNP details:**
+    - **VDR BsmI (AA or AG — reduced receptor stability)** — BsmI sits in the VDR 3'UTR and reduces vitamin D receptor mRNA stability, raising the circulating 25(OH)D level needed for the same biological effect — higher target dose.
+      - Source: PubMed (meta-analysis, 26 studies) — https://pubmed.ncbi.nlm.nih.gov/23134477/
+    - **GC DBP minor allele (AC or CC — lower circulating 25(OH)D)** — Minor allele of the GC vitamin-D binding protein lowers circulating 25(OH)D and blunts the rise after standard supplementation; effect is amplified in African-ancestry populations.
+      - Source: PubMed (supplementation response) — https://pubmed.ncbi.nlm.nih.gov/30661702/
+    - **CYP2R1 rs10741657 (GG — reduced D3 activation)** — Variants in the major hepatic 25-hydroxylase reduce conversion of D3 to circulating 25(OH)D, dampening the response to fixed-dose supplementation.
+      - Source: PubMed (systematic review + meta-analysis) — https://pubmed.ncbi.nlm.nih.gov/30120973/
 - **Omega-3 (EPA/DHA, marine)**
   - *Feels like:* Slow conversion tends to show up as joint stiffness, sluggish post-workout recovery, drier skin, and the kind of mid-afternoon mental fog that sneaks up on you.
+  - **Primary SNP details:**
+    - **FADS1 rs174537 (GT or TT — slow ALA→EPA converter)** — Reduces FADS1 (Δ-5 desaturase) activity by 30–50% in T-allele carriers, severely limiting ALA-to-EPA conversion and making marine-sourced EPA/DHA the practical route.
+      - Source: PubMed (intervention RCT) — https://www.mdpi.com/2072-6643/9/3/240
+    - **FADS2 rs1535 (AG or GG — reduced Δ-6 desaturase)** — Lowers FADS2 (Δ-6 desaturase) activity, the upstream step in long-chain omega-3 synthesis; G-allele carriers respond preferentially to direct EPA/DHA supplementation.
+      - Source: PubMed (OMEGA-REMODEL pharmacogenomic post-hoc) — https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0222061
+    - **ELOVL2 rs953413 (GA or GG — reduced EPA→DHA elongation)** — Modulates ELOVL2 expression via FOXA1/HNF4α, controlling the EPA→DPA→DHA elongation step; minor-allele carriers convert less EPA into DHA endogenously.
+      - Source: PubMed (mechanism paper) — https://pmc.ncbi.nlm.nih.gov/articles/PMC7033636/
 - **NAC (N-acetyl cysteine)**
   - *Feels like:* Sluggish detox often shows up as hangovers that feel disproportionate to what you drank, feeling wiped out after smoke or fume exposure, and skin that takes longer to bounce back from stress.
+  - **Primary SNP details:**
+    - **GSTP1 Ile105Val (AG or GG — reduced glutathione conjugation)** — Reduces GSTP1 catalytic activity for glutathione conjugation, lowering xenobiotic clearance; NAC supplies cysteine to replenish the glutathione substrate this enzyme depends on. *PharmGKB's rs1695 clinical annotations cover platinum chemo and cyclophosphamide, not NAC — citation is the gene-level VIP page; the NAC-GSTP1 link is mechanistic via shared glutathione substrate.*
+      - Source: PharmGKB Very Important Pharmacogene (gene-level) — https://www.pharmgkb.org/vip/PA166169438
 - **Berberine**
   - *Feels like:* These variants tend to show up as afternoon energy crashes after carb-heavy meals, sweet cravings that aren't really hunger, and weight that holds on around the midsection even when the rest is moving.
+  - **Primary SNP details:**
+    - **TCF7L2 rs7903146 (CT or TT — impaired incretin-driven insulin secretion)** — Disrupts incretin-driven insulin secretion via TCF7L2, raising T2D risk; berberine targets the same insulin-resistance pathway via AMPK activation. *No berberine-specific pharmacogenomic study exists — mechanism-only rationale, citation is the canonical TCF7L2/T2D mechanism paper.*
+      - Source: PubMed (TCF7L2 mechanism paper, not berberine-specific) — https://pmc.ncbi.nlm.nih.gov/articles/PMC2809956/
+    - **PPARG Pro12Pro (CC — lower insulin sensitivity than Ala carriers)** — Pro12 (CC) carries lower PPARγ-mediated insulin sensitivity than Ala12 carriers; berberine engages PPARγ and AMPK pathways. *No berberine-specific pharmacogenomic study exists — mechanism-only rationale, citation is the canonical PPARG/T2D meta-analysis.*
+      - Source: PubMed (PPARG/T2D meta-analysis, not berberine-specific) — https://pmc.ncbi.nlm.nih.gov/articles/PMC7391673/
 - **Magnesium (glycinate)**
   - *Feels like:* Low magnesium tends to show up as trouble falling asleep, muscle tightness or calf cramps at night, and a nervous system that takes longer than it should to come down after stress.
+  - **Primary SNP details:**
+    - **TRPM6 rs11144134 (CT or TT — reduced Mg reabsorption)** — Reduces intestinal/renal magnesium handling via TRPM6, raising risk of latent hypomagnesemia and the rationale for daily supplementation.
+      - Source: PubMed (ARIC GWAS) — https://pmc.ncbi.nlm.nih.gov/articles/PMC4462077/
 - **Sulforaphane (broccoli sprout)**
   - *Feels like:* This one's more preventative than felt in the moment — steadier recovery from environmental exposures, and a body that handles everyday oxidative load without you having to think about it.
+  - **Primary SNP details:**
+    - **GSTP1 Ile105Val (AG or GG — reduced glutathione conjugation)** — Reduces GSTP1 baseline activity; sulforaphane induces Phase II antioxidant enzymes including GSTP1 itself, partially compensating for the lower-activity variant.
+      - Source: PubMed (Phase II induction RCT) — https://pubmed.ncbi.nlm.nih.gov/19028145/
 
 ### Healthy Aging
 
@@ -84,10 +126,21 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 
 - **CoQ10 (ubiquinol)**
   - *Feels like:* Low CoQ10 usually reads as low-octane energy — workouts that feel harder than they should, recovery that drags, and a heart that works noticeably more on stairs or inclines.
+  - **Primary SNP details:**
+    - **NQO1 C609T (CT or TT — reduced ubiquinone→ubiquinol reduction)** — C609T lowers NQO1 activity, the enzyme that reduces ubiquinone to ubiquinol; direct ubiquinol supplementation bypasses the conversion step this variant impairs.
+      - Source: PubMed (Frontiers review on NQO1 + CoQ10) — https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full
+    - **SOD2 Ala16Val (CT or TT — reduced mitochondrial SOD2 import)** — Ala16Val alters MnSOD's mitochondrial targeting sequence, reducing import efficiency and raising mitochondrial oxidative stress; CoQ10 supports the same mitochondrial-redox axis SOD2 protects.
+      - Source: PubMed (structural/import study) — https://pubmed.ncbi.nlm.nih.gov/36552556/
 - **Phosphatidylserine (PS)**
   - *Feels like:* When the brain needs more structural support, it tends to show up as names and words slipping mid-conversation, harder-to-hold focus when you're juggling things, and more mental friction late in the day.
+  - **Primary SNP details:**
+    - **APOE ε4 carrier (rs429358-C + rs7412-C — at least one ε4 allele)** — ε4 carriers show altered neuronal phospholipid handling and accelerated cognitive aging; phosphatidylserine + omega-3 supplementation has shown memory benefit in this risk group.
+      - Source: PubMed (Vakhapova RCT) — https://pubmed.ncbi.nlm.nih.gov/20523044/
 - **NMN / NR (NAD⁺ precursor)**
   - *Feels like:* Aging mitochondria tend to read as a slower metabolic engine overall — workouts that take longer to recover from, energy that doesn't return to baseline the way it used to, and sleep that feels less restorative.
+  - **Primary SNP details:**
+    - **NQO1 C609T (CT or TT — reduced NAD redox cycling)** — C609T reduces NQO1's NAD(P)H-dependent quinone reduction, sitting in the redox-coupling pathway that NMN/NR replenishes via NAD⁺ supply.
+      - Source: PubMed (Frontiers review on NQO1 redox role) — https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full
 
 ### Body Optimization
 
@@ -101,10 +154,19 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 
 - **Creatine monohydrate**
   - *Feels like:* If you carry the XX genotype, creatine tends to show up as a real lift — more reps left in the tank, faster between-set recovery, and strength that builds sooner than you'd expect for the effort you're putting in.
+  - **Primary SNP details:**
+    - **ACTN3 R577X / XX genotype (TT — α-actinin-3 deficient)** — XX genotype carriers lack α-actinin-3 in fast-twitch fibers; creatine produces the largest power and recovery gains in this group, partly compensating for the deficit.
+      - Source: PubMed (meta-analysis, elite power sports) — https://pubmed.ncbi.nlm.nih.gov/31145768/
 - **L-carnitine (tartrate)**
   - *Feels like:* Slower fat oxidation often shows up as exercise that feels like it's running on sugar before fat — energy that crashes sooner than expected, and weight that's harder to shift even with consistent cardio.
+  - **Primary SNP details:**
+    - **ADRB2 Arg16Gly (AG or GG — blunted lipolytic response)** — Arg16Gly blunts β2-adrenergic lipolytic signaling, slowing fat mobilization during exercise; L-carnitine supports fatty-acid transport into mitochondria for oxidation. *No direct ADRB2-carnitine pharmacogenomic study exists — mechanism-only rationale, citation is the canonical ADRB2 lipolysis meta-analysis.*
+      - Source: PubMed (ADRB2/lipolysis meta-analysis, not carnitine-specific) — https://pubmed.ncbi.nlm.nih.gov/24960039/
 - **PQQ**
   - *Feels like:* The payoff here is subtle and slow — more stamina across long days, better-quality sleep, and a brain that doesn't hit its afternoon wall as hard.
+  - **Primary SNP details:**
+    - **PPARGC1A Gly482Ser (GA or AA — reduced mitochondrial biogenesis)** — Gly482Ser reduces PGC-1α coactivator activity at the mitochondrial-biogenesis program; PQQ stimulates PGC-1α expression. *No PQQ-specific pharmacogenomic study exists — mechanism-only rationale, citation is the canonical PPARGC1A/exercise-physiology review.*
+      - Source: PubMed (PPARGC1A narrative review, not PQQ-specific) — https://pubmed.ncbi.nlm.nih.gov/39766897/
 
 ### Food Sensitivity
 
@@ -120,14 +182,30 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 - **Lactase enzyme**
   - *Feels like:* If dairy reliably gives you bloating, cramping, or looser stools within an hour or two of the meal, that's exactly the pattern this targets.
   - *Context:* The LCT persistence genotype — being able to digest dairy into adulthood — is uncommon outside Northern European ancestry, which is why lactose issues are the norm rather than the exception for most of us.
+  - **Primary SNP details:**
+    - **LCT/MCM6 rs4988235 (CC — lactase non-persistent)** — CC genotype keeps the lactase gene downregulated past childhood (lactase non-persistence); supplemental lactase replaces what the gut no longer makes.
+      - Source: PubMed (lactase persistence + dairy intake) — https://pubmed.ncbi.nlm.nih.gov/31405126/
 - **Non-dairy calcium (citrate)**
   - *Feels like:* If you've cut or reduced dairy, the gap usually isn't felt day to day — it shows up long-term in bone density, and near-term you might notice more nighttime muscle cramping.
   - *Context:* Because lactose non-persistence is the default for most non-Northern-European populations, many people in this audience have been quietly running below the calcium-intake assumptions that most nutrition guidance is built on.
+  - **Primary SNP details:**
+    - **LCT/MCM6 rs4988235 (CC — lactase non-persistent, low dairy)** — CC genotype implies adult lactose maldigestion and typically reduced dairy intake; non-dairy calcium fills the calcium gap this dietary pattern creates.
+      - Source: PubMed (lactase persistence + dairy intake) — https://pubmed.ncbi.nlm.nih.gov/31405126/
 - **DAO enzyme (histamine intolerance)**
   - *Feels like:* Low DAO tends to show up as flushing after wine or aged cheese, unexplained headaches, hives, or a runny nose that kicks in after meals — histamine building up faster than your body can clear it.
+  - **Primary SNP details:**
+    - **AOC1 Thr16Met (CT or TT — reduced DAO activity)** — Thr16Met reduces DAO enzymatic activity in plasma, slowing histamine clearance after histamine-rich meals; supplemental DAO eases the overflow.
+      - Source: PubMed (DAO variants in HIT pilot) — https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/
+    - **AOC1 Ser332Phe (CT or TT — reduced DAO production)** — Ser332Phe lowers DAO production, compounding histamine-clearance deficiency when carried alongside other AOC1 variants; supplemental DAO compensates pre-meal.
+      - Source: PubMed (DAO variants in HIT pilot) — https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/
 - **Iron — SKIP if HFE carrier**
   - *Feels like:* If you're a carrier, extra iron doesn't make you feel anything different in the moment — it quietly accumulates over years. Skipping iron in multis and not "just topping up" is the move.
   - *Context:* HFE hemochromatosis is largely a Northern European founder variant and is much less common in people of African descent, so this card fires for fewer users in our audience than the general population rate would suggest.
+  - **Primary SNP details:**
+    - **HFE H63D carrier (CG or GG)** — H63D mildly disrupts HFE-transferrin receptor binding, modestly elevating intestinal iron absorption; extra iron from supplements quietly accumulates over years and is best avoided.
+      - Source: PubMed (NEJM iron-overload study) — https://www.nejm.org/doi/full/10.1056/NEJMoa073286
+    - **HFE C282Y carrier (GA or AA)** — C282Y disrupts a disulfide bond in HFE, sharply raising intestinal iron absorption; homozygotes risk overt hemochromatosis and supplemental iron must be avoided.
+      - Source: PubMed (NEJM iron-overload study) — https://www.nejm.org/doi/full/10.1056/NEJMoa073286
 
 ## SNP Reference (v0 ceiling: 60)
 
