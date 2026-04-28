@@ -1,20 +1,23 @@
-import { SUPPLEMENT_RULES } from '../engine/supplementRules';
 import { CATEGORY_LABELS } from './supplementLabels';
 import { getPartnerDisplayName } from './affiliateLinks';
 import type {
-  Genotype,
   PartnerOption,
-  SNPReference,
   SupplementRecommendation,
 } from '../types';
 import type { DesignPriority } from '../components/ui';
+
+export interface DesignCardVariant {
+  variantLabel: string;
+  description: string;
+  citationUrl: string;
+}
 
 export interface DesignCardSupplement {
   name: string;
   tag: string;
   priority: DesignPriority;
   dose: string;
-  snps: string[];
+  variants: DesignCardVariant[];
   reason: string;
   healthEffect: string;
   culturalContext?: string;
@@ -22,40 +25,13 @@ export interface DesignCardSupplement {
   partnerOptions: PartnerOption[];
 }
 
-const RULE_INDEX: Map<string, SNPReference[]> = new Map(
-  SUPPLEMENT_RULES.map((r) => [r.supplement.name, r.primarySNPs]),
-);
-
-function mapPriority(
-  rec: SupplementRecommendation,
-): DesignPriority {
+function mapPriority(rec: SupplementRecommendation): DesignPriority {
   if (rec.priority === 'skip') return 'avoid';
   if (rec.priority === 'gap') return 'gap';
   if (rec.partnerOptions.length === 0) return 'gap';
   if (rec.priority === 'essential') return 'essential';
   if (rec.priority === 'recommended') return 'recommended';
   return 'optional';
-}
-
-function shortEffect(effect: string): string {
-  const emDash = effect.indexOf('—');
-  if (emDash !== -1) return effect.slice(0, emDash).trim();
-  if (effect.length <= 40) return effect;
-  return effect.slice(0, 40).trim();
-}
-
-function labelSnp(
-  rsid: string,
-  primarySNPs: SNPReference[],
-  snpMap: Map<string, Genotype>,
-): string {
-  const ref = primarySNPs.find((s) => s.rsid === rsid);
-  const genotype = snpMap.get(rsid) ?? '';
-  if (!ref) {
-    return genotype ? `${rsid} (${genotype})` : rsid;
-  }
-  const label = shortEffect(ref.effect) || ref.gene;
-  return genotype ? `${label} (${genotype})` : label;
 }
 
 function buildReason(rec: SupplementRecommendation): string {
@@ -70,15 +46,22 @@ function buildReason(rec: SupplementRecommendation): string {
   return first;
 }
 
-export function toDesignCard(
-  rec: SupplementRecommendation,
-  snpMap: Map<string, Genotype>,
-): DesignCardSupplement {
-  const primarySNPs = RULE_INDEX.get(rec.supplement.name) ?? [];
-  const snpLabels = rec.firedPrimary.length > 0
-    ? rec.firedPrimary.map((rsid) => labelSnp(rsid, primarySNPs, snpMap))
-    : primarySNPs.slice(0, 2).map((s) => s.gene);
+function buildVariants(rec: SupplementRecommendation): DesignCardVariant[] {
+  const seen = new Set<string>();
+  const variants: DesignCardVariant[] = [];
+  for (const ref of rec.firedPrimaryDetails) {
+    if (seen.has(ref.variantLabel)) continue;
+    seen.add(ref.variantLabel);
+    variants.push({
+      variantLabel: ref.variantLabel,
+      description: ref.description,
+      citationUrl: ref.citationUrl,
+    });
+  }
+  return variants;
+}
 
+export function toDesignCard(rec: SupplementRecommendation): DesignCardSupplement {
   const priority = mapPriority(rec);
   const reason = priority === 'avoid'
     ? `Avoid — ${buildReason(rec)}`
@@ -89,7 +72,7 @@ export function toDesignCard(
     tag: CATEGORY_LABELS[rec.supplement.category],
     priority,
     dose: rec.dosage,
-    snps: snpLabels,
+    variants: buildVariants(rec),
     reason,
     healthEffect: rec.supplement.healthEffect,
     culturalContext: rec.supplement.culturalContext,
@@ -98,9 +81,6 @@ export function toDesignCard(
   };
 }
 
-export function toDesignCards(
-  recs: SupplementRecommendation[],
-  snpMap: Map<string, Genotype>,
-): DesignCardSupplement[] {
-  return recs.map((r) => toDesignCard(r, snpMap));
+export function toDesignCards(recs: SupplementRecommendation[]): DesignCardSupplement[] {
+  return recs.map((r) => toDesignCard(r));
 }

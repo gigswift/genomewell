@@ -77,8 +77,14 @@ export interface SNPReference {
   rsid: string;
   gene: string;
   role: 'primary' | 'supporting';
-  effect: string;
+  description: string;
   riskGenotypes: readonly string[];
+}
+
+export interface PrimarySNPReference extends SNPReference {
+  role: 'primary';
+  variantLabel: string;
+  citationUrl: string;
 }
 
 export interface Supplement {
@@ -95,7 +101,7 @@ export type EvidenceTier = 'SNP-driven' | 'SNP-informed';
 export interface SupplementRule {
   supplement: Supplement;
   evidenceTier: EvidenceTier;
-  primarySNPs: SNPReference[];
+  primarySNPs: PrimarySNPReference[];
   supportingSNPs: SNPReference[];
   // Skip-only rules (e.g. Iron + HFE carrier) force priority = 'skip' when any primary fires.
   avoidanceRule?: boolean;
@@ -113,6 +119,7 @@ export interface SupplementRecommendation {
   dosage: string;
   reasoning: string[];
   firedPrimary: string[];
+  firedPrimaryDetails: PrimarySNPReference[];
   firedSupporting: string[];
   confidence: SupplementConfidence;
   partnerOptions: PartnerOption[];

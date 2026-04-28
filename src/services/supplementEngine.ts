@@ -7,20 +7,22 @@ import type {
   SupplementRule,
 } from '../types';
 
-function firedRsids(
-  refs: SNPReference[],
+function firedRefs<T extends SNPReference>(
+  refs: T[],
   snpMap: Map<string, Genotype>,
-): { rsids: string[]; effects: string[] } {
+): { fired: T[]; rsids: string[]; descriptions: string[] } {
+  const fired: T[] = [];
   const rsids: string[] = [];
-  const effects: string[] = [];
+  const descriptions: string[] = [];
   for (const ref of refs) {
     const genotype = snpMap.get(ref.rsid);
     if (genotype && ref.riskGenotypes.includes(genotype)) {
+      fired.push(ref);
       rsids.push(ref.rsid);
-      effects.push(`${ref.gene} (${ref.rsid}, ${genotype}): ${ref.effect}`);
+      descriptions.push(`${ref.gene} (${ref.rsid}, ${genotype}): ${ref.description}`);
     }
   }
-  return { rsids, effects };
+  return { fired, rsids, descriptions };
 }
 
 function priorityFromCount(firedPrimaryCount: number): SupplementPriorityTier {
@@ -37,8 +39,8 @@ export function evaluate(
   rule: SupplementRule,
   snpMap: Map<string, Genotype>,
 ): SupplementRecommendation | null {
-  const primary = firedRsids(rule.primarySNPs, snpMap);
-  const supporting = firedRsids(rule.supportingSNPs, snpMap);
+  const primary = firedRefs(rule.primarySNPs, snpMap);
+  const supporting = firedRefs(rule.supportingSNPs, snpMap);
 
   // Haplotype gate (e.g. PS requires APOE E4): if present and fails, never recommend.
   if (rule.customGate && !rule.customGate(snpMap)) {
@@ -59,7 +61,7 @@ export function evaluate(
     ? 'skip'
     : priorityFromCount(primary.rsids.length);
 
-  const reasoning = [...primary.effects, ...supporting.effects];
+  const reasoning = [...primary.descriptions, ...supporting.descriptions];
 
   return {
     supplement: rule.supplement,
@@ -67,6 +69,7 @@ export function evaluate(
     dosage,
     reasoning,
     firedPrimary: primary.rsids,
+    firedPrimaryDetails: primary.fired,
     firedSupporting: supporting.rsids,
     confidence: confidenceFromTier(rule),
     partnerOptions: rule.supplement.partnerOptions,

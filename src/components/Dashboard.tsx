@@ -45,7 +45,7 @@ export function Dashboard({
   const archetype = deriveArchetype(snpMap, allRecs, totalRowsParsed);
 
   const recsForTab = grouped[tab];
-  const cards = toDesignCards(recsForTab, snpMap);
+  const cards = toDesignCards(recsForTab);
 
   return (
     <div style={{

@@ -1,15 +1,15 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { CWPriorityChip, CWTooltip, SNP_DEF } from './ui';
 import { getPartnerDisplayName } from '../lib/affiliateLinks';
 import type { PartnerOption } from '../types';
-import type { DesignCardSupplement } from '../lib/designDataAdapter';
+import type { DesignCardSupplement, DesignCardVariant } from '../lib/designDataAdapter';
 
 interface SupplementCardProps {
   supp: DesignCardSupplement;
 }
 
 export function SupplementCard({ supp }: SupplementCardProps) {
-  const { name, tag, priority, dose, snps, reason, healthEffect, culturalContext, partnerOptions } = supp;
+  const { name, tag, priority, dose, variants, reason, healthEffect, culturalContext, partnerOptions } = supp;
   const isGap = priority === 'gap';
   const isAvoid = priority === 'avoid';
   const suppressShop = isGap || isAvoid;
@@ -44,19 +44,10 @@ export function SupplementCard({ supp }: SupplementCardProps) {
       </div>
       <div style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 14 }}>
         {!suppressShop && (
-          <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
-            <FieldPair label="Dose">{dose}</FieldPair>
-            {snps.length > 0 && (
-              <FieldPair label={<CWTooltip content={SNP_DEF}>Variants</CWTooltip>}>
-                {snps.join(' · ')}
-              </FieldPair>
-            )}
-          </div>
+          <FieldPair label="Dose">{dose}</FieldPair>
         )}
-        {suppressShop && snps.length > 0 && (
-          <FieldPair label={<CWTooltip content={SNP_DEF}>Variants</CWTooltip>}>
-            {snps.join(' · ')}
-          </FieldPair>
+        {variants.length > 0 && (
+          <VariantList variants={variants} />
         )}
         <p style={{
           margin: 0, fontFamily: 'var(--cw-font-body)',
@@ -194,6 +185,60 @@ function PartnerRow({ opt }: { opt: PartnerOption }) {
         </svg>
       </button>
     </div>
+  );
+}
+
+function VariantList({ variants }: { variants: DesignCardVariant[] }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
+      <span style={{
+        fontFamily: 'var(--cw-font-mono)', fontSize: 10,
+        letterSpacing: '0.1em', textTransform: 'uppercase',
+        color: 'var(--cw-ink-soft)',
+      }}>
+        <CWTooltip content={SNP_DEF}>Your Variants</CWTooltip>
+      </span>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+        {variants.map((v) => (
+          <VariantRow key={v.variantLabel} v={v} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function VariantRow({ v }: { v: DesignCardVariant }) {
+  const [hover, setHover] = useState(false);
+  const labelColor = hover ? 'var(--cw-accent)' : 'var(--cw-ink)';
+  const descColor = hover ? 'var(--cw-accent)' : 'var(--cw-ink-muted)';
+  const borderColor = hover ? 'var(--cw-accent)' : 'var(--cw-ink-muted)';
+  return (
+    <a
+      href={v.citationUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onFocus={() => setHover(true)}
+      onBlur={() => setHover(false)}
+      style={{
+        display: 'block',
+        padding: '6px 0',
+        textDecoration: 'none',
+        borderBottom: `1px dashed ${borderColor}`,
+        fontFamily: 'var(--cw-font-body)',
+        fontSize: 13,
+        lineHeight: 1.5,
+        transition: 'border-color 0.15s ease',
+      }}
+    >
+      <strong style={{ fontWeight: 600, color: labelColor, transition: 'color 0.15s ease' }}>
+        {v.variantLabel}
+      </strong>
+      <span style={{ color: descColor, transition: 'color 0.15s ease' }}>
+        : {v.description}
+      </span>
+    </a>
   );
 }
 

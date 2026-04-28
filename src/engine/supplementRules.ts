@@ -1,5 +1,6 @@
 import type {
   Genotype,
+  PrimarySNPReference,
   SNPReference,
   SupplementRule,
 } from '../types';
@@ -8,10 +9,29 @@ function snp(
   rsid: string,
   gene: string,
   role: 'primary' | 'supporting',
-  effect: string,
+  description: string,
   riskGenotypes: readonly string[],
 ): SNPReference {
-  return { rsid, gene, role, effect, riskGenotypes };
+  return { rsid, gene, role, description, riskGenotypes };
+}
+
+function primarySnp(
+  rsid: string,
+  gene: string,
+  description: string,
+  riskGenotypes: readonly string[],
+  variantLabel: string,
+  citationUrl: string,
+): PrimarySNPReference {
+  return {
+    rsid,
+    gene,
+    role: 'primary',
+    description,
+    riskGenotypes,
+    variantLabel,
+    citationUrl,
+  };
 }
 
 function has(map: Map<string, Genotype>, rsid: string, alleles: readonly string[]): boolean {
@@ -50,9 +70,30 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs1801133', 'MTHFR', 'primary', 'MTHFR C677T — T allele reduces enzyme activity; methylated folate bypasses the blocked step', ['CT', 'TC', 'TT']),
-      snp('rs1801131', 'MTHFR', 'primary', 'MTHFR A1298C — C allele reduces BH4 pathway function', ['AC', 'CA', 'CC']),
-      snp('rs2236225', 'MTHFD1', 'primary', 'MTHFD1 G1958A — reduces folate pathway flux', ['AA', 'AG', 'GA']),
+      primarySnp(
+        'rs1801133',
+        'MTHFR',
+        'Reduces MTHFR enzyme activity ~30–65%, lowering conversion of folate to active 5-methyl-THF; supplementing the methylated form bypasses the bottleneck.',
+        ['CT', 'TC', 'TT'],
+        'MTHFR C677T (CT or TT — slow methylator)',
+        'https://www.pharmgkb.org/clinicalAnnotation/1450814430',
+      ),
+      primarySnp(
+        'rs1801131',
+        'MTHFR',
+        "Sits in MTHFR's regulatory region, modestly reducing folate-handling capacity especially when stacked with C677T; methylated folate is the form that reaches the methylation cycle.",
+        ['AC', 'CA', 'CC'],
+        'MTHFR A1298C (AC or CC — moderate methylation drag)',
+        'https://www.pharmgkb.org/clinicalAnnotation/1450814424',
+      ),
+      primarySnp(
+        'rs2236225',
+        'MTHFD1',
+        'Destabilizes MTHFD1, the upstream enzyme that supplies the folate forms MTHFR acts on, increasing the burden on the methyl cycle and the case for pre-converted methylfolate.',
+        ['AA', 'AG', 'GA'],
+        'MTHFD1 G1958A (GA or AA — reduced folate-cycle stability)',
+        'https://www.snpedia.com/index.php/Rs2236225',
+      ),
     ],
     supportingSNPs: [
       snp('rs1805087', 'MTR', 'supporting', 'B12-dependent methionine synthase — G allele slows methylation cycle', ['AG', 'GA', 'GG']),
@@ -82,9 +123,30 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs601338', 'FUT2', 'primary', 'FUT2 non-secretor — reduced gut B12 absorption via altered mucin glycosylation', ['AA', 'AG', 'GA']),
-      snp('rs1805087', 'MTR', 'primary', 'MTR A2756G — reduced methionine synthase activity, higher B12 demand', ['AG', 'GA', 'GG']),
-      snp('rs1801394', 'MTRR', 'primary', 'MTRR A66G — reduced recycling of oxidized B12', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs601338',
+        'FUT2',
+        'Non-secretor genotype alters gut mucosal glycosylation and shifts holo-haptocorrin handling, raising B12 intra-organismal recycling demand and the case for direct methylcobalamin supplementation.',
+        ['AA', 'AG', 'GA'],
+        'FUT2 non-secretor (AA)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC2673801/',
+      ),
+      primarySnp(
+        'rs1805087',
+        'MTR',
+        'Alters methionine synthase activity at the homocysteine→methionine step, increasing methylcobalamin turnover and the ongoing B12 cofactor requirement.',
+        ['AG', 'GA', 'GG'],
+        'MTR A2756G (AG or GG — accelerated B12 turnover)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC3990204/',
+      ),
+      primarySnp(
+        'rs1801394',
+        'MTRR',
+        'Reduces methionine synthase reductase activity, the enzyme that regenerates the active B12 cofactor on MTR, so methylcobalamin reserves deplete faster; direct supplementation eases the recycling load.',
+        ['AG', 'GA', 'GG'],
+        'MTRR A66G (AG or GG — slower B12 reactivation)',
+        'https://pubmed.ncbi.nlm.nih.gov/24261678/',
+      ),
     ],
     supportingSNPs: [
       snp('rs1801133', 'MTHFR', 'supporting', 'MTHFR C677T — B12 pairs with methylfolate for homocysteine control', ['CT', 'TC', 'TT']),
@@ -112,9 +174,30 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs1544410', 'VDR', 'primary', 'VDR BsmI — receptor efficiency; minor allele reduces cellular vitamin D utilization', ['AA', 'AG', 'GA']),
-      snp('rs2282679', 'GC', 'primary', 'GC binding protein — minor allele reduces circulating 25(OH)D; effect amplified in African ancestry', ['AC', 'CA', 'AA']),
-      snp('rs10741657', 'CYP2R1', 'primary', '25-hydroxylase — variants reduce hepatic conversion of D3 to 25(OH)D', ['AG', 'GA', 'AA']),
+      primarySnp(
+        'rs1544410',
+        'VDR',
+        "BsmI sits in the VDR 3'UTR and reduces vitamin D receptor mRNA stability, raising the circulating 25(OH)D level needed for the same biological effect — higher target dose.",
+        ['AA', 'AG', 'GA'],
+        'VDR BsmI (AA or AG — reduced receptor stability)',
+        'https://pubmed.ncbi.nlm.nih.gov/23134477/',
+      ),
+      primarySnp(
+        'rs2282679',
+        'GC',
+        'Minor allele of the GC vitamin-D binding protein lowers circulating 25(OH)D and blunts the rise after standard supplementation; effect is amplified in African-ancestry populations.',
+        ['AC', 'CA', 'AA'],
+        'GC DBP minor allele (AC or CC — lower circulating 25(OH)D)',
+        'https://pubmed.ncbi.nlm.nih.gov/30661702/',
+      ),
+      primarySnp(
+        'rs10741657',
+        'CYP2R1',
+        'Variants in the major hepatic 25-hydroxylase reduce conversion of D3 to circulating 25(OH)D, dampening the response to fixed-dose supplementation.',
+        ['AG', 'GA', 'AA'],
+        'CYP2R1 rs10741657 (GG — reduced D3 activation)',
+        'https://pubmed.ncbi.nlm.nih.gov/30120973/',
+      ),
     ],
     supportingSNPs: [
       snp('rs12785878', 'DHCR7', 'supporting', 'DHCR7 — affects cutaneous D3 synthesis; reinforces supplementation case', ['GT', 'TG', 'TT']),
@@ -149,9 +232,30 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs174537', 'FADS1', 'primary', 'FADS1 — ALA→EPA conversion; minor allele = poor converter, plant omega-3 insufficient', ['GT', 'TG', 'TT']),
-      snp('rs1535', 'FADS2', 'primary', 'FADS2 — same desaturase pathway, reinforces FADS1 signal', ['AG', 'GA', 'GG']),
-      snp('rs953413', 'ELOVL2', 'primary', 'ELOVL2 — EPA→DHA elongation step', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs174537',
+        'FADS1',
+        'Reduces FADS1 (Δ-5 desaturase) activity by 30–50% in T-allele carriers, severely limiting ALA-to-EPA conversion and making marine-sourced EPA/DHA the practical route.',
+        ['GT', 'TG', 'TT'],
+        'FADS1 rs174537 (GT or TT — slow ALA→EPA converter)',
+        'https://www.mdpi.com/2072-6643/9/3/240',
+      ),
+      primarySnp(
+        'rs1535',
+        'FADS2',
+        'Lowers FADS2 (Δ-6 desaturase) activity, the upstream step in long-chain omega-3 synthesis; G-allele carriers respond preferentially to direct EPA/DHA supplementation.',
+        ['AG', 'GA', 'GG'],
+        'FADS2 rs1535 (AG or GG — reduced Δ-6 desaturase)',
+        'https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0222061',
+      ),
+      primarySnp(
+        'rs953413',
+        'ELOVL2',
+        'Modulates ELOVL2 expression via FOXA1/HNF4α, controlling the EPA→DPA→DHA elongation step; minor-allele carriers convert less EPA into DHA endogenously.',
+        ['AG', 'GA', 'GG'],
+        'ELOVL2 rs953413 (GA or GG — reduced EPA→DHA elongation)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC7033636/',
+      ),
     ],
     supportingSNPs: [
       snp('rs429358', 'APOE', 'supporting', 'APOE E4 carriers benefit more (neuro + lipid) — increases priority', ['CT', 'TC', 'CC']),
@@ -185,7 +289,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs1695', 'GSTP1', 'primary', 'GSTP1 I105V — Val allele reduces glutathione-S-transferase activity', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs1695',
+        'GSTP1',
+        "Reduces GSTP1 catalytic activity for glutathione conjugation, lowering xenobiotic clearance; NAC supplies cysteine to replenish the glutathione substrate this enzyme depends on. *PharmGKB's rs1695 clinical annotations cover platinum chemo and cyclophosphamide, not NAC — citation is the gene-level VIP page; the NAC-GSTP1 link is mechanistic via shared glutathione substrate.*",
+        ['AG', 'GA', 'GG'],
+        'GSTP1 Ile105Val (AG or GG — reduced glutathione conjugation)',
+        'https://www.pharmgkb.org/vip/PA166169438',
+      ),
     ],
     supportingSNPs: [
       snp('rs4880', 'SOD2', 'supporting', 'SOD2 — mitochondrial superoxide dismutase; supports redox balance NAC feeds into', ['CC', 'CT', 'TC']),
@@ -212,8 +323,22 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs7903146', 'TCF7L2', 'primary', 'TCF7L2 — strongest genetic T2D risk factor; berberine activates AMPK', ['CT', 'TC', 'TT']),
-      snp('rs1801282', 'PPARG', 'primary', 'PPARG P12A — insulin sensitivity regulation', ['CG', 'GC', 'GG']),
+      primarySnp(
+        'rs7903146',
+        'TCF7L2',
+        'Disrupts incretin-driven insulin secretion via TCF7L2, raising T2D risk; berberine targets the same insulin-resistance pathway via AMPK activation. *No berberine-specific pharmacogenomic study exists — mechanism-only rationale, citation is the canonical TCF7L2/T2D mechanism paper.*',
+        ['CT', 'TC', 'TT'],
+        'TCF7L2 rs7903146 (CT or TT — impaired incretin-driven insulin secretion)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC2809956/',
+      ),
+      primarySnp(
+        'rs1801282',
+        'PPARG',
+        'Pro12 (CC) carries lower PPARγ-mediated insulin sensitivity than Ala12 carriers; berberine engages PPARγ and AMPK pathways. *No berberine-specific pharmacogenomic study exists — mechanism-only rationale, citation is the canonical PPARG/T2D meta-analysis.*',
+        ['CG', 'GC', 'GG'],
+        'PPARG Pro12Pro (CC — lower insulin sensitivity than Ala carriers)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC7391673/',
+      ),
     ],
     supportingSNPs: [
       snp('rs9939609', 'FTO', 'supporting', 'FTO — obesity risk; metabolic syndrome context', ['AA', 'AT', 'TA']),
@@ -257,7 +382,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
-      snp('rs11144134', 'TRPM6', 'primary', 'TRPM6 — magnesium transporter variant affects intestinal Mg uptake', ['AC', 'CA', 'CC']),
+      primarySnp(
+        'rs11144134',
+        'TRPM6',
+        'Reduces intestinal/renal magnesium handling via TRPM6, raising risk of latent hypomagnesemia and the rationale for daily supplementation.',
+        ['AC', 'CA', 'CC'],
+        'TRPM6 rs11144134 (CT or TT — reduced Mg reabsorption)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC4462077/',
+      ),
     ],
     supportingSNPs: [
       snp('rs4680', 'COMT', 'supporting', 'COMT — Mg is a cofactor; slow metabolizers benefit from Mg support', ['AG', 'GA', 'AA']),
@@ -284,7 +416,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
-      snp('rs1695', 'GSTP1', 'primary', 'GSTP1 — phase II detox capacity; sulforaphane upregulates GST family', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs1695',
+        'GSTP1',
+        'Reduces GSTP1 baseline activity; sulforaphane induces Phase II antioxidant enzymes including GSTP1 itself, partially compensating for the lower-activity variant.',
+        ['AG', 'GA', 'GG'],
+        'GSTP1 Ile105Val (AG or GG — reduced glutathione conjugation)',
+        'https://pubmed.ncbi.nlm.nih.gov/19028145/',
+      ),
     ],
     supportingSNPs: [
       snp('rs6721961', 'NFE2L2', 'supporting', 'NFE2L2 (NRF2) — sulforaphane activates NRF2 antioxidant response', ['AA', 'AC', 'CA']),
@@ -311,8 +450,22 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs1800566', 'NQO1', 'primary', 'NQO1 P187S — reduced ubiquinone recycling capacity', ['CT', 'TC', 'TT']),
-      snp('rs4880', 'SOD2', 'primary', 'SOD2 — mitochondrial oxidative stress defense', ['CC', 'CT', 'TC']),
+      primarySnp(
+        'rs1800566',
+        'NQO1',
+        'C609T lowers NQO1 activity, the enzyme that reduces ubiquinone to ubiquinol; direct ubiquinol supplementation bypasses the conversion step this variant impairs.',
+        ['CT', 'TC', 'TT'],
+        'NQO1 C609T (CT or TT — reduced ubiquinone→ubiquinol reduction)',
+        'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full',
+      ),
+      primarySnp(
+        'rs4880',
+        'SOD2',
+        "Ala16Val alters MnSOD's mitochondrial targeting sequence, reducing import efficiency and raising mitochondrial oxidative stress; CoQ10 supports the same mitochondrial-redox axis SOD2 protects.",
+        ['CC', 'CT', 'TC'],
+        'SOD2 Ala16Val (CT or TT — reduced mitochondrial SOD2 import)',
+        'https://pubmed.ncbi.nlm.nih.gov/36552556/',
+      ),
     ],
     supportingSNPs: [
       snp('rs17238540', 'HMGCR', 'supporting', 'HMGCR — statin pathway; CoQ10 depletion context', ['CT', 'TC', 'TT']),
@@ -339,8 +492,22 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs429358', 'APOE', 'primary', 'APOE E4 marker — E4 carriers show cognitive-protective response to PS', ['CT', 'TC', 'CC']),
-      snp('rs7412', 'APOE', 'primary', 'APOE E4 haplotype requires rs7412 CC (excludes E2 allele)', ['CC']),
+      primarySnp(
+        'rs429358',
+        'APOE',
+        'ε4 carriers show altered neuronal phospholipid handling and accelerated cognitive aging; phosphatidylserine + omega-3 supplementation has shown memory benefit in this risk group.',
+        ['CT', 'TC', 'CC'],
+        'APOE ε4 carrier (rs429358-C + rs7412-C — at least one ε4 allele)',
+        'https://pubmed.ncbi.nlm.nih.gov/20523044/',
+      ),
+      primarySnp(
+        'rs7412',
+        'APOE',
+        'ε4 carriers show altered neuronal phospholipid handling and accelerated cognitive aging; phosphatidylserine + omega-3 supplementation has shown memory benefit in this risk group.',
+        ['CC'],
+        'APOE ε4 carrier (rs429358-C + rs7412-C — at least one ε4 allele)',
+        'https://pubmed.ncbi.nlm.nih.gov/20523044/',
+      ),
     ],
     supportingSNPs: [
       snp('rs6265', 'BDNF', 'supporting', 'BDNF Val66Met — reduced neuroplasticity, PS supports membrane integrity', ['AG', 'GA', 'AA']),
@@ -367,7 +534,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
-      snp('rs1800566', 'NQO1', 'primary', 'NQO1 — NAD(P)H:quinone oxidoreductase; redox balance depends on NAD+ pool', ['CT', 'TC', 'TT']),
+      primarySnp(
+        'rs1800566',
+        'NQO1',
+        "C609T reduces NQO1's NAD(P)H-dependent quinone reduction, sitting in the redox-coupling pathway that NMN/NR replenishes via NAD⁺ supply.",
+        ['CT', 'TC', 'TT'],
+        'NQO1 C609T (CT or TT — reduced NAD redox cycling)',
+        'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full',
+      ),
     ],
     supportingSNPs: [
       snp('rs4880', 'SOD2', 'supporting', 'SOD2 — mitochondrial oxidative stress', ['CC', 'CT', 'TC']),
@@ -404,7 +578,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs1815739', 'ACTN3', 'primary', 'ACTN3 R577X — XX (TT) genotype lacks alpha-actinin-3, benefits most from creatine', ['CT', 'TC', 'TT']),
+      primarySnp(
+        'rs1815739',
+        'ACTN3',
+        'XX genotype carriers lack α-actinin-3 in fast-twitch fibers; creatine produces the largest power and recovery gains in this group, partly compensating for the deficit.',
+        ['CT', 'TC', 'TT'],
+        'ACTN3 R577X / XX genotype (TT — α-actinin-3 deficient)',
+        'https://pubmed.ncbi.nlm.nih.gov/31145768/',
+      ),
     ],
     supportingSNPs: [
       snp('rs4343', 'ACE', 'supporting', 'ACE — I/D polymorphism; power/endurance context', ['AG', 'GA', 'GG']),
@@ -430,7 +611,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs1042713', 'ADRB2', 'primary', 'ADRB2 R16G — Gly allele reduces β2-adrenergic fat oxidation', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs1042713',
+        'ADRB2',
+        'Arg16Gly blunts β2-adrenergic lipolytic signaling, slowing fat mobilization during exercise; L-carnitine supports fatty-acid transport into mitochondria for oxidation. *No direct ADRB2-carnitine pharmacogenomic study exists — mechanism-only rationale, citation is the canonical ADRB2 lipolysis meta-analysis.*',
+        ['AG', 'GA', 'GG'],
+        'ADRB2 Arg16Gly (AG or GG — blunted lipolytic response)',
+        'https://pubmed.ncbi.nlm.nih.gov/24960039/',
+      ),
     ],
     supportingSNPs: [
       snp('rs8192678', 'PPARGC1A', 'supporting', 'PPARGC1A — mitochondrial fat oxidation capacity', ['AG', 'GA', 'AA']),
@@ -448,7 +636,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-informed',
     primarySNPs: [
-      snp('rs8192678', 'PPARGC1A', 'primary', 'PPARGC1A G482S — reduced mitochondrial biogenesis; PQQ stimulates PGC-1α', ['AG', 'GA', 'AA']),
+      primarySnp(
+        'rs8192678',
+        'PPARGC1A',
+        'Gly482Ser reduces PGC-1α coactivator activity at the mitochondrial-biogenesis program; PQQ stimulates PGC-1α expression. *No PQQ-specific pharmacogenomic study exists — mechanism-only rationale, citation is the canonical PPARGC1A/exercise-physiology review.*',
+        ['AG', 'GA', 'AA'],
+        'PPARGC1A Gly482Ser (GA or AA — reduced mitochondrial biogenesis)',
+        'https://pubmed.ncbi.nlm.nih.gov/39766897/',
+      ),
     ],
     supportingSNPs: [
       snp('rs4880', 'SOD2', 'supporting', 'SOD2 — mitochondrial ROS handling', ['CC', 'CT', 'TC']),
@@ -467,7 +662,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs4988235', 'LCT', 'primary', 'LCT −13910 — GG genotype = non-persistence (lactose intolerance)', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs4988235',
+        'LCT',
+        'CC genotype keeps the lactase gene downregulated past childhood (lactase non-persistence); supplemental lactase replaces what the gut no longer makes.',
+        ['AG', 'GA', 'GG'],
+        'LCT/MCM6 rs4988235 (CC — lactase non-persistent)',
+        'https://pubmed.ncbi.nlm.nih.gov/31405126/',
+      ),
     ],
     supportingSNPs: [],
   },
@@ -491,7 +693,14 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs4988235', 'LCT', 'primary', 'LCT non-persistence reduces dairy intake → calcium gap from non-dairy sources', ['AG', 'GA', 'GG']),
+      primarySnp(
+        'rs4988235',
+        'LCT',
+        'CC genotype implies adult lactose maldigestion and typically reduced dairy intake; non-dairy calcium fills the calcium gap this dietary pattern creates.',
+        ['AG', 'GA', 'GG'],
+        'LCT/MCM6 rs4988235 (CC — lactase non-persistent, low dairy)',
+        'https://pubmed.ncbi.nlm.nih.gov/31405126/',
+      ),
     ],
     supportingSNPs: [
       snp('rs1544410', 'VDR', 'supporting', 'VDR — calcium absorption efficiency depends on vitamin D receptor function', ['AA', 'AG', 'GA']),
@@ -508,8 +717,22 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     },
     evidenceTier: 'SNP-driven',
     primarySNPs: [
-      snp('rs10156191', 'AOC1', 'primary', 'AOC1 — diamine oxidase activity; T allele reduces DAO', ['CT', 'TC', 'TT']),
-      snp('rs1049742', 'AOC1', 'primary', 'AOC1 — second DAO-reducing variant', ['CT', 'TC', 'TT']),
+      primarySnp(
+        'rs10156191',
+        'AOC1',
+        'Thr16Met reduces DAO enzymatic activity in plasma, slowing histamine clearance after histamine-rich meals; supplemental DAO eases the overflow.',
+        ['CT', 'TC', 'TT'],
+        'AOC1 Thr16Met (CT or TT — reduced DAO activity)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/',
+      ),
+      primarySnp(
+        'rs1049742',
+        'AOC1',
+        'Ser332Phe lowers DAO production, compounding histamine-clearance deficiency when carried alongside other AOC1 variants; supplemental DAO compensates pre-meal.',
+        ['CT', 'TC', 'TT'],
+        'AOC1 Ser332Phe (CT or TT — reduced DAO production)',
+        'https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/',
+      ),
     ],
     supportingSNPs: [
       snp('rs1800629', 'TNF', 'supporting', 'TNFA pro-inflammatory — histamine load compounds inflammation signal', ['AG', 'GA', 'AA']),
@@ -527,8 +750,22 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     evidenceTier: 'SNP-driven',
     avoidanceRule: true,
     primarySNPs: [
-      snp('rs1799945', 'HFE', 'primary', 'HFE H63D — hemochromatosis risk; iron overload threat, avoid supplementation', ['CG', 'GC', 'GG']),
-      snp('rs1800562', 'HFE', 'primary', 'HFE C282Y — strongest hemochromatosis allele; iron supplementation contraindicated', ['AG', 'GA', 'AA']),
+      primarySnp(
+        'rs1799945',
+        'HFE',
+        'H63D mildly disrupts HFE-transferrin receptor binding, modestly elevating intestinal iron absorption; extra iron from supplements quietly accumulates over years and is best avoided.',
+        ['CG', 'GC', 'GG'],
+        'HFE H63D carrier (CG or GG)',
+        'https://www.nejm.org/doi/full/10.1056/NEJMoa073286',
+      ),
+      primarySnp(
+        'rs1800562',
+        'HFE',
+        'C282Y disrupts a disulfide bond in HFE, sharply raising intestinal iron absorption; homozygotes risk overt hemochromatosis and supplemental iron must be avoided.',
+        ['AG', 'GA', 'AA'],
+        'HFE C282Y carrier (GA or AA)',
+        'https://www.nejm.org/doi/full/10.1056/NEJMoa073286',
+      ),
     ],
     supportingSNPs: [],
   },
