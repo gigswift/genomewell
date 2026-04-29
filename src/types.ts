@@ -85,6 +85,18 @@ export interface PrimarySNPReference extends SNPReference {
   role: 'primary';
   variantLabel: string;
   citationUrl: string;
+  // Wild-type genotype shown to the user as "Normal:" on the card.
+  referenceGenotype: string;
+  // Set only on dual-strand SNPs where the parser may emit either strand
+  // orientation (TRPM6 rs11144134, VDR BsmI rs1544410). The adapter picks
+  // whichever reference shares a strand with the user's matched genotype.
+  referenceGenotypeAlt?: string;
+}
+
+export interface FiredVariantDetail {
+  ref: PrimarySNPReference;
+  // The user's actual genotype that matched this entry's riskGenotypes.
+  firedGenotype: string;
 }
 
 export interface Supplement {
@@ -119,7 +131,7 @@ export interface SupplementRecommendation {
   dosage: string;
   reasoning: string[];
   firedPrimary: string[];
-  firedPrimaryDetails: PrimarySNPReference[];
+  firedPrimaryDetails: FiredVariantDetail[];
   firedSupporting: string[];
   confidence: SupplementConfidence;
   partnerOptions: PartnerOption[];

@@ -138,21 +138,23 @@ describe('rule-logic corrections (2026-04-29)', () => {
   });
 
   it('riskGenotypes match the verified-correction tables in docs/science-snp-catalog.md', () => {
-    const berberine = findRule('Berberine');
-    const ppargPrimary = berberine.primarySNPs.find((s) => s.rsid === 'rs1801282')!;
-    expect([...ppargPrimary.riskGenotypes].sort()).toEqual(['CC', 'CG', 'GC']);
+    // After the per-genotype split (2026-04-29), each multi-trigger primary SNP is
+    // stored as multiple PrimarySNPReference entries (one per genotype outcome).
+    // Aggregate riskGenotypes across all entries with the same rsid before comparing.
+    function unionRiskGenotypes(rule: typeof SUPPLEMENT_RULES[number], rsid: string): string[] {
+      return Array.from(
+        new Set(
+          rule.primarySNPs
+            .filter((s) => s.rsid === rsid)
+            .flatMap((s) => [...s.riskGenotypes]),
+        ),
+      ).sort();
+    }
 
-    const methylB12 = findRule('Methyl-B12 (methylcobalamin)');
-    const fut2Primary = methylB12.primarySNPs.find((s) => s.rsid === 'rs601338')!;
-    expect([...fut2Primary.riskGenotypes]).toEqual(['AA']);
-
-    const lactase = findRule('Lactase enzyme');
-    const lctPrimary = lactase.primarySNPs.find((s) => s.rsid === 'rs4988235')!;
-    expect([...lctPrimary.riskGenotypes]).toEqual(['GG']);
-
-    const magnesium = findRule('Magnesium (glycinate)');
-    const trpm6Primary = magnesium.primarySNPs.find((s) => s.rsid === 'rs11144134')!;
-    expect([...trpm6Primary.riskGenotypes].sort()).toEqual(
+    expect(unionRiskGenotypes(findRule('Berberine'), 'rs1801282')).toEqual(['CC', 'CG', 'GC']);
+    expect(unionRiskGenotypes(findRule('Methyl-B12 (methylcobalamin)'), 'rs601338')).toEqual(['AA']);
+    expect(unionRiskGenotypes(findRule('Lactase enzyme'), 'rs4988235')).toEqual(['GG']);
+    expect(unionRiskGenotypes(findRule('Magnesium (glycinate)'), 'rs11144134')).toEqual(
       ['AG', 'CC', 'CT', 'GA', 'GG', 'TC'],
     );
   });

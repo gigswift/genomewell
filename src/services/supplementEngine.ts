@@ -1,5 +1,7 @@
 import type {
+  FiredVariantDetail,
   Genotype,
+  PrimarySNPReference,
   SNPReference,
   SupplementConfidence,
   SupplementPriorityTier,
@@ -7,22 +9,50 @@ import type {
   SupplementRule,
 } from '../types';
 
-function firedRefs<T extends SNPReference>(
-  refs: T[],
+interface FiredPrimary {
+  fired: FiredVariantDetail[];
+  rsids: string[];
+  uniqueRsids: string[];
+  descriptions: string[];
+}
+
+function firedPrimary(
+  refs: PrimarySNPReference[],
   snpMap: Map<string, Genotype>,
-): { fired: T[]; rsids: string[]; descriptions: string[] } {
-  const fired: T[] = [];
+): FiredPrimary {
+  const fired: FiredVariantDetail[] = [];
   const rsids: string[] = [];
   const descriptions: string[] = [];
   for (const ref of refs) {
     const genotype = snpMap.get(ref.rsid);
     if (genotype && ref.riskGenotypes.includes(genotype)) {
-      fired.push(ref);
+      fired.push({ ref, firedGenotype: genotype });
       rsids.push(ref.rsid);
       descriptions.push(`${ref.gene} (${ref.rsid}, ${genotype}): ${ref.description}`);
     }
   }
-  return { fired, rsids, descriptions };
+  // Deduplicate by rsid for priority calculation: a single rsid's per-genotype split
+  // can only ever fire one entry per user (entries' riskGenotypes are disjoint by
+  // construction), but if the catalog ever grows overlapping entries this keeps
+  // priority counting correct.
+  const uniqueRsids = Array.from(new Set(rsids));
+  return { fired, rsids, uniqueRsids, descriptions };
+}
+
+function firedSupporting(
+  refs: SNPReference[],
+  snpMap: Map<string, Genotype>,
+): { rsids: string[]; descriptions: string[] } {
+  const rsids: string[] = [];
+  const descriptions: string[] = [];
+  for (const ref of refs) {
+    const genotype = snpMap.get(ref.rsid);
+    if (genotype && ref.riskGenotypes.includes(genotype)) {
+      rsids.push(ref.rsid);
+      descriptions.push(`${ref.gene} (${ref.rsid}, ${genotype}): ${ref.description}`);
+    }
+  }
+  return { rsids, descriptions };
 }
 
 function priorityFromCount(firedPrimaryCount: number): SupplementPriorityTier {
@@ -39,8 +69,8 @@ export function evaluate(
   rule: SupplementRule,
   snpMap: Map<string, Genotype>,
 ): SupplementRecommendation | null {
-  const primary = firedRefs(rule.primarySNPs, snpMap);
-  const supporting = firedRefs(rule.supportingSNPs, snpMap);
+  const primary = firedPrimary(rule.primarySNPs, snpMap);
+  const supporting = firedSupporting(rule.supportingSNPs, snpMap);
 
   // Haplotype gate (e.g. PS requires APOE E4): if present and fails, never recommend.
   if (rule.customGate && !rule.customGate(snpMap)) {
@@ -48,7 +78,7 @@ export function evaluate(
   }
 
   // Default firing rule: if no gate is set, require at least one primary SNP fired.
-  if (primary.rsids.length === 0 && !rule.customGate) {
+  if (primary.uniqueRsids.length === 0 && !rule.customGate) {
     return null;
   }
 
@@ -59,7 +89,7 @@ export function evaluate(
   // Avoidance rules (Iron + HFE) always emit with priority='skip' regardless of fired count.
   const priority: SupplementPriorityTier = rule.avoidanceRule
     ? 'skip'
-    : priorityFromCount(primary.rsids.length);
+    : priorityFromCount(primary.uniqueRsids.length);
 
   const reasoning = [...primary.descriptions, ...supporting.descriptions];
 
@@ -68,7 +98,7 @@ export function evaluate(
     priority,
     dosage,
     reasoning,
-    firedPrimary: primary.rsids,
+    firedPrimary: primary.uniqueRsids,
     firedPrimaryDetails: primary.fired,
     firedSupporting: supporting.rsids,
     confidence: confidenceFromTier(rule),

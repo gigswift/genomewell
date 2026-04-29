@@ -200,7 +200,7 @@ function VariantList({ variants }: { variants: DesignCardVariant[] }) {
       </span>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
         {variants.map((v) => (
-          <VariantRow key={v.variantLabel} v={v} />
+          <VariantRow key={`${v.variantLabel}-${v.firedGenotype}`} v={v} />
         ))}
       </div>
     </div>
@@ -212,6 +212,13 @@ function VariantRow({ v }: { v: DesignCardVariant }) {
   const labelColor = hover ? 'var(--cw-accent)' : 'var(--cw-ink)';
   const descColor = hover ? 'var(--cw-accent)' : 'var(--cw-ink-muted)';
   const borderColor = hover ? 'var(--cw-accent)' : 'var(--cw-ink-muted)';
+  const tagStyle = {
+    fontFamily: 'var(--cw-font-mono)',
+    fontSize: 10,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase' as const,
+    color: 'var(--cw-ink-soft)',
+  };
   return (
     <a
       href={v.citationUrl}
@@ -235,6 +242,19 @@ function VariantRow({ v }: { v: DesignCardVariant }) {
       <strong style={{ fontWeight: 600, color: labelColor, transition: 'color 0.15s ease' }}>
         {v.variantLabel}
       </strong>
+      <span style={{ color: 'var(--cw-ink-soft)' }}>
+        {' ('}
+      </span>
+      <span style={tagStyle}>Normal:</span>
+      <span style={{ color: labelColor, transition: 'color 0.15s ease' }}>
+        {' '}{v.referenceGenotype}
+      </span>
+      <span style={{ color: 'var(--cw-ink-soft)' }}>{' · '}</span>
+      <span style={tagStyle}>Yours:</span>
+      <span style={{ color: labelColor, transition: 'color 0.15s ease' }}>
+        {' '}{v.firedGenotype}
+      </span>
+      <span style={{ color: 'var(--cw-ink-soft)' }}>{')'}</span>
       <span style={{ color: descColor, transition: 'color 0.15s ease' }}>
         : {v.description}
       </span>
