@@ -66,3 +66,94 @@ describe('supplement engine (end-to-end smoke)', () => {
     expect(flat).toHaveLength(0);
   });
 });
+
+describe('rule-logic corrections (2026-04-29)', () => {
+  function findRule(supplementName: string) {
+    return SUPPLEMENT_RULES.find((r) => r.supplement.name === supplementName)!;
+  }
+
+  it('PPARG rs1801282: Pro/Pro (CC) fires Berberine; Ala/Ala (GG) does not via PPARG', () => {
+    const proHomo = new Map([['rs1801282', 'CC']]);
+    const aloneFiresPro = recommendSupplements(proHomo).flat.find(
+      (r) => r.supplement.name === 'Berberine',
+    );
+    expect(aloneFiresPro?.firedPrimary).toContain('rs1801282');
+
+    const alaHomo = new Map([['rs1801282', 'GG']]);
+    const aloneFiresAla = recommendSupplements(alaHomo).flat.find(
+      (r) => r.supplement.name === 'Berberine',
+    );
+    expect(aloneFiresAla).toBeUndefined();
+  });
+
+  it('FUT2 rs601338: only AA homozygotes trigger Methyl-B12 non-secretor primary', () => {
+    const homo = new Map([['rs601338', 'AA']]);
+    const recHomo = recommendSupplements(homo).flat.find(
+      (r) => r.supplement.name === 'Methyl-B12 (methylcobalamin)',
+    );
+    expect(recHomo?.firedPrimary).toContain('rs601338');
+
+    const het = new Map([['rs601338', 'AG']]);
+    const recHet = recommendSupplements(het).flat.find(
+      (r) => r.supplement.name === 'Methyl-B12 (methylcobalamin)',
+    );
+    expect(recHet).toBeUndefined();
+  });
+
+  it('LCT rs4988235: only GG (non-persistent) triggers Lactase enzyme; AG/GA do not', () => {
+    const nonPersistent = new Map([['rs4988235', 'GG']]);
+    const recHomo = recommendSupplements(nonPersistent).flat.find(
+      (r) => r.supplement.name === 'Lactase enzyme',
+    );
+    expect(recHomo?.firedPrimary).toContain('rs4988235');
+
+    const het = new Map([['rs4988235', 'AG']]);
+    const recHet = recommendSupplements(het).flat.find(
+      (r) => r.supplement.name === 'Lactase enzyme',
+    );
+    expect(recHet).toBeUndefined();
+
+    const persistent = new Map([['rs4988235', 'AA']]);
+    const recAA = recommendSupplements(persistent).flat.find(
+      (r) => r.supplement.name === 'Lactase enzyme',
+    );
+    expect(recAA).toBeUndefined();
+  });
+
+  it('TRPM6 rs11144134: minor-allele carriers in either strand orientation trigger Magnesium; wild-type homo does not', () => {
+    for (const g of ['CC', 'CT', 'TC', 'GG', 'AG', 'GA']) {
+      const m = new Map([['rs11144134', g]]);
+      const rec = recommendSupplements(m).flat.find(
+        (r) => r.supplement.name === 'Magnesium (glycinate)',
+      );
+      expect(rec, `expected Magnesium rule to fire for rs11144134=${g}`).toBeDefined();
+    }
+    for (const g of ['TT', 'AA']) {
+      const m = new Map([['rs11144134', g]]);
+      const rec = recommendSupplements(m).flat.find(
+        (r) => r.supplement.name === 'Magnesium (glycinate)',
+      );
+      expect(rec, `expected Magnesium rule NOT to fire for rs11144134=${g}`).toBeUndefined();
+    }
+  });
+
+  it('riskGenotypes match the verified-correction tables in docs/science-snp-catalog.md', () => {
+    const berberine = findRule('Berberine');
+    const ppargPrimary = berberine.primarySNPs.find((s) => s.rsid === 'rs1801282')!;
+    expect([...ppargPrimary.riskGenotypes].sort()).toEqual(['CC', 'CG', 'GC']);
+
+    const methylB12 = findRule('Methyl-B12 (methylcobalamin)');
+    const fut2Primary = methylB12.primarySNPs.find((s) => s.rsid === 'rs601338')!;
+    expect([...fut2Primary.riskGenotypes]).toEqual(['AA']);
+
+    const lactase = findRule('Lactase enzyme');
+    const lctPrimary = lactase.primarySNPs.find((s) => s.rsid === 'rs4988235')!;
+    expect([...lctPrimary.riskGenotypes]).toEqual(['GG']);
+
+    const magnesium = findRule('Magnesium (glycinate)');
+    const trpm6Primary = magnesium.primarySNPs.find((s) => s.rsid === 'rs11144134')!;
+    expect([...trpm6Primary.riskGenotypes].sort()).toEqual(
+      ['AG', 'CC', 'CT', 'GA', 'GG', 'TC'],
+    );
+  });
+});

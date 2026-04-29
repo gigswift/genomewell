@@ -207,6 +207,31 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
     - **HFE C282Y carrier (GA or AA)** — C282Y disrupts a disulfide bond in HFE, sharply raising intestinal iron absorption; homozygotes risk overt hemochromatosis and supplemental iron must be avoided.
       - Source: PubMed (NEJM iron-overload study) — https://www.nejm.org/doi/full/10.1056/NEJMoa073286
 
+## Rule-logic corrections (verified 2026-04-29)
+
+Trigger arrays in `src/engine/supplementRules.ts` were corrected for four primary SNPs (and their supporting-role twins) where they fired on the wrong genotype. Verifications below are good for future sessions — do not re-search what's already recorded here.
+
+| rsid | Gene | Where used | Old trigger (wrong) | New trigger | Why |
+|---|---|---|---|---|---|
+| rs1801282 | PPARG Pro12Ala | Berberine (primary), Omega-3 (supporting) | `[CG, GC, GG]` (G/Ala carriers) | `[CC, CG, GC]` (C/Pro carriers) | Pro12 (C allele) is the canonical T2D-risk allele in major meta-analyses; Ala12 (G) is protective. The previous trigger fired on the protective genotype. Sources verified 2026-04-29: [Nature Sci Rep meta-analysis](https://www.nature.com/articles/s41598-020-69363-7) (OR 0.86 for G allele = protective), [PMC8630345 review](https://pmc.ncbi.nlm.nih.gov/articles/PMC8630345/), [PMC2834889 HuGE meta-analysis](https://pmc.ncbi.nlm.nih.gov/articles/PMC2834889/). Population caveat: a few studies (Russian, South Asian, mixed African) have shown opposite associations — directional consensus across the largest meta-analyses is Pro = risk. |
+| rs601338 | FUT2 W143X | Methyl-B12 (primary), Methylfolate (supporting) | `[AA, AG, GA]` (any A carrier) | `[AA]` only | W143X is recessive; only AA homozygotes are non-secretors. Heterozygotes (AG/GA) still secrete histo-blood-group antigens. Previous trigger over-fired on heterozygous secretors. Sources verified 2026-04-29: [PMC6171556 ALSPAC cohort](https://pmc.ncbi.nlm.nih.gov/articles/PMC6171556/), [PMC3198057 T1D + infection paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC3198057/), [OMIM 182100](https://omim.org/entry/182100). |
+| rs4988235 | LCT/MCM6 | Lactase (primary), Calcium (primary), D3+K2 (supporting) | `[AG, GA, GG]` (any G carrier) | `[GG]` only | A allele = lactase persistent, **dominant**; one A copy is sufficient for adult lactase activity. Only GG homozygotes are lactase non-persistent (lactose intolerant). 23andMe and Ancestry both report this SNP with A/G alleles (the existing variantLabel `(CC ...)` uses plus-strand C/T convention; the trigger must match what the parser sees, which is verbatim chip data). Previous trigger over-fired on AG/GA heterozygotes who are still persistent. Sources verified 2026-04-29: [MDPI 2019 (PMC6723957)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6723957/), [Wikipedia: Lactase persistence](https://en.wikipedia.org/wiki/Lactase_persistence), [Genetic Genie LCT/MCM6 article](https://geneticgenie.org/article/lactose-intolerance-genetics-the-lct-mcm6-gene/). |
+| rs11144134 | TRPM6 | Magnesium (primary) | `[AC, CA, CC]` (mixed-strand letters) | `[CC, CT, TC, GG, AG, GA]` (covers both strand orientations) | Old trigger letters mixed alleles from both strand orientations (A from one strand, C from the other) — would never have matched real chip-reported genotypes. dbSNP records this as a biallelic SNP that can be reported as T/C (plus strand) or A/G (opposite strand). Per ARIC GWAS (PMC4462077), the **minor** allele decreases serum magnesium (negative beta = -0.013 in EU-Americans). New trigger fires on minor-allele carriers in either strand convention. Sources verified 2026-04-29: [ARIC GWAS PMC4462077](https://pmc.ncbi.nlm.nih.gov/articles/PMC4462077/), [Gene Food TRPM6 page](https://www.mygenefood.com/genes/gastrointestinal-genes/trpm6/). **Population note:** rs11144134 had MAF = 2% in ARIC African-Americans — this primary SNP is mostly relevant to European-ancestry users; consider whether Magnesium should remain primary-gated by this rsid for the target audience. Parked as a follow-up. |
+
+### Known label-vs-trigger mismatches NOT fixed yet
+
+These three variantLabels reference genotypes that aren't in the (correct) trigger array. They get rewritten by the parked per-genotype split task; no code change in this pass. Listed for transparency:
+
+| rsid | Gene | Trigger (correct) | Label currently says | Should reference |
+|---|---|---|---|---|
+| rs10741657 | CYP2R1 | `[AG, GA, AA]` (A is risk) | "(GG — reduced D3 activation)" | AA |
+| rs2282679 | GC DBP | `[AC, CA, AA]` (A is risk) | "(AC or CC — lower circulating 25(OH)D)" | AA |
+| rs4880 | SOD2 Ala16Val | `[CC, CT, TC]` (C/Val is risk) | "(CT or TT — reduced mitochondrial SOD2 import)" | CC (TT is the Ala/wild-type homo) |
+
+### Open clinical-judgment question
+
+**rs1815739 ACTN3 R577X (Creatine).** Trigger fires on `[CT, TC, TT]`. Heterozygous CT (RX) carriers still have one functional α-actinin-3 copy; the documented strong creatine benefit is largely XX-only (TT). The rule's own variantLabel says "TT — α-actinin-3 deficient." Whether to restrict the trigger to TT or keep CT in (modest benefit) is a clinical-significance call deferred to the per-genotype split task with user input.
+
 ## SNP Reference (v0 ceiling: 60)
 
 v0 catalog uses 60 SNPs — the union of all primary and supporting SNPs referenced in the supplement catalog above. SNPs beyond 60 are out-of-scope for v0.

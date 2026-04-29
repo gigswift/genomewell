@@ -105,3 +105,48 @@ To resume: tell Claude "unpark [title]" or "resume the [title] thread."
 **Next action when unparked:** Run the targeted WebSearch pass, record verified findings in `docs/science-snp-catalog.md` (per "verify once, record in docs" rule), then choose path 1/2/3 with user.
 
 **Architecture headroom confirmed:** No code changes required — `SupplementRule` already accepts empty `primarySNPs`, `SupplementConfidence` already includes `'medium'`, and the rules array is the only file that grows.
+
+---
+
+## Per-genotype variantLabel/description split on Supplement Card variant rows
+**Parked:** 2026-04-29
+
+**Context:** Original ask was two cosmetic fixes on `SupplementCard` variant rows:
+1. variantLabel should show the user's actual genotype (e.g. "MTHFR C677T (CT)") instead of a rule-trigger range ("MTHFR C677T (CT or TT — slow methylator)").
+2. variantLabel should drop the embedded summary that's then duplicated as the description below.
+
+While planning, four real rule-logic bugs were discovered (PPARG/FUT2/LCT/TRPM6 trigger arrays) plus three label-vs-trigger mismatches (CYP2R1/GC/SOD2). User chose to pause this cosmetic task and fix rule logic first; that fix shipped 2026-04-29 — see `docs/science-snp-catalog.md` "Rule-logic corrections" section. Now resuming this task on a known-correct base.
+
+**Files in scope:**
+- `docs/science-snp-catalog.md` — per-genotype primary SNP entries
+- `src/engine/supplementRules.ts` — split each multi-genotype primary into per-genotype entries with disjoint `riskGenotypes`
+- `src/types.ts` — likely no change to `PrimarySNPReference`; possibly add a userGenotype-templated label later
+- `src/services/supplementEngine.ts` — no change required (the existing `firedRefs` filter naturally selects the matching entry once `riskGenotypes` are disjoint)
+- `src/lib/designDataAdapter.ts` — pipe through unchanged
+- `src/components/SupplementCard.tsx` — likely no code change required; rendering is `{label}: {description}`, fix is purely in the data shape
+
+**Required format:** variantLabel = `[Gene] [rsid-or-name] ([genotype])` — no embedded summary, no em-dash with description text.
+
+**Locked-in design decisions from the planning conversation:**
+- **APOE renders per-rsid rows** (not a single haplotype row). An ε3/ε4 carrier sees both "APOE rs429358 (CT)" and "APOE rs7412 (CC)" as separate rows.
+- **Honest per-genotype severity in descriptions** for SNPs with a known clinical gradient (MTHFR C677T, MTHFR A1298C, FADS1 rs174537, GC rs2282679, HFE C282Y, HFE H63D). Where severity isn't well-characterized, descriptions can be similar across genotypes — say so plainly rather than inventing a gradient. Per CLAUDE.md, never cite PMIDs from memory; use existing citations where they cover the gradient, WebSearch-verify any new sources.
+- **Process:** before any writes, present a row-by-row table to the user with columns `rsid | Gene | Existing trigger | Proposed split | New variantLabel | New description | Severity differentiation? | citationUrl`. User approves row-by-row; reject/rewrite freely.
+
+**Open clinical-judgment question to resolve during this task:** rs1815739 ACTN3 R577X — does the trigger restrict to TT homozygous (XX/α-actinin-3 deficient = strong creatine benefit) or keep CT in (modest benefit)? Currently `[CT, TC, TT]`. Default proposal is to keep CT and write the per-genotype description honestly ("one functional copy" vs "no functional copies"); confirm with user.
+
+**Side-effect cleanup expected from this task:** The three label-vs-trigger mismatches in `docs/science-snp-catalog.md` "Known label-vs-trigger mismatches NOT fixed yet" subsection (CYP2R1, GC, SOD2) get rewritten by the per-genotype split, since new variantLabels are templated from trigger genotypes.
+
+**Hard constraints from original task brief:**
+- DO NOT cite PMIDs from memory — WebSearch-verify any new sources.
+- DO NOT remove existing citationUrls; only add or substitute when needed for severity context.
+- DO NOT touch supporting SNPs (this task is primary SNPs only).
+- DO NOT add deps.
+- DO NOT leave `npm run dev` running at task end.
+- `npm run build` MUST pass.
+- Type-complete (no `any`, no `ts-ignore`).
+
+**Next action when unparked:** Re-read the original task brief in this entry, then walk through every primary SNP in `src/engine/supplementRules.ts` proposing a split table for user row-by-row review, then write code + doc updates, then run `npm run build` and visual smoke-test with `npm run dev` (stop the server before finishing).
+
+**Out-of-scope follow-ups parked alongside this:**
+- Supporting-SNP directional audit (the other ~25 supporting entries beyond the four already corrected) — possible additional bugs.
+- TRPM6 rs11144134 evidence-discipline review — MAF = 2% in African-ancestry populations; consider whether Magnesium should remain primary-gated by this rsid for the target audience.
