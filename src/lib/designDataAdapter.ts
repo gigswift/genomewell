@@ -21,7 +21,6 @@ export interface DesignCardSupplement {
   priority: DesignPriority;
   dose: string;
   variants: DesignCardVariant[];
-  reason: string;
   healthEffect: string;
   culturalContext?: string;
   partners: string[];
@@ -35,18 +34,6 @@ function mapPriority(rec: SupplementRecommendation): DesignPriority {
   if (rec.priority === 'essential') return 'essential';
   if (rec.priority === 'recommended') return 'recommended';
   return 'optional';
-}
-
-function buildReason(rec: SupplementRecommendation): string {
-  if (rec.reasoning.length === 0) {
-    return 'Based on your matched variants in this pathway.';
-  }
-  const first = rec.reasoning[0];
-  const colon = first.indexOf(':');
-  if (colon !== -1) {
-    return first.slice(colon + 1).trim();
-  }
-  return first;
 }
 
 // For dual-strand SNPs (TRPM6, VDR BsmI), the parser may report either strand
@@ -85,18 +72,12 @@ function buildVariants(rec: SupplementRecommendation): DesignCardVariant[] {
 }
 
 export function toDesignCard(rec: SupplementRecommendation): DesignCardSupplement {
-  const priority = mapPriority(rec);
-  const reason = priority === 'avoid'
-    ? `Avoid — ${buildReason(rec)}`
-    : buildReason(rec);
-
   return {
     name: rec.supplement.name,
     tag: CATEGORY_LABELS[rec.supplement.category],
-    priority,
+    priority: mapPriority(rec),
     dose: rec.dosage,
     variants: buildVariants(rec),
-    reason,
     healthEffect: rec.supplement.healthEffect,
     culturalContext: rec.supplement.culturalContext,
     partners: rec.partnerOptions.map((p) => getPartnerDisplayName(p.partner)),
