@@ -80,7 +80,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801133',
         'MTHFR',
-        'Heterozygous slow methylator — folate conversion runs at roughly 65% of typical efficiency; supplementing the methylated form bypasses the partial bottleneck.',
+        'One slower copy of the folate-converting variant — your body uses folate at about two-thirds the usual pace, so taking the already-active form (methylfolate) skips the slow step.',
         ['CT', 'TC'],
         'MTHFR C677T (CT)',
         'https://www.pharmgkb.org/clinicalAnnotation/1450814430',
@@ -89,7 +89,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801133',
         'MTHFR',
-        'Homozygous slow methylator — folate conversion runs at roughly 35% of typical efficiency, the strongest signal in this lane; methylated folate bypasses the bottleneck entirely.',
+        'Two slower copies of the folate-converting variant — your body uses folate at about a third of the usual pace, the strongest signal in this lane. Methylfolate gives you the form your body is slow to make on its own.',
         ['TT'],
         'MTHFR C677T (TT)',
         'https://www.pharmgkb.org/clinicalAnnotation/1450814430',
@@ -98,7 +98,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801131',
         'MTHFR',
-        "Heterozygous regulatory variant in MTHFR's regulatory region — modest reduction in folate-handling capacity, more relevant when stacked with C677T.",
+        'One copy of a regulatory MTHFR variant — modestly reduced ability to process folate, so the pre-active form (methylfolate) makes the conversion easier. If you also carry the main MTHFR (C677T) variant, the two stack and the combined effect is bigger than either alone.',
         ['AC', 'CA'],
         'MTHFR A1298C (AC)',
         'https://www.pharmgkb.org/clinicalAnnotation/1450814424',
@@ -107,7 +107,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801131',
         'MTHFR',
-        "Homozygous regulatory variant — fuller reduction in folate-handling capacity, most relevant when stacked with C677T; methylated folate is the form that reaches the methylation cycle.",
+        'Two copies of a regulatory MTHFR variant — fuller drop in your ability to process folate, and methylfolate is the form your body can use directly without the slow step. If you also carry the main MTHFR (C677T) variant, the two stack and the combined effect is meaningfully larger.',
         ['CC'],
         'MTHFR A1298C (CC)',
         'https://www.pharmgkb.org/clinicalAnnotation/1450814424',
@@ -116,7 +116,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs2236225',
         'MTHFD1',
-        'Heterozygous variant — mild destabilization of MTHFD1, the upstream folate-cycle enzyme, modestly raising methylation load.',
+        'One copy of a variant that makes the upstream folate-handling protein (MTHFD1) less stable — a small extra drag on the system that uses folate.',
         ['AG', 'GA'],
         'MTHFD1 G1958A (AG)',
         'https://www.snpedia.com/index.php/Rs2236225',
@@ -125,7 +125,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs2236225',
         'MTHFD1',
-        'Homozygous variant — fuller destabilization of MTHFD1, increasing the burden on the methyl cycle and the case for pre-converted methylfolate.',
+        'Two copies of a variant that makes the upstream folate-handling protein (MTHFD1) less stable — a bigger drag on the system, which is why the pre-converted form (methylfolate) is the cleaner fit.',
         ['AA'],
         'MTHFD1 G1958A (AA)',
         'https://www.snpedia.com/index.php/Rs2236225',
@@ -163,7 +163,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs601338',
         'FUT2',
-        'Non-secretor — gut mucosal glycosylation is altered and holo-haptocorrin handling shifts, raising B12 intra-organismal recycling demand and the case for direct methylcobalamin supplementation. (W143X is recessive — only the homozygous AA genotype produces the non-secretor phenotype.)',
+        'Non-secretor — your gut lining handles B12 differently and burns through stored B12 faster than usual, so a daily dose of the active form (methylcobalamin) keeps levels steady. (This one only fires when both copies match — one copy isn\'t enough.)',
         ['AA'],
         'FUT2 W143X (AA)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC2673801/',
@@ -172,7 +172,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1805087',
         'MTR',
-        'Heterozygous variant — modest acceleration of B12 turnover at the homocysteine→methionine step.',
+        'One copy of a faster-burning B12 variant — your body uses B12 a bit quicker than typical at the step that recycles homocysteine.',
         ['AG', 'GA'],
         'MTR A2756G (AG)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC3990204/',
@@ -181,7 +181,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1805087',
         'MTR',
-        'Homozygous variant — accelerated B12 turnover at the homocysteine→methionine step, raising the ongoing methylcobalamin requirement.',
+        'Two copies of a faster-burning B12 variant — your body uses B12 noticeably quicker, so daily methylcobalamin keeps the supply ahead of the demand.',
         ['GG'],
         'MTR A2756G (GG)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC3990204/',
@@ -190,7 +190,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801394',
         'MTRR',
-        'Heterozygous variant — modestly slower B12 cofactor reactivation by methionine synthase reductase.',
+        'One copy of a variant that slows down B12 recycling — your body refreshes used-up B12 a bit slower than typical.',
         ['AG', 'GA'],
         'MTRR A66G (AG)',
         'https://pubmed.ncbi.nlm.nih.gov/24261678/',
@@ -199,7 +199,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801394',
         'MTRR',
-        'Homozygous variant — slower B12 cofactor reactivation, depleting methylcobalamin reserves faster; direct supplementation eases the recycling load.',
+        'Two copies of a variant that slows down B12 recycling — your reserves drain faster, so a steady daily dose takes the pressure off the recycling system.',
         ['GG'],
         'MTRR A66G (GG)',
         'https://pubmed.ncbi.nlm.nih.gov/24261678/',
@@ -238,7 +238,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1544410',
         'VDR',
-        "Heterozygous BsmI carrier — modest reduction in vitamin-D-receptor mRNA stability.",
+        "One copy of a less-stable vitamin D receptor variant (BsmI) — your body's vitamin D signal runs a bit weaker than typical.",
         ['AG', 'GA', 'TC', 'CT'],
         'VDR BsmI (het)',
         'https://pubmed.ncbi.nlm.nih.gov/23134477/',
@@ -248,7 +248,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1544410',
         'VDR',
-        "Homozygous BsmI — fuller reduction in receptor stability, raising the 25(OH)D level needed for the same biological effect; higher target dose.",
+        'Two copies of a less-stable vitamin D receptor variant (BsmI) — your body needs higher blood levels of vitamin D to get the same effect, which usually means a higher daily dose.',
         ['AA', 'TT'],
         'VDR BsmI (hom)',
         'https://pubmed.ncbi.nlm.nih.gov/23134477/',
@@ -258,7 +258,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs2282679',
         'GC',
-        'Heterozygous minor-allele carrier — modestly lower circulating 25(OH)D and blunted response to standard supplementation; effect amplified in African ancestry.',
+        'One copy of a variant that lowers how much vitamin D travels in your blood — standard daily doses tend to under-deliver. This often runs more pronounced with African ancestry, though admixture varies person to person.',
         ['AC', 'CA'],
         'GC DBP (AC)',
         'https://pubmed.ncbi.nlm.nih.gov/30661702/',
@@ -267,7 +267,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs2282679',
         'GC',
-        'Homozygous minor-allele — strongest reduction in circulating 25(OH)D in this gene; effect amplified in African ancestry.',
+        'Two copies of a variant that lowers how much vitamin D travels in your blood — the strongest reduction this gene produces. Often runs more pronounced with African ancestry, though admixture varies person to person.',
         ['AA'],
         'GC DBP (AA)',
         'https://pubmed.ncbi.nlm.nih.gov/30661702/',
@@ -276,7 +276,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs10741657',
         'CYP2R1',
-        'Heterozygous variant — modest reduction in hepatic 25-hydroxylation of D3.',
+        'One copy of a less-efficient vitamin D activator variant (CYP2R1) — your liver turns D3 into the active form modestly less efficiently than typical.',
         ['AG', 'GA'],
         'CYP2R1 rs10741657 (AG)',
         'https://pubmed.ncbi.nlm.nih.gov/30120973/',
@@ -285,7 +285,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs10741657',
         'CYP2R1',
-        'Homozygous variant — strongest reduction in 25-hydroxylation of D3, dampening response to fixed-dose supplementation.',
+        "Two copies of a less-efficient vitamin D activator variant (CYP2R1) — your liver is the least efficient at turning D3 into the active form, so standard daily doses don't move blood levels as much.",
         ['AA'],
         'CYP2R1 rs10741657 (AA)',
         'https://pubmed.ncbi.nlm.nih.gov/30120973/',
@@ -328,7 +328,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs174537',
         'FADS1',
-        'Heterozygous T-carrier — Δ-5 desaturase activity reduced ~30%, slowing ALA→EPA conversion.',
+        'One copy of a less-efficient fat-conversion variant (FADS1) — your body converts roughly 30% less plant-based omega-3 (ALA) into the active form (EPA) than typical, not just more slowly but less in total.',
         ['GT', 'TG'],
         'FADS1 rs174537 (GT)',
         'https://www.mdpi.com/2072-6643/9/3/240',
@@ -337,7 +337,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs174537',
         'FADS1',
-        'Homozygous T — Δ-5 desaturase activity reduced ~50%, severely limiting ALA-to-EPA conversion and making marine-sourced EPA/DHA the practical route.',
+        'Two copies of a less-efficient fat-conversion variant (FADS1) — your body turns about half as much plant omega-3 (ALA) into EPA as typical, again not just slower but less overall, which is why fish-sourced EPA/DHA is the practical fix.',
         ['TT'],
         'FADS1 rs174537 (TT)',
         'https://www.mdpi.com/2072-6643/9/3/240',
@@ -346,7 +346,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1535',
         'FADS2',
-        'Heterozygous G-carrier — modest reduction in Δ-6 desaturase activity, the upstream step in long-chain omega-3 synthesis.',
+        'One copy of a less-efficient variant at the upstream omega-3 step (FADS2) — your body builds modestly less long-chain omega-3 from plant sources than typical.',
         ['AG', 'GA'],
         'FADS2 rs1535 (AG)',
         'https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0222061',
@@ -355,7 +355,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1535',
         'FADS2',
-        'Homozygous G — fuller reduction in Δ-6 desaturase activity; preferential response to direct EPA/DHA supplementation.',
+        'Two copies of a less-efficient variant at the upstream omega-3 step (FADS2) — your body builds noticeably less long-chain omega-3 from plant sources, so EPA/DHA you take directly works best.',
         ['GG'],
         'FADS2 rs1535 (GG)',
         'https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0222061',
@@ -370,7 +370,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs953413',
         'ELOVL2',
-        'Heterozygous A-carrier — modestly reduced ELOVL2 expression and EPA→DPA→DHA elongation; benefits from direct EPA/DHA supplementation.',
+        'One copy of a less-efficient omega-3 finishing variant (ELOVL2) — your body builds modestly less DHA from EPA, so direct EPA/DHA supplementation makes up the difference.',
         ['AG', 'GA'],
         'ELOVL2 rs953413 (AG)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC7033636/',
@@ -379,7 +379,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs953413',
         'ELOVL2',
-        'Homozygous A — strongest reduction in ELOVL2 expression and EPA→DHA elongation; less endogenous DHA from EPA.',
+        'Two copies of a less-efficient omega-3 finishing variant (ELOVL2) — the biggest drop in turning EPA into DHA, so noticeably less DHA gets built from what you eat.',
         ['AA'],
         'ELOVL2 rs953413 (AA)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC7033636/',
@@ -421,7 +421,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1695',
         'GSTP1',
-        "Heterozygous Val carrier — modestly reduced GSTP1 catalytic activity for glutathione conjugation; NAC supplies cysteine to replenish the glutathione substrate.",
+        "One copy of a slower detox variant (GSTP1) — your body's main detox helper (glutathione) works a bit less efficiently. NAC supplies the building block (cysteine) your body uses to make more.",
         ['AG', 'GA'],
         'GSTP1 Ile105Val (AG)',
         'https://www.pharmgkb.org/vip/PA166169438',
@@ -430,7 +430,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1695',
         'GSTP1',
-        "Homozygous Val — fuller reduction in glutathione conjugation, lowering xenobiotic clearance; NAC supplies cysteine to replenish the glutathione substrate this enzyme depends on.",
+        'Two copies of a slower detox variant (GSTP1) — fuller drop in glutathione function, which slows clearing toxins. NAC keeps glutathione stocked by feeding it the building block (cysteine) it relies on.',
         ['GG'],
         'GSTP1 Ile105Val (GG)',
         'https://www.pharmgkb.org/vip/PA166169438',
@@ -465,7 +465,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs7903146',
         'TCF7L2',
-        'Heterozygous T-carrier — partial impairment of incretin-driven insulin secretion, moderate T2D risk; berberine targets the same pathway via AMPK activation.',
+        'One copy of a blood-sugar-risk variant (TCF7L2) — your insulin response after meals runs a bit weaker, raising type 2 diabetes risk. Berberine works on the same blood-sugar pathway.',
         ['CT', 'TC'],
         'TCF7L2 rs7903146 (CT)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC2809956/',
@@ -474,7 +474,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs7903146',
         'TCF7L2',
-        'Homozygous T — fuller impairment of incretin-driven insulin secretion; strongest T2D-risk allele in our catalog. Berberine targets the same pathway via AMPK activation.',
+        'Two copies of the strongest blood-sugar-risk variant in our catalog (TCF7L2) — your insulin response after meals runs noticeably weaker. Berberine works on the same blood-sugar pathway and matters most here.',
         ['TT'],
         'TCF7L2 rs7903146 (TT)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC2809956/',
@@ -486,7 +486,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801282',
         'PPARG',
-        "One Pro12 risk copy plus one protective Ala12 copy — partial benefit from berberine's PPAR-γ–insulin-sensitizing effect.",
+        "One risk copy plus one protective copy of an insulin-sensitivity variant (PPARG) — partial benefit from berberine's effect on the same insulin-sensitivity pathway.",
         ['CG', 'GC'],
         'PPARG Pro12Ala (CG)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC7391673/',
@@ -495,7 +495,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1801282',
         'PPARG',
-        "Homozygous Pro12 — full risk-allele dose with no protective Ala12; berberine's PPAR-γ–insulin-sensitizing effect carries the most weight here.",
+        "Two risk copies of an insulin-sensitivity variant (PPARG), no protective copy — berberine's effect on the insulin-sensitivity pathway carries the most weight here.",
         ['CC'],
         'PPARG Pro12Ala (CC)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC7391673/',
@@ -550,7 +550,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs11144134',
         'TRPM6',
-        'Heterozygous minor-allele carrier — modestly reduced intestinal/renal magnesium handling.',
+        'One copy of a magnesium-handling variant (TRPM6) — your gut and kidneys hold onto magnesium a bit less efficiently than typical.',
         ['CT', 'TC', 'AG', 'GA'],
         'TRPM6 rs11144134 (het)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC4462077/',
@@ -560,7 +560,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs11144134',
         'TRPM6',
-        'Homozygous minor-allele — fuller reduction in TRPM6-mediated Mg reabsorption; latent hypomagnesemia risk and rationale for daily supplementation.',
+        'Two copies of a magnesium-handling variant (TRPM6) — fuller drop in how well your body keeps magnesium, with real risk of running quietly low. Daily supplementation closes the gap.',
         ['CC', 'GG'],
         'TRPM6 rs11144134 (hom)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC4462077/',
@@ -596,7 +596,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1695',
         'GSTP1',
-        'Heterozygous Val carrier — modestly reduced GSTP1 baseline activity; sulforaphane induces Phase II antioxidant enzymes including GSTP1, partially compensating.',
+        'One copy of a slower detox variant (GSTP1) — your built-in antioxidant defense runs a bit weaker. Sulforaphane turns up production of these defenses, including the slower one, partly making up the difference.',
         ['AG', 'GA'],
         'GSTP1 Ile105Val (AG)',
         'https://pubmed.ncbi.nlm.nih.gov/19028145/',
@@ -605,7 +605,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1695',
         'GSTP1',
-        'Homozygous Val — fuller reduction in GSTP1 baseline activity; sulforaphane induces Phase II antioxidant enzymes including GSTP1 itself, partially compensating for the lower-activity variant.',
+        'Two copies of a slower detox variant (GSTP1) — fuller drop in your built-in antioxidant defense. Sulforaphane boosts production of those defenses, including the slower variant itself, helping make up the gap.',
         ['GG'],
         'GSTP1 Ile105Val (GG)',
         'https://pubmed.ncbi.nlm.nih.gov/19028145/',
@@ -640,7 +640,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1800566',
         'NQO1',
-        'Heterozygous T-carrier — modestly reduced NQO1 activity at the ubiquinone→ubiquinol step.',
+        'One copy of a less-efficient variant (NQO1) at the step that converts CoQ10 into its active form (ubiquinol) — modestly less efficient than typical.',
         ['CT', 'TC'],
         'NQO1 C609T (CT)',
         'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full',
@@ -649,7 +649,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1800566',
         'NQO1',
-        'Homozygous T — strongest reduction in NQO1 activity; direct ubiquinol bypasses the conversion step entirely.',
+        'Two copies of a less-efficient variant (NQO1) — the strongest drop in efficiency at converting CoQ10 into its active form. Taking ubiquinol directly skips the conversion entirely.',
         ['TT'],
         'NQO1 C609T (TT)',
         'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full',
@@ -661,7 +661,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs4880',
         'SOD2',
-        "Heterozygous Val carrier — modestly reduced mitochondrial SOD2 import.",
+        'One copy of a variant (SOD2) that delivers a key antioxidant into your cellular power plants (mitochondria) less efficiently than typical.',
         ['CT', 'TC'],
         'SOD2 Ala16Val (CT)',
         'https://pubmed.ncbi.nlm.nih.gov/36552556/',
@@ -670,7 +670,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs4880',
         'SOD2',
-        "Homozygous Val — fuller reduction in mitochondrial SOD2 import; strongest mitochondrial-redox case for CoQ10 support, which protects the same axis SOD2 maintains.",
+        'Two copies of a variant (SOD2) that delivers a key antioxidant into your cellular power plants less efficiently — the strongest case for CoQ10, which protects the same system.',
         ['CC'],
         'SOD2 Ala16Val (CC)',
         'https://pubmed.ncbi.nlm.nih.gov/36552556/',
@@ -705,7 +705,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs429358',
         'APOE',
-        'Single ε4 allele — altered neuronal phospholipid handling and modestly accelerated cognitive aging; phosphatidylserine + omega-3 supplementation has shown memory benefit in this risk group.',
+        'One copy of the APOE ε4 variant — your brain handles its building-block fats a bit differently, and cognitive aging tends to move a step faster. Read together with the rs7412 row below, which confirms this is the ε4 type and not the protective ε2 type. PS plus omega-3 has shown memory benefit in this group.',
         ['CT', 'TC'],
         'APOE ε4 (one copy)',
         'https://pubmed.ncbi.nlm.nih.gov/20523044/',
@@ -714,7 +714,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs429358',
         'APOE',
-        'Two ε4 alleles — strongest cognitive-aging risk profile in our catalog; phosphatidylserine + omega-3 most relevant here.',
+        'Two copies of the APOE ε4 variant — the strongest cognitive-aging risk profile in our catalog. Read together with the rs7412 row below, which confirms the APOE type alongside this one. PS plus omega-3 matters most here.',
         ['CC'],
         'APOE ε4 (two copies)',
         'https://pubmed.ncbi.nlm.nih.gov/20523044/',
@@ -723,7 +723,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs7412',
         'APOE',
-        'Confirms ε4 (not ε2) by excluding any T allele at rs7412. Single-genotype gate co-condition for the APOE ε4 carrier rule.',
+        'Confirms your APOE type by ruling out the protective ε2 variant. The APOE letter (ε2 / ε3 / ε4) is read from rs429358 and rs7412 together — this CC excludes any ε2 and locks in the ε4 reading from the row above.',
         ['CC'],
         'APOE ε2 absence (CC)',
         'https://pubmed.ncbi.nlm.nih.gov/20523044/',
@@ -758,7 +758,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1800566',
         'NQO1',
-        "Heterozygous T-carrier — modestly reduced NAD(P)H-dependent quinone reduction.",
+        'One copy of a less-efficient variant (NQO1) at the step that recycles NAD — your cellular energy currency cycles modestly less efficiently than typical.',
         ['CT', 'TC'],
         'NQO1 C609T (CT)',
         'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full',
@@ -767,7 +767,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1800566',
         'NQO1',
-        "Homozygous T — strongest reduction in NAD redox cycling; raising the case for NMN/NR to replenish NAD⁺ supply.",
+        'Two copies of a less-efficient variant (NQO1) at the NAD-recycling step — the strongest drop in this gene, which makes the case for NMN/NR to top up your cellular energy supply.',
         ['TT'],
         'NQO1 C609T (TT)',
         'https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full',
@@ -812,7 +812,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1815739',
         'ACTN3',
-        'One nonfunctional α-actinin-3 copy — modest additional creatine benefit over baseline, since fast-twitch fibers have partial phosphocreatine-buffering demand.',
+        'One inactive copy of a power-muscle protein (α-actinin-3) — creatine helps everyone build power and strength, but research suggests the relative gain may run a bit larger here, since your power muscles get a small extra fuel boost from supplementation.',
         ['CT', 'TC'],
         'ACTN3 R577X (CT)',
         'https://pubmed.ncbi.nlm.nih.gov/31145768/',
@@ -821,7 +821,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1815739',
         'ACTN3',
-        'Both α-actinin-3 copies nonfunctional (XX genotype) — strongest creatine benefit in our catalog, partly compensating for the deficit in fast-twitch fibers.',
+        'Both copies of a power-muscle protein (α-actinin-3) are inactive in your file (the "XX" genotype). Creatine works regardless of genotype, but research suggests the relative gain runs largest in this group, since your power muscles fully lean on the extra fuel support creatine provides.',
         ['TT'],
         'ACTN3 R577X (TT — XX genotype)',
         'https://pubmed.ncbi.nlm.nih.gov/31145768/',
@@ -855,7 +855,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1042713',
         'ADRB2',
-        'Heterozygous Gly carrier — modestly blunted β2-adrenergic lipolytic signaling.',
+        "One copy of a variant (ADRB2) that softens your body's signal to break down stored fat — modestly slower fat-burning response than typical.",
         ['AG', 'GA'],
         'ADRB2 Arg16Gly (AG)',
         'https://pubmed.ncbi.nlm.nih.gov/24960039/',
@@ -864,7 +864,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1042713',
         'ADRB2',
-        'Homozygous Gly16 — fuller blunting of lipolytic response, slowing fat mobilization during exercise; L-carnitine supports fatty-acid transport into mitochondria for oxidation.',
+        'Two copies of a variant (ADRB2) that softens the signal to break down stored fat — fat is harder to mobilize during exercise. L-carnitine helps shuttle fat into your cellular power plants where it gets burned.',
         ['GG'],
         'ADRB2 Arg16Gly (GG)',
         'https://pubmed.ncbi.nlm.nih.gov/24960039/',
@@ -890,7 +890,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs8192678',
         'PPARGC1A',
-        'Heterozygous Ser carrier — modestly reduced PGC-1α coactivator activity at the mitochondrial-biogenesis program.',
+        'One copy of a variant that softens the master switch (PGC-1α) for building new cellular power plants — runs a bit weaker than typical.',
         ['AG', 'GA'],
         'PPARGC1A Gly482Ser (AG)',
         'https://pubmed.ncbi.nlm.nih.gov/39766897/',
@@ -899,7 +899,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs8192678',
         'PPARGC1A',
-        'Homozygous Ser — fuller reduction in PGC-1α coactivator activity; PQQ stimulates the same mitochondrial-biogenesis axis.',
+        'Two copies of a variant that softens the master switch (PGC-1α) for building new cellular power plants — fuller drop. PQQ pushes on the same switch.',
         ['AA'],
         'PPARGC1A Gly482Ser (AA)',
         'https://pubmed.ncbi.nlm.nih.gov/39766897/',
@@ -930,7 +930,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs4988235',
         'LCT/MCM6',
-        'Lactase non-persistent — the lactase gene stays downregulated past childhood; supplemental lactase replaces what the gut no longer makes.',
+        'Lactase non-persistent — your body stopped making lactase (the enzyme that digests milk sugar) sometime after childhood, which is the typical pattern for most non-Northern-European ancestry. Supplemental lactase fills in for what your gut no longer makes.',
         ['GG'],
         'LCT/MCM6 rs4988235 (GG)',
         'https://pubmed.ncbi.nlm.nih.gov/31405126/',
@@ -962,7 +962,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs4988235',
         'LCT/MCM6',
-        'Lactase non-persistent — adult lactose maldigestion typically reduces dairy intake; non-dairy calcium fills the calcium gap this dietary pattern creates.',
+        'Lactase non-persistent — most adults with this pattern eat less dairy because of how it sits, which can leave daily calcium intake below the recommended range for some people. Non-dairy calcium covers any gap this dietary pattern creates. (Worth knowing: outright calcium deficiency is uncommon in adults — this is about hitting daily intake targets, not treating a deficit.)',
         ['GG'],
         'LCT/MCM6 rs4988235 (GG)',
         'https://pubmed.ncbi.nlm.nih.gov/31405126/',
@@ -987,7 +987,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs10156191',
         'AOC1',
-        'Heterozygous Met carrier — modestly reduced DAO enzymatic activity in plasma.',
+        'One copy of a slower histamine-clearing variant (AOC1) — your body breaks down dietary histamine a bit slower than typical.',
         ['CT', 'TC'],
         'AOC1 Thr16Met (CT)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/',
@@ -996,7 +996,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs10156191',
         'AOC1',
-        'Homozygous Met — fuller reduction in plasma DAO activity, slowing histamine clearance after histamine-rich meals.',
+        'Two copies of a slower histamine-clearing variant (AOC1) — your body is noticeably slower to clear histamine after meals high in it (aged cheese, wine, fermented foods).',
         ['TT'],
         'AOC1 Thr16Met (TT)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/',
@@ -1005,7 +1005,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1049742',
         'AOC1',
-        'Heterozygous Phe carrier — modestly reduced DAO production.',
+        'One copy of a variant (AOC1) that lowers how much histamine-clearing enzyme (DAO) your body produces.',
         ['CT', 'TC'],
         'AOC1 Ser332Phe (CT)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/',
@@ -1014,7 +1014,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1049742',
         'AOC1',
-        'Homozygous Phe — fuller reduction in DAO production, compounding histamine-clearance deficiency when stacked with other AOC1 variants; supplemental DAO compensates pre-meal.',
+        'Two copies of a variant (AOC1) that lowers how much histamine-clearing enzyme your body makes — compounds when paired with the other AOC1 variant. Supplemental DAO before histamine-rich meals fills the gap.',
         ['TT'],
         'AOC1 Ser332Phe (TT)',
         'https://pmc.ncbi.nlm.nih.gov/articles/PMC11054051/',
@@ -1040,7 +1040,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1799945',
         'HFE',
-        'Heterozygous H63D — mildly elevated intestinal iron absorption; supplemental iron not advised as a precaution.',
+        'One copy of an iron-loading variant (HFE H63D) — your gut may absorb slightly more iron than typical. Worth a conversation with your doctor before starting iron supplementation, especially given other factors like a vegetarian diet or menstruation that can pull iron the other way.',
         ['CG', 'GC'],
         'HFE H63D (CG)',
         'https://www.nejm.org/doi/full/10.1056/NEJMoa073286',
@@ -1049,7 +1049,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1799945',
         'HFE',
-        'Homozygous H63D — fuller elevation in iron absorption; long-term accumulation risk and clear case for avoiding supplemental iron.',
+        'Two copies of an iron-loading variant (HFE H63D) — your gut may absorb more iron than typical, with risk of buildup over time. Talk to your doctor before taking supplemental iron, especially if you\'ve been told you need it for another reason (low iron from periods, vegetarian or vegan diet).',
         ['GG'],
         'HFE H63D (GG)',
         'https://www.nejm.org/doi/full/10.1056/NEJMoa073286',
@@ -1058,7 +1058,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1800562',
         'HFE',
-        'Heterozygous C282Y carrier — modestly elevated iron absorption; supplemental iron not advised as a precaution.',
+        'One copy of an iron-loading variant (HFE C282Y) — your gut may absorb slightly more iron than typical. Worth a conversation with your doctor before starting iron supplementation, especially given other factors like a vegetarian diet or menstruation that can pull iron the other way.',
         ['AG', 'GA'],
         'HFE C282Y (AG)',
         'https://www.nejm.org/doi/full/10.1056/NEJMoa073286',
@@ -1067,7 +1067,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
       primarySnp(
         'rs1800562',
         'HFE',
-        'Homozygous C282Y — overt hemochromatosis risk; supplemental iron must be avoided.',
+        'Two copies of an iron-loading variant (HFE C282Y) — clear hereditary hemochromatosis risk (iron buildup that can damage organs over time). This needs medical input. Talk to your doctor before taking any iron supplement, even if you\'ve been told you need it for another reason.',
         ['AA'],
         'HFE C282Y (AA)',
         'https://www.nejm.org/doi/full/10.1056/NEJMoa073286',
