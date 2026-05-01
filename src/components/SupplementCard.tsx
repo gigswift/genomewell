@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import { CWPriorityChip, CWTooltip, SNP_DEF } from './ui';
 import { getPartnerDisplayName } from '../lib/affiliateLinks';
+import { wrapGlossary } from '../lib/glossary';
 import type { PartnerOption } from '../types';
 import type { DesignCardSupplement, DesignCardVariant } from '../lib/designDataAdapter';
 
@@ -53,7 +54,7 @@ export function SupplementCard({ supp }: SupplementCardProps) {
           <p style={{
             margin: 0, fontFamily: 'var(--cw-font-body)',
             fontSize: 14, lineHeight: 1.6, color: 'var(--cw-ink)',
-          }}>{healthEffect}</p>
+          }}>{wrapGlossary(healthEffect)}</p>
         )}
         {culturalContext && (
           <p style={{
@@ -64,7 +65,7 @@ export function SupplementCard({ supp }: SupplementCardProps) {
             fontSize: 13, lineHeight: 1.6,
             fontStyle: 'italic',
             color: 'var(--cw-ink-muted)',
-          }}>{culturalContext}</p>
+          }}>{wrapGlossary(culturalContext)}</p>
         )}
         {!suppressShop && partnerOptions.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -252,7 +253,7 @@ function VariantRow({ v }: { v: DesignCardVariant }) {
       </span>
       <span style={{ color: 'var(--cw-ink-soft)' }}>{')'}</span>
       <span style={{ color: descColor, transition: 'color 0.15s ease' }}>
-        : {v.description}
+        : {wrapGlossary(v.description)}
       </span>
     </a>
   );
