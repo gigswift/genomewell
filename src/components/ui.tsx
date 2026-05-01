@@ -156,19 +156,28 @@ export const CWButton = ({
   );
 };
 
-const GW_PARTNER_META: Record<string, { tint: string; initial: string }> = {
-  Thorne: { tint: 'var(--cw-surface-alt)', initial: 'T' },
-  BioTrust: { tint: 'var(--cw-surface-alt)', initial: 'B' },
-  Organifi: { tint: 'var(--cw-surface-alt)', initial: 'O' },
+// Keyed by brand display name (the value of getBrandDisplayName), since this map
+// is read directly by the UI from prop strings. Initials collide harmlessly —
+// the display name is the dominant label.
+const GW_BRAND_META: Record<string, { tint: string; initial: string }> = {
+  'Source Naturals': { tint: 'var(--cw-surface-alt)', initial: 'S' },
+  Solgar: { tint: 'var(--cw-surface-alt)', initial: 'S' },
+  'NOW Foods': { tint: 'var(--cw-surface-alt)', initial: 'N' },
+  'Life Extension': { tint: 'var(--cw-surface-alt)', initial: 'L' },
+  Solaray: { tint: 'var(--cw-surface-alt)', initial: 'S' },
+  'Jarrow Formulas': { tint: 'var(--cw-surface-alt)', initial: 'J' },
+  'Bucked Up': { tint: 'var(--cw-surface-alt)', initial: 'B' },
+  PrimaForce: { tint: 'var(--cw-surface-alt)', initial: 'P' },
+  Nutricost: { tint: 'var(--cw-surface-alt)', initial: 'N' },
 };
 
-interface PartnerButtonProps {
-  partner: string;
+interface BrandButtonProps {
+  brand: string;
   onClick?: () => void;
 }
 
-export const CWPartnerButton = ({ partner, onClick }: PartnerButtonProps) => {
-  const meta = GW_PARTNER_META[partner] || { tint: 'var(--cw-surface-alt)', initial: partner.charAt(0) };
+export const CWBrandButton = ({ brand, onClick }: BrandButtonProps) => {
+  const meta = GW_BRAND_META[brand] || { tint: 'var(--cw-surface-alt)', initial: brand.charAt(0) };
   return (
     <button
       type="button"
@@ -195,7 +204,7 @@ export const CWPartnerButton = ({ partner, onClick }: PartnerButtonProps) => {
         }}>{meta.initial}</span>
         <span style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <span style={{ fontSize: 10, fontFamily: 'var(--cw-font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--cw-ink-soft)' }}>Shop at</span>
-          <span style={{ fontWeight: 500, fontSize: 13.5 }}>{partner}</span>
+          <span style={{ fontWeight: 500, fontSize: 13.5 }}>{brand}</span>
         </span>
       </span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -216,7 +225,7 @@ export const CWPriorityChip = ({ priority }: PriorityChipProps) => {
     essential: 'Essential',
     recommended: 'Recommended',
     optional: 'Optional',
-    gap: 'Gap — no partner yet',
+    gap: 'Gap — no brand yet',
     avoid: 'Avoid',
   };
   const bg: Record<DesignPriority, string> = {

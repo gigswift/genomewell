@@ -1,7 +1,7 @@
 # Chronic Wellness — Project Rules
 
 ## What this project is
-Privacy-first genetic wellness app for the Black American community. Users upload 23andMe/AncestryDNA files → browser-side parsing → personalized supplement recommendations → Thorne affiliate commerce.
+Privacy-first genetic wellness app for the Black American community. Users upload 23andMe/AncestryDNA files → browser-side parsing → personalized supplement recommendations → Rakuten LinkShare affiliate commerce (HerbsPro merchant, curated brand list).
 
 ## Source of truth
 Read `docs/` before making claims or decisions. These are living strategy docs maintained across sessions:
@@ -20,7 +20,7 @@ Before adding any supplement to the catalog, verify ALL of the following:
 - [ ] Evidence tier explicitly stated: SNP-driven (strong primary) or SNP-informed (partial hooks)
 - [ ] At least one primary SNP identified with published evidence
 - [ ] Evidence strength labeled honestly — if previously labeled "weak," it cannot be included
-- [ ] Thorne or a named partner carries it (or gap explicitly noted)
+- [ ] At least one curated brand carries it via the HerbsPro feed (or gap explicitly noted)
 - [ ] Not contradicted by an earlier decision in docs
 
 ### Citation rules
@@ -50,7 +50,7 @@ Before adding any supplement to the catalog, verify ALL of the following:
 - Only structured SNPResult data may be sent to external APIs.
 
 ## Business model
-- v0: Thorne affiliate (10–20%) + DTC fills (BioTrust 40%, Organifi 30%). No practitioner required.
+- v0: Rakuten LinkShare via HerbsPro merchant (commission TBD pending partner confirmation), curated to nine brands. No practitioner required.
 - v1: Fullscript dispensary (up to 35% margin) + family practitioners (PharmD aunt as CPO, MD aunt as CMO).
 - v2: White-label own brand at scale.
 

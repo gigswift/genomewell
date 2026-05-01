@@ -8,7 +8,7 @@ function rec(priority: SupplementRecommendation['priority'], fired: string[] = [
       name: 'x',
       category: 'daily-wellness',
       defaultDosage: '',
-      partnerOptions: [],
+      brandOptions: [],
       healthEffect: '',
     },
     priority,
@@ -17,7 +17,7 @@ function rec(priority: SupplementRecommendation['priority'], fired: string[] = [
     firedPrimary: fired,
     firedSupporting: [],
     confidence: 'high',
-    partnerOptions: [],
+    brandOptions: [],
   };
 }
 

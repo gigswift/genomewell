@@ -1,7 +1,7 @@
 import { CATEGORY_LABELS } from './supplementLabels';
-import { getPartnerDisplayName } from './affiliateLinks';
+import { getBrandDisplayName } from './affiliateLinks';
 import type {
-  PartnerOption,
+  BrandOption,
   PrimarySNPReference,
   SupplementRecommendation,
 } from '../types';
@@ -23,14 +23,14 @@ export interface DesignCardSupplement {
   variants: DesignCardVariant[];
   healthEffect: string;
   culturalContext?: string;
-  partners: string[];
-  partnerOptions: PartnerOption[];
+  brands: string[];
+  brandOptions: BrandOption[];
 }
 
 function mapPriority(rec: SupplementRecommendation): DesignPriority {
   if (rec.priority === 'skip') return 'avoid';
   if (rec.priority === 'gap') return 'gap';
-  if (rec.partnerOptions.length === 0) return 'gap';
+  if (rec.brandOptions.length === 0) return 'gap';
   if (rec.priority === 'essential') return 'essential';
   if (rec.priority === 'recommended') return 'recommended';
   return 'optional';
@@ -80,8 +80,8 @@ export function toDesignCard(rec: SupplementRecommendation): DesignCardSupplemen
     variants: buildVariants(rec),
     healthEffect: rec.supplement.healthEffect,
     culturalContext: rec.supplement.culturalContext,
-    partners: rec.partnerOptions.map((p) => getPartnerDisplayName(p.partner)),
-    partnerOptions: rec.partnerOptions,
+    brands: rec.brandOptions.map((p) => getBrandDisplayName(p.brand)),
+    brandOptions: rec.brandOptions,
   };
 }
 

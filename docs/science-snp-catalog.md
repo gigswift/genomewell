@@ -35,22 +35,22 @@ This is an ethical line, not a disclaimer formality.
 
 ## Supplement Catalog (v0)
 
-Every row passes the supplement inclusion checklist in `CLAUDE.md`: explicit evidence tier, at least one primary SNP with published evidence, honest labeling, partner disclosed (or gap noted), not contradicted by a prior decision. Count is driven by the evidence bar — no target. Within each category, rows are ordered by evidence strength: SNP-driven (strong primary) first, SNP-informed (partial hooks) second.
+Every row passes the supplement inclusion checklist in `CLAUDE.md`: explicit evidence tier, at least one primary SNP with published evidence, honest labeling, brand disclosed (or gap noted), not contradicted by a prior decision. Count is driven by the evidence bar — no target. Within each category, rows are ordered by evidence strength: SNP-driven (strong primary) first, SNP-informed (partial hooks) second.
 
-Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per row, semicolon-joined when multiple partners carry a match. Slugs and display data are wired from the CSVs in `docs/catalogue/` (Thorne 201 rows, BioTrust 20 rows, Organifi 31 rows). Where a partner lacks a matching SKU by product name/form, that partner is omitted from the row. `gap — no v0 partner` when no partner on any CSV matches. `n/a (avoidance, no commerce)` for skip-priority cards. Affiliate IDs remain env-var placeholders — wiring real IDs is deferred to a separate task.
+Brand convention: comma-separated list of brand display names per row. The full set of curated brands lives in `docs/catalogue/herbspro_products.csv` (70 rows, all from the Rakuten LinkShare / HerbsPro feed). One product per `(supplement, brand)` pair (first CSV row wins). `gap — no v0 brand` when no curated brand carries a matching product. `n/a (avoidance, no commerce)` for skip-priority cards. URLs in the CSV are pre-tagged Rakuten deeplinks — no env-var affiliate IDs in code.
 
 ### Daily Wellness
 
-| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Brand Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **Methylfolate (L-5-MTHF)** | rs1801133 MTHFR C677T; rs1801131 MTHFR A1298C; rs2236225 MTHFD1 | rs1805087 MTR; rs1801394 MTRR; rs4680 COMT; rs234706 CBS; rs3733890 BHMT; rs601338 FUT2 | 400–1000 mcg daily | Thorne: 5-mthf-1-mg | SNP-driven |
-| **Methyl-B12 (methylcobalamin)** | rs601338 FUT2; rs1805087 MTR; rs1801394 MTRR | rs1801133 MTHFR; rs234706 CBS; rs1801198 TCN2 | 1000 mcg daily | Thorne: methylcobalamin | SNP-driven |
-| **Vitamin D3 + K2** | rs1544410 VDR BsmI; rs2282679 GC; rs10741657 CYP2R1 | rs12785878 DHCR7; rs4988235 LCT; rs1800795 IL6; rs7903146 TCF7L2 | 2000–5000 IU D3 + 100 mcg MK-7 daily, with fat (GC minor allele → 5000 IU) | Thorne: vitamin-d-k2-liquid | SNP-driven |
-| **Omega-3 (EPA/DHA, marine)** | rs174537 FADS1; rs1535 FADS2; rs953413 ELOVL2 | rs429358 + rs7412 APOE; rs7903146 TCF7L2; rs1801282 PPARG; rs1800795 IL6; rs1800629 TNFA; rs17238540 HMGCR; rs708272 CETP; rs1042713 ADRB2; rs8192678 PPARGC1A | 2 g combined EPA/DHA daily, with food | Thorne: super-epa-sp608nc | SNP-driven |
-| **NAC (N-acetyl cysteine)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs4880 SOD2; rs1050450 GPX1; rs1799930 NAT2 | 600 mg twice daily | Thorne: cysteplus-reg | SNP-driven |
-| **Berberine** | rs7903146 TCF7L2; rs1801282 PPARG | rs9939609 FTO; rs1801278 IRS1; rs5400 SLC2A2 | 500 mg 2–3× daily with meals | Thorne: berberine-500 | SNP-driven |
-| **Magnesium (glycinate)** | rs11144134 TRPM6 | rs4680 COMT; rs1801133 MTHFR; rs1544410 VDR | 200–400 mg elemental daily | Thorne: magnesium-glycinate; BioTrust: ageless-multi-magnesium; Organifi: magnesium | SNP-informed |
-| **Sulforaphane (broccoli sprout)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs6721961 NFE2L2 | 10–30 mg SGS daily | Thorne: crucera-sgs | SNP-informed |
+| **Methylfolate (L-5-MTHF)** | rs1801133 MTHFR C677T; rs1801131 MTHFR A1298C; rs2236225 MTHFD1 | rs1805087 MTR; rs1801394 MTRR; rs4680 COMT; rs234706 CBS; rs3733890 BHMT; rs601338 FUT2 | 400–1000 mcg daily | Source Naturals, Solgar, NOW Foods, Life Extension | SNP-driven |
+| **Methyl-B12 (methylcobalamin)** | rs601338 FUT2; rs1805087 MTR; rs1801394 MTRR | rs1801133 MTHFR; rs234706 CBS; rs1801198 TCN2 | 1000 mcg daily | NOW Foods, Solaray, Jarrow Formulas | SNP-driven |
+| **Vitamin D3 + K2** | rs1544410 VDR BsmI; rs2282679 GC; rs10741657 CYP2R1 | rs12785878 DHCR7; rs4988235 LCT; rs1800795 IL6; rs7903146 TCF7L2 | 2000–5000 IU D3 + 100 mcg MK-7 daily, with fat (GC minor allele → 5000 IU) | Solaray, NOW Foods, Source Naturals | SNP-driven |
+| **Omega-3 (EPA/DHA, marine)** | rs174537 FADS1; rs1535 FADS2; rs953413 ELOVL2 | rs429358 + rs7412 APOE; rs7903146 TCF7L2; rs1801282 PPARG; rs1800795 IL6; rs1800629 TNFA; rs17238540 HMGCR; rs708272 CETP; rs1042713 ADRB2; rs8192678 PPARGC1A | 2 g combined EPA/DHA daily, with food | Solaray, NOW Foods | SNP-driven |
+| **NAC (N-acetyl cysteine)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs4880 SOD2; rs1050450 GPX1; rs1799930 NAT2 | 600 mg twice daily | NOW Foods, Solaray | SNP-driven |
+| **Berberine** | rs7903146 TCF7L2; rs1801282 PPARG | rs9939609 FTO; rs1801278 IRS1; rs5400 SLC2A2 | 500 mg 2–3× daily with meals | Source Naturals, Solaray, NOW Foods | SNP-driven |
+| **Magnesium (glycinate)** | rs11144134 TRPM6 | rs4680 COMT; rs1801133 MTHFR; rs1544410 VDR | 200–400 mg elemental daily | NOW Foods, Solaray, Source Naturals | SNP-informed |
+| **Sulforaphane (broccoli sprout)** | rs1695 GSTP1 | GSTM1-null; GSTT1-null; rs6721961 NFE2L2 | 10–30 mg SGS daily | Solaray, Source Naturals | SNP-informed |
 
 **Copy — felt effects & context**
 
@@ -115,11 +115,11 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 
 ### Healthy Aging
 
-| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Brand Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **CoQ10 (ubiquinol)** | rs1800566 NQO1; rs4880 SOD2 | rs17238540 HMGCR; rs4693570 COQ2; rs8192678 PPARGC1A | 100–200 mg ubiquinol daily with fat | Thorne: q-best-100 | SNP-driven |
-| **Phosphatidylserine (PS)** | rs429358 + rs7412 APOE (E4 carriers only) | rs6265 BDNF; rs1800795 IL6 | 100 mg 3× daily (E4 carriers) | Thorne: iso-phos-reg | SNP-driven (E4-gated) |
-| **NMN / NR (NAD⁺ precursor)** | rs1800566 NQO1 | rs4880 SOD2; rs2802292 FOXO3; rs3758391 SIRT1 | 300 mg NR or 500 mg NMN daily | Thorne: niacel-400 | SNP-informed |
+| **CoQ10 (ubiquinol)** | rs1800566 NQO1; rs4880 SOD2 | rs17238540 HMGCR; rs4693570 COQ2; rs8192678 PPARGC1A | 100–200 mg ubiquinol daily with fat | Solaray, NOW Foods | SNP-driven |
+| **Phosphatidylserine (PS)** | rs429358 + rs7412 APOE (E4 carriers only) | rs6265 BDNF; rs1800795 IL6 | 100 mg 3× daily (E4 carriers) | Solgar, Jarrow Formulas | SNP-driven (E4-gated) |
+| **NMN / NR (NAD⁺ precursor)** | rs1800566 NQO1 | rs4880 SOD2; rs2802292 FOXO3; rs3758391 SIRT1 | 300 mg NR or 500 mg NMN daily | Source Naturals (NR only; NMN side uncovered) | SNP-informed |
 
 **Copy — felt effects & context**
 
@@ -144,11 +144,11 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 
 ### Body Optimization
 
-| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Brand Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **Creatine monohydrate** | rs1815739 ACTN3 | rs4343 ACE; rs8192678 PPARGC1A | 3–5 g daily | Thorne: creatine; Organifi: creatine-cherry-chews | SNP-driven (ACTN3 XX genotype benefits most; dose not genotype-titrated) |
-| **L-carnitine (tartrate)** | rs1042713 ADRB2 | rs8192678 PPARGC1A; rs4343 ACE; rs762551 CYP1A2 | 1–2 g daily | Thorne: carnityl-reg | SNP-driven |
-| **PQQ** | rs8192678 PPARGC1A | rs4880 SOD2 | 10–20 mg daily | gap — no v0 partner | SNP-informed |
+| **Creatine monohydrate** | rs1815739 ACTN3 | rs4343 ACE; rs8192678 PPARGC1A | 3–5 g daily | Bucked Up, PrimaForce, Nutricost | SNP-driven (ACTN3 XX genotype benefits most; dose not genotype-titrated) |
+| **L-carnitine (tartrate)** | rs1042713 ADRB2 | rs8192678 PPARGC1A; rs4343 ACE; rs762551 CYP1A2 | 1–2 g daily | Solaray, NOW Foods, Solgar | SNP-driven |
+| **PQQ** | rs8192678 PPARGC1A | rs4880 SOD2 | 10–20 mg daily | gap — no v0 brand | SNP-informed |
 
 **Copy — felt effects & context**
 
@@ -170,11 +170,11 @@ Partner convention: `Thorne: <slug>`, `BioTrust: <slug>`, `Organifi: <slug>` per
 
 ### Food Sensitivity
 
-| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Partner Options | Evidence Tier |
+| Supplement | Primary SNPs | Supporting SNPs | Default Dose | Brand Options | Evidence Tier |
 |---|---|---|---|---|---|
-| **Lactase enzyme** | rs4988235 LCT | — | 3000–9000 FCC units with dairy meals | gap — no v0 partner | SNP-driven |
-| **Non-dairy calcium (citrate)** | rs4988235 LCT | rs1544410 VDR; rs2282679 GC | 500–1000 mg daily | Thorne: dicalcium-malate | SNP-driven |
-| **DAO enzyme (histamine intolerance)** | rs10156191 AOC1; rs1049742 AOC1 | rs1800629 TNFA | 10,000 HDU before histamine-rich meals | gap — no v0 partner | SNP-driven |
+| **Lactase enzyme** | rs4988235 LCT | — | 3000–9000 FCC units with dairy meals | Solaray, Source Naturals | SNP-driven |
+| **Non-dairy calcium (citrate)** | rs4988235 LCT | rs1544410 VDR; rs2282679 GC | 500–1000 mg daily | NOW Foods, Solgar, Solaray, Source Naturals | SNP-driven |
+| **DAO enzyme (histamine intolerance)** | rs10156191 AOC1; rs1049742 AOC1 | rs1800629 TNFA | 10,000 HDU before histamine-rich meals | Solaray | SNP-driven |
 | **Iron — SKIP if HFE carrier** | rs1799945 HFE H63D; rs1800562 HFE C282Y | — | Skip priority; no supplementation recommended | n/a (avoidance, no commerce) | SNP-driven |
 
 **Copy — felt effects & context**
@@ -344,7 +344,7 @@ The recommender engine is supplement-centric. Each `SupplementRule` owns a set o
 
 ### Rationale
 
-- **Commerce alignment.** v0 revenue is Thorne affiliate. Supplement-centric produces one card per supplement → one affiliate link per card. SNP-centric produces N cards that must be deduped into supplements anyway, losing reasoning along the way.
+- **Commerce alignment.** v0 revenue is the Rakuten LinkShare / HerbsPro feed. Supplement-centric produces one card per supplement, with 1–4 brand buttons per card. SNP-centric would produce N cards that must be deduped into supplements anyway, losing reasoning along the way.
 - **Collapses the multi-SNP-one-supplement problem.** Omega-3 is informed by ~12 SNPs. Iterating SNPs produces conflicting, repetitive output. Iterating supplements produces one card that synthesizes primary drivers + supporting context.
 - **Richer reasoning = higher purchase confidence.** "Your FADS1 + APOE + IL6 profile together suggest X" converts better than three separate SNP cards pointing at the same bottle.
 - **Escape hatch for conflicts.** Conflicting primary drivers → flag for practitioner discussion (v1 Fullscript / family-practitioner path). SNP-centric has nowhere to surface "these signals disagree."

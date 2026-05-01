@@ -45,35 +45,22 @@ Cleanup landed 2026-04-17: orphan files and their directories (`src/api/`, `src/
 - Env var to set when activating Claude narrative: `VITE_ANTHROPIC_API_KEY`
 - Currently unset — app uses deterministic fallback narrative, which is the preferred default (see `product-strategy.md`)
 
-## Affiliate env vars
+## Affiliate links
 
-`src/lib/affiliateLinks.ts` is the single source of truth for all outbound supplement links. It reads one env var per partner. Set whichever programs have approved the account; the rest fall back to a placeholder ID that will not attribute commission (a dev-mode console warning is emitted once per unset partner).
+No affiliate env vars needed. All product URLs in `docs/catalogue/herbspro_products.csv` are pre-tagged Rakuten LinkShare deeplinks (`click.linksynergy.com/...&id=lDiltZ8gZ2U`) for the merchant HerbsPro. `src/lib/affiliateLinks.ts` is a passthrough — `BrandOption.productUrl` is what the user clicks.
 
-| Partner | Env var | Commission | Live value (Vercel production) | Notes |
-|---|---|---|---|---|
-| Thorne | `VITE_THORNE_AFFILIATE_ID` | 10–20% tiered | `PENDING_THORNE_APPROVAL` | Primary v0 partner (see `commerce-practitioner.md`) |
-| BioTrust | `VITE_BIOTRUST_AFFILIATE_ID` | up to 40% | `PENDING_BIOTRUST_APPROVAL` | Specialty / protein fills |
-| Organifi | `VITE_ORGANIFI_AFFILIATE_ID` | 30% | `PENDING_ORGANIFI_APPROVAL` | Greens / superfoods |
+The user-facing concept is **brand**, not partner. The card renders one "Shop at \<Brand\>" button per brand, max ~4 per supplement card. Adding a new brand: append the slug to the `Brand` union in `src/types.ts`, add the display name to `BRAND_DISPLAY_NAMES` in `src/lib/affiliateLinks.ts`, and add a `GW_BRAND_META` entry in `src/components/ui.tsx`.
 
-All three vars are seeded with `PENDING_<PARTNER>_APPROVAL` placeholders as of 2026-04-18 — none of the affiliate programs have approved yet. Clicks attribute zero commission until a real ID is swapped in.
+### Refreshing prices
+The catalog CSV stores brand + URL but not prices; prices are scraped from each HerbsPro product page's `og:price:amount` meta tag and baked into `src/engine/supplementRules.ts` as static `priceDisplay` strings. To refresh:
 
-Because approval timing is unpredictable, no code path hardcodes a single partner — whichever partner ID is populated starts paying commission immediately. Adding a new partner is an enum entry + env var: no component or engine edits required.
+```bash
+node docs/catalogue/.refresh-prices.mjs
+# Inspect docs/catalogue/.herbspro_enriched.json, then update the priceDisplay
+# fields in src/engine/supplementRules.ts.
+```
 
-### Approval-swap workflow (no code deploy)
-When a partner approves the account:
+The script is rate-limited to ~1 req/sec, takes ~80 seconds for the current 70-row catalog, and has no npm dependencies (uses Node 18 built-in fetch).
 
-1. Update only that partner's env var on Vercel:
-   ```bash
-   vercel env rm VITE_<PARTNER>_AFFILIATE_ID production --yes
-   printf '<real-id-from-partner>' | vercel env add VITE_<PARTNER>_AFFILIATE_ID production
-   ```
-2. Trigger a fresh production deploy so the new value is baked into the bundle. **No git push or code change is required** — `VITE_*` vars are read at build time, not at runtime, so a redeploy is mandatory but a code change is not:
-   ```bash
-   cd ~/genomewell && vercel --prod --yes --force
-   ```
-3. Update the table above: change the live value cell from `PENDING_<PARTNER>_APPROVAL` to "approved (real ID redacted)" and note the swap date in the prose.
-
-The other two partners' env vars are untouched — their placeholders keep working until each program approves in turn.
-
-### Dev preview
-Run `npm run dev` and visit `http://localhost:5173/?preview=supplement-cards` to render the SupplementCard fixture across all three partners plus a gap and a skip case. The preview route is stripped from production builds (`import.meta.env.DEV` gate in `src/main.tsx`).
+### Commission rate
+Commission structure TBD pending Rakuten LinkShare partner confirmation — the prior tiered direct-program model (see `parking-lot.md` for historical detail) is obsolete; see `commerce-practitioner.md` for the current strategy.

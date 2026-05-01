@@ -121,7 +121,7 @@ Two-zone card with a muted header strip (surfaceAlt) and a body section:
 │                                          │
 │ Reason paragraph in body-M…              │
 │                                          │
-│ [Shop Thorne] [Shop BioTrust] [Shop Org] │  1–3 partners
+│ [Shop Source Naturals] [Shop NOW Foods] │  1–4 brands
 └─────────────────────────────────────────┘
 ```
 
@@ -134,7 +134,7 @@ Two-zone card with a muted header strip (surfaceAlt) and a body section:
 | Optional | filled pill, muted | `--cw-surfaceAlt` bg, `--cw-inkMuted` text |
 | Gap | outlined pill + dashed note | `--cw-line` border, `--cw-inkSoft` text |
 
-**Gap state:** replace partner buttons with a dashed-border note: *"No shop yet — we'll email when a partner we trust carries a third-party-tested version."*
+**Gap state:** replace partner buttons with a dashed-border note: *"No shop yet — we'll email when a brand we trust carries a third-party-tested version."*
 
 ## Privacy lockup (three variants)
 
@@ -149,7 +149,7 @@ Two-zone card with a muted header strip (surfaceAlt) and a body section:
 - Tone dial at ~65: knowledgeable friend who reads papers, not a clinician.
 - Name the variant. Explain what it does in plain English. Say what to try and roughly how long before they'll notice.
 - Never "may wish to consider." Never "based on genetic predispositions."
-- Be honest about gaps — if no partner we trust carries it, say so.
+- Be honest about gaps — if no brand we trust carries it, say so.
 
 ## Microcopy library
 
@@ -159,8 +159,8 @@ Two-zone card with a muted header strip (surfaceAlt) and a body section:
 | Upload CTA | "Drop your raw DNA file" |
 | Parse status | "Reading on this device…" → "Parsing 637,294 SNPs" → "Matching your variants" → "Ranking recommendations" |
 | Done state | "Done. Nothing was transmitted." |
-| Shop CTA | "Shop at [Partner]" (not "Buy now") |
-| Gap state | "No shop yet — we'll email when a partner we trust carries one." |
+| Shop CTA | "Shop at [Brand]" (not "Buy now") |
+| Gap state | "No shop yet — we'll email when a brand we trust carries one." |
 | Re-analyze | "Re-analyze" (not "Upload new file") |
 
 ---

@@ -37,11 +37,11 @@ export function recommendSupplements(
   for (const rule of SUPPLEMENT_RULES) {
     const rec = evaluate(rule, snpMap);
     if (!rec) continue;
-    // Remap fired supplements with no partner to 'gap' so the UI shows the
+    // Remap fired supplements with no brand to 'gap' so the UI shows the
     // "no shop yet" state instead of hiding them. Avoidance ('skip') rules
     // are preserved — they're a warning, not a commerce gap.
     const gapped: SupplementRecommendation =
-      rec.priority !== 'skip' && rec.partnerOptions.length === 0
+      rec.priority !== 'skip' && rec.brandOptions.length === 0
         ? { ...rec, priority: 'gap' }
         : rec;
     flat.push(gapped);

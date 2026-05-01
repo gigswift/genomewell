@@ -1,8 +1,8 @@
 import { useState, type ReactNode } from 'react';
 import { CWPriorityChip, CWTooltip, SNP_DEF } from './ui';
-import { getPartnerDisplayName } from '../lib/affiliateLinks';
+import { getBrandDisplayName } from '../lib/affiliateLinks';
 import { wrapGlossary } from '../lib/glossary';
-import type { PartnerOption } from '../types';
+import type { BrandOption } from '../types';
 import type { DesignCardSupplement, DesignCardVariant } from '../lib/designDataAdapter';
 
 interface SupplementCardProps {
@@ -10,7 +10,7 @@ interface SupplementCardProps {
 }
 
 export function SupplementCard({ supp }: SupplementCardProps) {
-  const { name, tag, priority, dose, variants, healthEffect, culturalContext, partnerOptions } = supp;
+  const { name, tag, priority, dose, variants, healthEffect, culturalContext, brandOptions } = supp;
   const isGap = priority === 'gap';
   const isAvoid = priority === 'avoid';
   const suppressShop = isGap || isAvoid;
@@ -67,10 +67,10 @@ export function SupplementCard({ supp }: SupplementCardProps) {
             color: 'var(--cw-ink-muted)',
           }}>{wrapGlossary(culturalContext)}</p>
         )}
-        {!suppressShop && partnerOptions.length > 0 && (
+        {!suppressShop && brandOptions.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {partnerOptions.map((opt, i) => (
-              <PartnerRow key={`${opt.partner}-${i}`} opt={opt} />
+            {brandOptions.map((opt, i) => (
+              <BrandRow key={`${opt.brand}-${i}`} opt={opt} />
             ))}
           </div>
         )}
@@ -80,10 +80,8 @@ export function SupplementCard({ supp }: SupplementCardProps) {
   );
 }
 
-function PartnerRow({ opt }: { opt: PartnerOption }) {
-  const partnerLabel = getPartnerDisplayName(opt.partner);
-  const hasStrike =
-    !!opt.originalPriceDisplay && opt.originalPriceDisplay !== opt.priceDisplay;
+function BrandRow({ opt }: { opt: BrandOption }) {
+  const brandLabel = getBrandDisplayName(opt.brand);
 
   function openProduct() {
     window.open(opt.productUrl, '_blank', 'noopener,noreferrer');
@@ -124,7 +122,7 @@ function PartnerRow({ opt }: { opt: PartnerOption }) {
           fontFamily: 'var(--cw-font-mono)', fontSize: 10,
           letterSpacing: '0.1em', textTransform: 'uppercase',
           color: 'var(--cw-ink-soft)',
-        }}>{partnerLabel}</span>
+        }}>{brandLabel}</span>
         <span
           title={opt.productName}
           style={{
@@ -140,15 +138,6 @@ function PartnerRow({ opt }: { opt: PartnerOption }) {
           <span style={{ fontSize: 14, color: 'var(--cw-ink)', fontWeight: 500 }}>
             {opt.priceDisplay}
           </span>
-          {hasStrike && (
-            <span style={{
-              fontSize: 12,
-              color: 'var(--cw-ink-soft)',
-              textDecoration: 'line-through',
-            }}>
-              {opt.originalPriceDisplay}
-            </span>
-          )}
         </span>
       </div>
       <button
@@ -290,7 +279,7 @@ function GapNote() {
         letterSpacing: '0.1em', textTransform: 'uppercase',
         color: 'var(--cw-ink-soft)', marginTop: 2, whiteSpace: 'nowrap',
       }}>No shop yet</span>
-      <span>We'll email you when a partner we trust carries a third-party-tested version.</span>
+      <span>We'll email you when a brand we trust carries a third-party-tested version.</span>
     </div>
   );
 }

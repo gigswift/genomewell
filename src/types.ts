@@ -40,17 +40,26 @@ export interface SNPInput {
   genotype: Genotype;
 }
 
-export type Partner = 'thorne' | 'biotrust' | 'organifi';
+// Curated brands carried by HerbsPro (via Rakuten LinkShare). Adding a brand
+// = add the slug here, the display name in affiliateLinks.ts, and an entry in
+// GW_BRAND_META in components/ui.tsx.
+export type Brand =
+  | 'source-naturals'
+  | 'solgar'
+  | 'now-foods'
+  | 'life-extension'
+  | 'solaray'
+  | 'jarrow-formulas'
+  | 'bucked-up'
+  | 'primaforce'
+  | 'nutricost';
 
-export interface PartnerOption {
-  partner: Partner;
+export interface BrandOption {
+  brand: Brand;
   productSlug: string;
-  displayName?: string;
   productName: string;
   productUrl: string;
   priceDisplay: string;
-  // BioTrust-only: pre-sale price; render as strike-through when present and ≠ priceDisplay.
-  originalPriceDisplay?: string;
   imageUrl: string;
 }
 
@@ -103,7 +112,7 @@ export interface Supplement {
   name: string;
   category: SupplementCategory;
   defaultDosage: string;
-  partnerOptions: PartnerOption[];
+  brandOptions: BrandOption[];
   healthEffect: string;
   culturalContext?: string;
 }
@@ -134,7 +143,7 @@ export interface SupplementRecommendation {
   firedPrimaryDetails: FiredVariantDetail[];
   firedSupporting: string[];
   confidence: SupplementConfidence;
-  partnerOptions: PartnerOption[];
+  brandOptions: BrandOption[];
 }
 
 export type GroupedRecommendations = Record<SupplementCategory, SupplementRecommendation[]>;

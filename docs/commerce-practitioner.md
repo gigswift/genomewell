@@ -1,64 +1,49 @@
 # Commerce & Practitioner Model
 
-## Partner landscape (with verified commission rates)
+## v0 commerce strategy (updated 2026-05-01)
 
-### Affiliate programs (no practitioner required)
+The earlier plan to stack three direct affiliate programs (one premium catalog brand + two DTC fills) was abandoned after none of those programs confirmed. The replacement is a single Rakuten LinkShare relationship through merchant **HerbsPro**, which carries many brands. We curate the brand list rather than the program — the user-facing label on every product is the brand, not the network. (Historical detail on the abandoned programs is in `docs/parking-lot.md`.)
 
-| Partner | Commission | Cookie | Min payout | Notes |
-|---|---|---|---|---|
-| **Thorne** | **10–20%** tiered (Bronze/Silver/Gold) | 30 days | $100 | **v0 primary.** Premium brand, covers most of the core stack. Gold tier at 20% is strong. |
-| **iHerb** | 10% first 3 months, **5%** ongoing | 7 days | ~$10 | Huge catalog but short cookie hurts conversion. Secondary option. |
-| **Life Extension** | **6–8%** | 30 days | Varies | Longevity-focused, audience-aligned. Supplemental. |
-| **Amazon Associates** | **1–3%** | 24 hours | $10 | **Not recommended.** Terrible rates, terrible cookie. Not worth integrating. |
-| **Nordic Naturals** | No affiliate program | — | — | Premium omega-3 brand but no referral path. |
+### Curated brand list (9, as of 2026-05-01)
+Source Naturals · Solgar · NOW Foods · Life Extension · Solaray · Jarrow Formulas · Bucked Up · PrimaForce · Nutricost.
 
-### DTC supplement brands (higher commission, narrower catalog)
+Selection criteria: third-party-tested where possible, audience-recognizable names, broad coverage of the core SNP-driven stack, no proprietary blends in the products we surface.
 
-| Partner | Commission | Cookie | Notes |
-|---|---|---|---|
-| **BioTrust** | Up to **40%** | 60 days | Weight loss, immune, keto. Highest rate in supplement space. |
-| **Vitauthority** | **25–35%** | 30 days | Collagen, women's wellness. |
-| **Organifi** | **30%** | 30 days | Superfoods, detox, green juices. |
-| **1st Phorm** | **30%** | 14 days | Fitness-oriented. Short cookie. |
-| **Onnit** | **15%** | 45 days | Nootropics, fitness. Longest cookie in the DTC set. |
+### Coverage
+16 of 18 catalog supplements have at least one curated-brand product mapped via `docs/catalogue/herbspro_products.csv`:
 
-### Dispensary models (practitioner required)
+- **Mapped (16):** Methylfolate, Methyl-B12, Vitamin D3+K2, Omega-3, NAC, Berberine, Magnesium glycinate, Sulforaphane, CoQ10, Phosphatidylserine, NMN/NR (NR side only), Creatine monohydrate, L-carnitine, Lactase enzyme, Non-dairy calcium citrate, DAO enzyme.
+- **Gap (2):** PQQ (no curated product yet) and Iron (avoidance rule — never gets supplemented). Both render as gap-state cards.
 
-| Partner | Margin | Model | Notes |
+### Commission
+**TBD pending partner confirmation.** Rakuten LinkShare commission rates vary by merchant program and aren't yet locked for HerbsPro. Update this section once confirmed.
+
+### What this means for the app
+- Each supplement recommendation card → 1–4 "Shop at \<Brand\>" buttons, each linking to a pre-tagged Rakuten deeplink (no runtime appending; URLs are committed verbatim).
+- Gap state ("No shop yet") for PQQ and any future uncovered supplement.
+- No practitioner needed for v0.
+- No Fullscript integration needed for v0.
+- Measure: click-through rate per brand, completed purchases, conversion from results → purchase.
+
+## Reference: programs evaluated but not pursued
+
+### Direct affiliate programs (declined / never confirmed)
+The original v0 plan stacked three direct programs (a premium-catalog brand, a high-commission DTC weight-loss brand, and a greens/superfoods DTC brand). All three applications went unconfirmed and the plan was retired in favor of the Rakuten/HerbsPro feed. Specific brand names and prior commission rates are recorded in `docs/parking-lot.md` for posterity.
+
+Other programs that were considered and not pursued: large-catalog general retailers (rates too low or cookies too short to be worth integrating).
+
+### Dispensary models (deferred to v1)
+| Program | Margin | Model | Notes |
 |---|---|---|---|
 | **Fullscript** | Up to **35%** (US) / 25% (CA) | Practitioner sets markup; you become seller of record | **v1 target.** Documented API, multi-brand catalog. |
 | **Wholescripts (Xymogen)** | ~20–30% | Single-brand practitioner dispensary | Too narrow vs Fullscript. |
 
-## v0 commerce strategy (decided 2026-04-16)
+## Launch sequencing (updated 2026-05-01)
 
-### Thorne affiliate as primary revenue
-Thorne covers most of the Chronic Wellness supplement stack: methylfolate, methyl-B12, D3+K2, omega-3, CoQ10, magnesium, NAC, berberine. One affiliate relationship covers the majority of recommendations.
-
-**Unit economics at Thorne Gold tier (20%):**
-- Average recommended stack: ~$80/month
-- Commission per order: ~$16
-- Annual value per subscribing user: ~$192
-
-### DTC brands for specialty fills
-Stack 1–2 DTC brands where Thorne has gaps or lower-margin products:
-- BioTrust (40%) for protein / specialty formulas
-- Organifi (30%) for greens / superfood blends
-
-**Blended effective rate: ~15–25%** depending on product mix.
-
-### What this means for the app
-- Each supplement recommendation card → affiliate link to Thorne (or DTC brand)
-- "Shop this stack" CTA on results page
-- No practitioner needed for v0
-- No Fullscript integration needed for v0
-- Measure: click-through rate, completed purchases, conversion from results → purchase
-
-## Launch sequencing (updated 2026-04-16)
-
-### v0 — Thorne affiliate + DTC brands (now)
-- Thorne as primary affiliate partner (~20% at Gold tier)
-- 1–2 DTC brands for specialty products (BioTrust at 40%, Organifi at 30%)
-- Affiliate links on supplement recommendation cards
+### v0 — Rakuten LinkShare via HerbsPro (now)
+- Single affiliate relationship, 9 curated brands
+- Commission TBD pending partner confirmation
+- Brand-labeled product buttons on supplement recommendation cards
 - No practitioner required, zero infrastructure beyond the app
 - Goal: prove the funnel converts before adding complexity
 
@@ -118,8 +103,8 @@ Formalize **more** with family, not less. Written agreements, fair compensation 
 Detailed planning deliverable: Kanban task `3450a` (practitioner engagement framework) — held in backlog in the genomewell workspace (workspace path rename handled separately; see `build-deployment.md`).
 
 ## Open questions to resolve
-- Thorne affiliate application and tier qualification timeline
-- Which DTC brands to stack alongside Thorne (BioTrust + Organifi vs alternatives)
+- Rakuten LinkShare / HerbsPro commission confirmation
+- Whether to expand the curated brand list (9 today; candidates if gaps appear: PQQ-carrying brand, NMN-side products for the NR/NMN supplement)
 - Vitamin Labs API status (re-verify if strategy shifts toward white-label)
 - State coverage map for family practitioners (v1)
 - Malpractice / E&O insurance (~$3–10k/year for company-held policy, v1)

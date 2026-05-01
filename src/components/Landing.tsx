@@ -94,7 +94,7 @@ export function Landing({
             { n: '02', t: 'Built for your ancestry',
               d: 'Most DNA-wellness products train on European cohorts. We weight for variant frequencies across Black American profiles specifically.' },
             { n: '03', t: 'Honest about gaps',
-              d: "If the research is thin — or if no partner we trust carries it — we tell you. No hype, no hedging." },
+              d: "If the research is thin — or if no brand we trust carries it — we tell you. No hype, no hedging." },
           ].map((item) => (
             <div key={item.n} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <span style={{

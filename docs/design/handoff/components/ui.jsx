@@ -122,16 +122,16 @@ const CWButton = ({ variant = 'primary', size = 'md', children, onClick, full, d
   );
 };
 
-// Partner shop CTA — no logos, just the label and a small neutral chip.
-// Partner visual order: rotate through a muted chip color per partner.
-const GW_PARTNER_META = {
-  Thorne:   { tint: 'var(--cw-surfaceAlt)', initial: 'T' },
-  BioTrust: { tint: 'var(--cw-surfaceAlt)', initial: 'B' },
-  Organifi: { tint: 'var(--cw-surfaceAlt)', initial: 'O' },
+// Brand shop CTA — no logos, just the label and a small neutral chip.
+// Brand visual order: rotate through a muted chip color per brand.
+const GW_BRAND_META = {
+  'Source Naturals': { tint: 'var(--cw-surfaceAlt)', initial: 'S' },
+  'NOW Foods':       { tint: 'var(--cw-surfaceAlt)', initial: 'N' },
+  Solaray:           { tint: 'var(--cw-surfaceAlt)', initial: 'S' },
 };
 
-const CWPartnerButton = ({ partner, onClick }) => {
-  const meta = GW_PARTNER_META[partner] || { tint: 'var(--cw-surfaceAlt)', initial: partner[0] };
+const CWBrandButton = ({ brand, onClick }) => {
+  const meta = GW_BRAND_META[brand] || { tint: 'var(--cw-surfaceAlt)', initial: brand[0] };
   return (
     <button onClick={onClick} style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -155,7 +155,7 @@ const CWPartnerButton = ({ partner, onClick }) => {
         }}>{meta.initial}</span>
         <span style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <span style={{ fontSize: 10, fontFamily: 'var(--cw-font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--cw-inkSoft)' }}>Shop at</span>
-          <span style={{ fontWeight: 500, fontSize: 13.5 }}>{partner}</span>
+          <span style={{ fontWeight: 500, fontSize: 13.5 }}>{brand}</span>
         </span>
       </span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -171,7 +171,7 @@ const CWPriorityChip = ({ priority }) => {
     essential: 'Essential',
     recommended: 'Recommended',
     optional: 'Optional',
-    gap: 'Gap — no partner yet',
+    gap: 'Gap — no brand yet',
   };
   const bg = {
     essential: 'var(--cw-accent)',
@@ -232,5 +232,5 @@ const CWStripe = ({ label = 'imagery', height = 120, angle = -35, style = {} }) 
 
 Object.assign(window, {
   CWLogo, CWMark, CWPrivacyLockup, CWButton,
-  CWPartnerButton, CWPriorityChip, CWStripe,
+  CWBrandButton, CWPriorityChip, CWStripe,
 });

@@ -102,6 +102,6 @@ export function evaluate(
     firedPrimaryDetails: primary.fired,
     firedSupporting: supporting.rsids,
     confidence: confidenceFromTier(rule),
-    partnerOptions: rule.supplement.partnerOptions,
+    brandOptions: rule.supplement.brandOptions,
   };
 }

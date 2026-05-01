@@ -30,7 +30,7 @@ const GW_SUPPLEMENTS = {
       dose: '800 mcg daily, with food',
       snps: ['MTHFR C677T (TT)', 'MTRR A66G'],
       reason: 'Your MTHFR variant reduces your ability to convert folic acid into its active form. The methylated version skips that step — you\'ll feel this one first, usually in energy and mood within 2–3 weeks.',
-      partners: ['Thorne', 'BioTrust', 'Organifi'],
+      partners: ['Source Naturals', 'NOW Foods', 'Solaray'],
     },
     {
       name: 'Vitamin D3 + K2',
@@ -39,7 +39,7 @@ const GW_SUPPLEMENTS = {
       dose: '5,000 IU D3 · 100 mcg K2',
       snps: ['VDR FokI (ff)', 'GC rs2282679'],
       reason: 'Two variants in how you bind and transport vitamin D. Higher melanin slows cutaneous synthesis too — pair that with winter indoor hours and most folks in your profile sit well below optimal.',
-      partners: ['Thorne', 'BioTrust'],
+      partners: ['Source Naturals', 'NOW Foods'],
     },
     {
       name: 'Algal Omega-3 (EPA/DHA)',
@@ -48,7 +48,7 @@ const GW_SUPPLEMENTS = {
       dose: '1,000 mg combined EPA + DHA',
       snps: ['FADS1 rs174537'],
       reason: 'Your FADS1 variant cuts conversion of plant ALA to usable EPA/DHA roughly in half. Pre-formed marine or algal sources bypass the bottleneck entirely.',
-      partners: ['Thorne', 'Organifi'],
+      partners: ['Source Naturals', 'Solaray'],
     },
     {
       name: 'Magnesium Glycinate',
@@ -57,7 +57,7 @@ const GW_SUPPLEMENTS = {
       dose: '300–400 mg at night',
       snps: ['TRPM6 rs11144134'],
       reason: 'Lower intestinal magnesium absorption on your profile. Glycinate is the gentlest form and doubles as a mild nervous-system quieter before sleep.',
-      partners: ['BioTrust', 'Organifi'],
+      partners: ['NOW Foods', 'Solaray'],
     },
     {
       name: 'Zinc Picolinate',
@@ -66,7 +66,7 @@ const GW_SUPPLEMENTS = {
       dose: '15 mg, alternate days',
       snps: ['SLC30A8 rs13266634'],
       reason: 'Mild variant in zinc transport. Most people get enough from diet — consider this only if you eat little red meat or shellfish.',
-      partners: ['Thorne'],
+      partners: ['Source Naturals'],
     },
   ],
   aging: [
@@ -77,7 +77,7 @@ const GW_SUPPLEMENTS = {
       dose: '100 mg with a fat-containing meal',
       snps: ['NQO1 rs1800566', 'COQ2 rs4693570'],
       reason: 'Two variants that slow your body\'s own CoQ10 regeneration. Ubiquinol is the reduced, ready-to-use form — preferable for your profile over plain CoQ10.',
-      partners: ['Thorne', 'BioTrust'],
+      partners: ['Source Naturals', 'NOW Foods'],
     },
     {
       name: 'NAC (N-Acetyl Cysteine)',
@@ -86,7 +86,7 @@ const GW_SUPPLEMENTS = {
       dose: '600 mg, twice daily',
       snps: ['GSTM1 (null)', 'GSTT1 (null)'],
       reason: 'You\'re missing both copies of two glutathione-S-transferase genes — common, and it means your baseline detox and antioxidant capacity is lower than average. NAC is the precursor.',
-      partners: ['Thorne'],
+      partners: ['Source Naturals'],
     },
     {
       name: 'Resveratrol',
@@ -106,7 +106,7 @@ const GW_SUPPLEMENTS = {
       dose: '5 g daily, any time',
       snps: ['CKM rs4884'],
       reason: 'Your CKM variant means lower baseline phosphocreatine in muscle. Creatine is among the most-studied supplements on the market and it matters more for your profile than most.',
-      partners: ['Thorne', 'BioTrust', 'Organifi'],
+      partners: ['Source Naturals', 'NOW Foods', 'Solaray'],
     },
     {
       name: 'Beta-Alanine',
@@ -115,7 +115,7 @@ const GW_SUPPLEMENTS = {
       dose: '3.2 g split across the day',
       snps: ['CARNS1 rs10427199'],
       reason: 'Lower muscle carnosine buffering on your profile. Helpful for high-intensity intervals and repeat-effort work — less relevant if you mostly train long and steady.',
-      partners: ['BioTrust'],
+      partners: ['NOW Foods'],
     },
     {
       name: 'Ashwagandha (KSM-66)',
@@ -124,7 +124,7 @@ const GW_SUPPLEMENTS = {
       dose: '600 mg at night',
       snps: ['ADRB2 rs1042713'],
       reason: 'Mild cortisol-response variant. Optional — only consider if recovery or sleep is the bottleneck, and skip during pregnancy or thyroid medication.',
-      partners: ['Organifi', 'Thorne'],
+      partners: ['Solaray', 'Source Naturals'],
     },
   ],
   food: [
@@ -135,7 +135,7 @@ const GW_SUPPLEMENTS = {
       dose: 'As needed before dairy',
       snps: ['MCM6 rs4988235 (CC)'],
       reason: 'You carry the ancestral lactase-non-persistent genotype — roughly 70% of adults globally, and the majority in your ancestry group. Enzyme support turns "avoid" into "occasional" for most people.',
-      partners: ['BioTrust'],
+      partners: ['NOW Foods'],
     },
     {
       name: 'DAO (Diamine Oxidase)',
@@ -144,7 +144,7 @@ const GW_SUPPLEMENTS = {
       dose: '10,000 HDU before aged foods',
       snps: ['AOC1 rs10156191'],
       reason: 'Lower histamine-breakdown capacity. Worth trying only if aged cheese, wine, or cured meats consistently leave you flushed or stuffy.',
-      partners: ['Thorne'],
+      partners: ['Source Naturals'],
     },
     {
       name: 'Berberine',
