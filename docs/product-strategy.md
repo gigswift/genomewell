@@ -35,6 +35,7 @@ Recurring subscription + retention
 - All DNA parsing in-browser (no file transmission)
 - Only structured `SNPResult` data would leave the device if Claude is activated (never raw genotypes)
 - "Your DNA never leaves your device" is a durable, prominent message
+- Full privacy story (including the mutual-liability framing for why the architecture is what it is) lives in `docs/privacy.md` and is surfaced from the dashboard/landing header lockup, which opens a "How we handle your data" modal (`src/components/PrivacyModal.tsx`)
 
 ## Competitive landscape
 

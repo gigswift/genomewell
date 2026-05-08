@@ -45,6 +45,17 @@ Cleanup landed 2026-04-17: orphan files and their directories (`src/api/`, `src/
 - Env var to set when activating Claude narrative: `VITE_ANTHROPIC_API_KEY`
 - Currently unset — app uses deterministic fallback narrative, which is the preferred default (see `product-strategy.md`)
 
+### Feedback form (`/api/feedback`)
+
+The dashboard and landing headers expose a Feedback button that POSTs to `/api/feedback` (Vercel serverless function at `api/feedback.ts`). The function forwards submissions to `hello@chronicwellness.ai` via the Resend HTTP API.
+
+**Required env var (Vercel project settings, no `VITE_` prefix):**
+- `RESEND_API_KEY` — server-only secret. Do **not** prefix with `VITE_` (would expose it in the browser bundle).
+
+**Deploy blocker — domain verification:** the function sends `from: hello@chronicwellness.ai`. Resend requires `chronicwellness.ai` to be verified as a sending domain (SPF/DKIM records added to DNS) before sends will succeed. Verify in the Resend dashboard before the first deploy or sends will return 403.
+
+**Privacy copy** lives in `docs/privacy.md` as source-of-truth and is mirrored as hand-rendered JSX in `src/components/PrivacyModal.tsx`. When updating the privacy story, edit both files.
+
 ## Affiliate links
 
 No affiliate env vars needed. All product URLs in `docs/catalogue/herbspro_products.csv` are pre-tagged Rakuten LinkShare deeplinks (`click.linksynergy.com/...&id=lDiltZ8gZ2U`) for the merchant HerbsPro. `src/lib/affiliateLinks.ts` is a passthrough — `BrandOption.productUrl` is what the user clicks.

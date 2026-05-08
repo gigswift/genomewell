@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CWLogo, CWPrivacyLockup, CWTooltip, SNP_DEF } from './ui';
+import { CWButton, CWLogo, CWPrivacyLockup, CWTooltip, SNP_DEF } from './ui';
+import { FeedbackModal } from './FeedbackModal';
+import { PrivacyModal } from './PrivacyModal';
 import { SupplementCard } from './SupplementCard';
 import { toDesignCards } from '../lib/designDataAdapter';
 import { CATEGORY_LABELS, CATEGORY_ORDER } from '../lib/supplementLabels';
@@ -38,6 +40,8 @@ export function Dashboard({
 }: DashboardProps) {
   const isMobile = useIsMobile();
   const [tab, setTab] = useState<SupplementCategory>('daily-wellness');
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const allRecs: SupplementRecommendation[] = CATEGORY_ORDER.flatMap(
     (c) => grouped[c],
@@ -61,7 +65,10 @@ export function Dashboard({
       }}>
         <CWLogo size={isMobile ? 16 : 18} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <CWPrivacyLockup variant="badge" dense />
+          <CWPrivacyLockup variant="badge" dense onClick={() => setPrivacyOpen(true)} />
+          <CWButton variant="ghost" size="sm" onClick={() => setFeedbackOpen(true)}>
+            Feedback
+          </CWButton>
           <button
             type="button"
             onClick={onReset}
@@ -74,6 +81,13 @@ export function Dashboard({
           >Re-analyze</button>
         </div>
       </header>
+
+      <PrivacyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <FeedbackModal
+        isOpen={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+        onOpenPrivacy={() => setPrivacyOpen(true)}
+      />
 
       <ArchetypeHero isMobile={isMobile} archetype={archetype} />
 

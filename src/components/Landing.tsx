@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { CWButton, CWLogo, CWPrivacyLockup, CWTooltip, SNP_DEF } from './ui';
+import { FeedbackModal } from './FeedbackModal';
+import { PrivacyModal } from './PrivacyModal';
 
 export type ParseState = 'idle' | 'parsing' | 'done';
 
@@ -32,6 +34,8 @@ export function Landing({
 }: LandingProps) {
   const isMobile = useIsMobile();
   const surface = isMobile ? 'mobile' : 'desktop';
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   return (
     <div style={{
@@ -46,8 +50,20 @@ export function Landing({
         borderBottom: '1px solid var(--cw-line)',
       }}>
         <CWLogo size={surface === 'mobile' ? 17 : 19} />
-        <CWPrivacyLockup variant="inline" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <CWPrivacyLockup variant="inline" onClick={() => setPrivacyOpen(true)} />
+          <CWButton variant="ghost" size="sm" onClick={() => setFeedbackOpen(true)}>
+            Feedback
+          </CWButton>
+        </div>
       </header>
+
+      <PrivacyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <FeedbackModal
+        isOpen={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+        onOpenPrivacy={() => setPrivacyOpen(true)}
+      />
 
       <HeroSplit surface={surface} />
 

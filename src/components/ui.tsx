@@ -37,9 +37,10 @@ type PrivacyVariant = 'inline' | 'badge' | 'rule';
 interface PrivacyLockupProps {
   variant?: PrivacyVariant;
   dense?: boolean;
+  onClick?: () => void;
 }
 
-export const CWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLockupProps) => {
+export const CWPrivacyLockup = ({ variant = 'inline', dense = false, onClick }: PrivacyLockupProps) => {
   const lockIcon = (
     <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
       <rect x="1" y="6" width="10" height="7" rx="1" stroke="currentColor" strokeWidth="1.2" />
@@ -49,20 +50,46 @@ export const CWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLo
   );
 
   if (variant === 'badge') {
-    return (
-      <span style={{
-        display: 'inline-flex', alignItems: 'center', gap: 8,
-        padding: dense ? '4px 9px' : '6px 12px',
-        border: '1px solid var(--cw-line)',
-        borderRadius: 999,
-        fontFamily: 'var(--cw-font-mono)',
-        fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase',
-        color: 'var(--cw-ink-muted)', background: 'transparent',
-      }}>
+    const inner = (
+      <>
         {lockIcon}
         <span>Processed locally</span>
-      </span>
+      </>
     );
+    const baseStyle: CSSProperties = {
+      display: 'inline-flex', alignItems: 'center', gap: 8,
+      padding: dense ? '4px 9px' : '6px 12px',
+      border: '1px solid var(--cw-line)',
+      borderRadius: 999,
+      fontFamily: 'var(--cw-font-mono)',
+      fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase',
+      color: 'var(--cw-ink-muted)', background: 'transparent',
+    };
+    if (onClick) {
+      return (
+        <button
+          type="button"
+          onClick={onClick}
+          aria-label="How we handle your data"
+          style={{
+            ...baseStyle,
+            cursor: 'pointer',
+            transition: 'border-color 0.18s ease, color 0.18s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--cw-ink-soft)';
+            e.currentTarget.style.color = 'var(--cw-ink)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--cw-line)';
+            e.currentTarget.style.color = 'var(--cw-ink-muted)';
+          }}
+        >
+          {inner}
+        </button>
+      );
+    }
+    return <span style={baseStyle}>{inner}</span>;
   }
   if (variant === 'rule') {
     return (
@@ -79,16 +106,162 @@ export const CWPrivacyLockup = ({ variant = 'inline', dense = false }: PrivacyLo
       </div>
     );
   }
-  return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: 8,
-      fontFamily: 'var(--cw-font-mono)',
-      fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase',
-      color: 'var(--cw-ink-muted)',
-    }}>
+  const inlineInner = (
+    <>
       {lockIcon}
       <span>100% on-device</span>
-    </span>
+    </>
+  );
+  const inlineBase: CSSProperties = {
+    display: 'inline-flex', alignItems: 'center', gap: 8,
+    fontFamily: 'var(--cw-font-mono)',
+    fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase',
+    color: 'var(--cw-ink-muted)',
+  };
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label="How we handle your data"
+        style={{
+          ...inlineBase,
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          transition: 'color 0.18s ease, text-decoration-color 0.18s ease',
+          textDecoration: 'underline',
+          textDecorationColor: 'transparent',
+          textUnderlineOffset: 4,
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = 'var(--cw-ink)';
+          e.currentTarget.style.textDecorationColor = 'var(--cw-ink-soft)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = 'var(--cw-ink-muted)';
+          e.currentTarget.style.textDecorationColor = 'transparent';
+        }}
+      >
+        {inlineInner}
+      </button>
+    );
+  }
+  return <span style={inlineBase}>{inlineInner}</span>;
+};
+
+// ---------- CWDialog ----------
+
+interface CWDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+  maxWidth?: number;
+}
+
+export const CWDialog = ({ isOpen, onClose, title, children, maxWidth = 560 }: CWDialogProps) => {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedRef = useRef<Element | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    lastFocusedRef.current = document.activeElement;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    // Focus close button on next tick so portal mount completes
+    const t = window.setTimeout(() => closeRef.current?.focus(), 0);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      window.clearTimeout(t);
+      const prev = lastFocusedRef.current;
+      if (prev instanceof HTMLElement) prev.focus();
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen || typeof document === 'undefined') return null;
+
+  return createPortal(
+    <div
+      role="presentation"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      style={{
+        position: 'fixed', inset: 0,
+        background: 'rgba(20, 14, 10, 0.72)',
+        backdropFilter: 'blur(2px)',
+        zIndex: 1000,
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+        padding: '8vh 16px 16px',
+        overflowY: 'auto',
+      }}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cw-dialog-title"
+        style={{
+          width: '100%', maxWidth,
+          background: 'var(--cw-surface)',
+          border: '1px solid var(--cw-line)',
+          borderRadius: 'var(--cw-r-lg)',
+          boxShadow: 'var(--cw-shadow-lg)',
+          padding: '24px 28px 28px',
+          maxHeight: '84vh',
+          display: 'flex', flexDirection: 'column',
+        }}
+      >
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          gap: 16, marginBottom: 18,
+        }}>
+          <h2 id="cw-dialog-title" style={{
+            margin: 0,
+            fontFamily: 'var(--cw-font-mono)',
+            fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: 'var(--cw-ink-muted)', fontWeight: 500,
+          }}>{title}</h2>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            style={{
+              background: 'transparent', border: '1px solid var(--cw-line)',
+              borderRadius: 999,
+              width: 28, height: 28,
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              color: 'var(--cw-ink-muted)', cursor: 'pointer',
+              padding: 0, flexShrink: 0,
+              transition: 'border-color 0.18s ease, color 0.18s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'var(--cw-ink-soft)';
+              e.currentTarget.style.color = 'var(--cw-ink)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--cw-line)';
+              e.currentTarget.style.color = 'var(--cw-ink-muted)';
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 3 L9 9 M9 3 L3 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div style={{ overflowY: 'auto', flex: 1 }}>
+          {children}
+        </div>
+      </div>
+    </div>,
+    document.body,
   );
 };
 
