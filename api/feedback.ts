@@ -1,3 +1,4 @@
+/// <reference types="node" />
 // Vercel serverless function — POST /api/feedback
 // Forwards feedback submissions to hello@chronicwellness.ai via Resend HTTP API.
 // Honeypot ('website' field) silently succeeds to avoid signaling bots.
@@ -76,25 +77,49 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     String(comment),
   ].join('\n');
 
-  const resendRes = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${resendKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: 'Chronic Wellness <hello@chronicwellness.ai>',
-      to: 'hello@chronicwellness.ai',
-      reply_to: email,
-      subject: `New feedback: ${topicNorm}`,
-      text,
-    }),
-  });
+  let resendRes: Response;
+  try {
+    resendRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${resendKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Chronic Wellness <hello@chronicwellness.ai>',
+        to: 'hello@chronicwellness.ai',
+        reply_to: email,
+        subject: `New feedback: ${topicNorm}`,
+        text,
+      }),
+    });
+  } catch {
+    console.error('[feedback] resend rejected', { status: 0, name: 'fetch_failed' });
+    return res.status(502).json({ error: 'Email send failed', code: 'fetch_failed' });
+  }
 
   if (!resendRes.ok) {
-    return res.status(500).json({ error: 'Email send failed' });
+    // Read Resend's error code for diagnostics, but don't surface its free-text
+    // `message` (it can echo back submitter email or comment fragments).
+    const code = await readResendErrorCode(resendRes);
+    console.error('[feedback] resend rejected', { status: resendRes.status, name: code });
+    return res.status(502).json({ error: 'Email send failed', code });
   }
   return res.status(200).json({ ok: true });
+}
+
+async function readResendErrorCode(r: Response): Promise<string> {
+  try {
+    const body = await r.text();
+    const parsed: unknown = JSON.parse(body);
+    if (parsed && typeof parsed === 'object' && 'name' in parsed) {
+      const name = (parsed as { name: unknown }).name;
+      if (typeof name === 'string') return name;
+    }
+  } catch {
+    // unparseable body — fall through
+  }
+  return 'unknown';
 }
 
 function parseBody(body: unknown): FeedbackBody {

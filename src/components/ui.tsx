@@ -164,12 +164,19 @@ interface CWDialogProps {
 export const CWDialog = ({ isOpen, onClose, title, children, maxWidth = 560 }: CWDialogProps) => {
   const closeRef = useRef<HTMLButtonElement>(null);
   const lastFocusedRef = useRef<Element | null>(null);
+  // onClose is read through a ref so the focus-management effect below
+  // doesn't tear down on every parent re-render (which would steal focus
+  // from inputs typed into inside the dialog).
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     if (!isOpen) return;
     lastFocusedRef.current = document.activeElement;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onCloseRef.current();
     };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
@@ -183,7 +190,7 @@ export const CWDialog = ({ isOpen, onClose, title, children, maxWidth = 560 }: C
       const prev = lastFocusedRef.current;
       if (prev instanceof HTMLElement) prev.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen || typeof document === 'undefined') return null;
 
