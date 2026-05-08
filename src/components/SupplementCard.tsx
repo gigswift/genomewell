@@ -50,9 +50,6 @@ export function SupplementCard({ supp }: SupplementCardProps) {
             fontSize: 14, lineHeight: 1.6, color: 'var(--cw-ink)',
           }}>{wrapGlossary(healthEffect)}</p>
         )}
-        {!suppressShop && (
-          <FieldPair label="Dose">{dose}</FieldPair>
-        )}
         {variants.length > 0 && (
           <VariantList variants={variants} />
         )}
@@ -66,6 +63,9 @@ export function SupplementCard({ supp }: SupplementCardProps) {
             fontStyle: 'italic',
             color: 'var(--cw-ink-muted)',
           }}>{wrapGlossary(culturalContext)}</p>
+        )}
+        {!suppressShop && (
+          <FieldPair label="Dose">{dose}</FieldPair>
         )}
         {!suppressShop && brandOptions.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
