@@ -86,7 +86,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Chronic Wellness <hello@chronicwellness.ai>',
+        from: 'Chronic Wellness <hello@updates.chronicwellness.ai>',
         to: 'hello@chronicwellness.ai',
         reply_to: email,
         subject: `New feedback: ${topicNorm}`,
