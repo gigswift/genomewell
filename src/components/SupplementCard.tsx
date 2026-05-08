@@ -44,17 +44,17 @@ export function SupplementCard({ supp }: SupplementCardProps) {
         <CWPriorityChip priority={priority} />
       </div>
       <div style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-        {!suppressShop && (
-          <FieldPair label="Dose">{dose}</FieldPair>
-        )}
-        {variants.length > 0 && (
-          <VariantList variants={variants} />
-        )}
         {healthEffect && (
           <p style={{
             margin: 0, fontFamily: 'var(--cw-font-body)',
             fontSize: 14, lineHeight: 1.6, color: 'var(--cw-ink)',
           }}>{wrapGlossary(healthEffect)}</p>
+        )}
+        {!suppressShop && (
+          <FieldPair label="Dose">{dose}</FieldPair>
+        )}
+        {variants.length > 0 && (
+          <VariantList variants={variants} />
         )}
         {culturalContext && (
           <p style={{
