@@ -39,7 +39,7 @@ Before adding any supplement to the catalog, verify ALL of the following:
 - **CPIC** (cpicpgx.org) — clinical pharmacogenomics guidelines.
 
 ## Catalog constraints
-- **4 categories:** Daily Wellness, Healthy Aging, Body Optimization, Food Sensitivity
+- **4 categories:** Daily Wellness, Healthy Aging, Athletic Performance, Food Sensitivity
 - **Supplement count = whatever the evidence supports**; no padding to a target. Each included supplement must pass the supplement inclusion checklist (above).
 - **60 unique SNPs total for v0**, referenced by the supplement catalog
 - Supplements with "weak" or no SNP evidence are explicitly excluded. See `docs/science-snp-catalog.md` Tier 3 section for the full exclusion list. Do not re-add them.

@@ -105,7 +105,7 @@ Two-column desktop (1.3fr / 1fr), stacked on mobile. Headline uses italicized em
 
 ## Results — segmented nav
 
-Four tabs inside a pill-shaped container: Daily Wellness · Healthy Aging · Body Optimization · Food Sensitivity. Active tab uses `--cw-surface` with subtle shadow; inactive is transparent over `--cw-surfaceAlt`.
+Four tabs inside a pill-shaped container: Daily Wellness · Healthy Aging · Athletic Performance · Food Sensitivity. Active tab uses `--cw-surface` with subtle shadow; inactive is transparent over `--cw-surfaceAlt`.
 
 ## Supplement card — stacked layout
 

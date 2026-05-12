@@ -37,7 +37,7 @@ To resume: tell Claude "unpark [title]" or "resume the [title] thread."
 1. **Drill-down results** — gated deeper SNP detail behind account signup (free tier showed top-level; account unlocks full analysis, supporting SNP context, cross-category insights)
 2. **Cashback / discounts** — share affiliate margin back with users as a loyalty incentive. Funded from Chronic Wellness's affiliate commission, not from supplement pricing. Could be percentage-back, credits toward future purchases, or tiered rewards.
 3. **GLP-1 access** — future offering tying into the metabolic health positioning. Significant regulatory and practitioner requirements (GLP-1s are prescription medications). Would leverage the family practitioner network (PharmD aunt, MD aunt) established for Fullscript.
-4. **DNA-based content library** — fitness programs informed by Body Optimization SNPs, podcasts, curated health content. Subscription or membership-gated. Aligns with the "community and content" moat identified in product strategy.
+4. **DNA-based content library** — fitness programs informed by Athletic Performance SNPs, podcasts, curated health content. Subscription or membership-gated. Aligns with the "community and content" moat identified in product strategy.
 
 **Timing:** After v0 launch and bug stabilization. Do not build account infrastructure before proving the free funnel converts.
 

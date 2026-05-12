@@ -8,7 +8,7 @@ Loose ideas captured before scoping. Promote to a Kanban task when ready to exec
 
 ## v1 features (after v0 launches and we have data)
 
-- [ ] **Segment marketing by the four categories** — Daily Wellness, Healthy Aging, Body Optimization, Food Sensitivity.
+- [ ] **Segment marketing by the four categories** — Daily Wellness, Healthy Aging, Athletic Performance, Food Sensitivity.
 
 - [ ] **Affiliate links for Ancestry** — Add affiliate links to Ancestry (presumably AncestryDNA's affiliate program for DNA-test purchase referrals; final scope TBD when promoted).
 

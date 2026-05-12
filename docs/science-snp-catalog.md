@@ -30,7 +30,7 @@ This is an ethical line, not a disclaimer formality.
 |---|---|---|
 | **Daily Wellness** | Methylation, vitamins, minerals, metabolic health, antioxidant defense, inflammation | Highest — most recommendations land here |
 | **Healthy Aging** | Cellular aging, mitochondrial function, brain aging, longevity-associated biology | Moderate — fewer but high-value recommendations |
-| **Body Optimization** | Exercise physiology, muscle fiber, fat oxidation, recovery, injury risk. Supplement context only — no fitness programming | Moderate — supplement-informed, not workout-informed |
+| **Athletic Performance** | Exercise physiology, muscle fiber, fat oxidation, recovery, injury risk. Supplement context only — no fitness programming | Moderate — supplement-informed, not workout-informed |
 | **Food Sensitivity** | Lactose, caffeine, histamine, alcohol, bitter taste, gluten-related | Limited — more informational than supplement-driven |
 
 ## Supplement Catalog (v0)
@@ -142,7 +142,7 @@ Brand convention: comma-separated list of brand display names per row. The full 
     - **NQO1 C609T (CT)** — One copy of a less-efficient variant (NQO1) at the step that recycles NAD — your cellular energy currency cycles modestly less efficiently than typical. Normal: CC. Source: PubMed (Frontiers review on NQO1 redox role) — https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2017.00595/full
     - **NQO1 C609T (TT)** — Two copies of a less-efficient variant (NQO1) at the NAD-recycling step — the strongest drop in this gene, which makes the case for NMN/NR to top up your cellular energy supply. Normal: CC. Source: same.
 
-### Body Optimization
+### Athletic Performance
 
 | Supplement | Primary SNPs | Supporting SNPs | Default Dose | Brand Options | Evidence Tier |
 |---|---|---|---|---|---|
@@ -287,7 +287,7 @@ Each SNP is listed once, under the category where its primary role sits (or, for
 | rs2802292 | FOXO3 | supporting | NMN/NR |
 | rs3758391 | SIRT1 | supporting | NMN/NR |
 
-### Body Optimization (5 variants)
+### Athletic Performance (5 variants)
 
 | rsid | Gene | Role | Informs |
 |---|---|---|---|
@@ -363,7 +363,7 @@ type Confidence = 'high' | 'medium' | 'flagged-conflict' | 'insufficient-data';
 type Category =
   | 'daily-wellness'
   | 'healthy-aging'
-  | 'body-optimization'
+  | 'athletic-performance'
   | 'food-sensitivity';
 
 interface SNPReference {
@@ -504,5 +504,5 @@ Chosen as the second worked example for African-ancestry relevance: rs2282679 (G
 - **Stay focused on supplements** (not disease risk, cancer, or longevity predictions)
 - **Add pharmacogenomics as v2 feature** — high trust, high value, low regulatory risk
 - **Skip or heavily caveat cancer/longevity** until a clinical advisor is in place
-- **Categories are final:** Daily Wellness, Healthy Aging, Body Optimization, Food Sensitivity
+- **Categories are final:** Daily Wellness, Healthy Aging, Athletic Performance, Food Sensitivity
 - **v0 SNP set** = the union of primary + supporting SNPs referenced by the supplement catalog (see Supplement Catalog (v0) section). Current count: 51 variants. Ceiling: 60.

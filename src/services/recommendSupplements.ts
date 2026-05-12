@@ -20,7 +20,7 @@ function emptyGrouped(): GroupedRecommendations {
   return {
     'daily-wellness': [],
     'healthy-aging': [],
-    'body-optimization': [],
+    'athletic-performance': [],
     'food-sensitivity': [],
   };
 }

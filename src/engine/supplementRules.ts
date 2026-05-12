@@ -892,11 +892,11 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
     ],
   },
 
-  // ── BODY OPTIMIZATION ──────────────────────────────────────────────────
+  // ── ATHLETIC PERFORMANCE ───────────────────────────────────────────────
   {
     supplement: {
       name: 'Creatine monohydrate',
-      category: 'body-optimization',
+      category: 'athletic-performance',
       defaultDosage: '3–5 g daily',
       brandOptions: [
         {
@@ -955,7 +955,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
   {
     supplement: {
       name: 'L-carnitine (tartrate)',
-      category: 'body-optimization',
+      category: 'athletic-performance',
       defaultDosage: '1–2 g daily',
       brandOptions: [
         {
@@ -1015,7 +1015,7 @@ export const SUPPLEMENT_RULES: SupplementRule[] = [
   {
     supplement: {
       name: 'PQQ',
-      category: 'body-optimization',
+      category: 'athletic-performance',
       defaultDosage: '10–20 mg daily',
       brandOptions: [],
       healthEffect: 'The payoff here is subtle and slow — more stamina across long days, better-quality sleep, and a brain that doesn\'t hit its afternoon wall as hard.',

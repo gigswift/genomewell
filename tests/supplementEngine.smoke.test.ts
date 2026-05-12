@@ -31,7 +31,7 @@ describe('supplement engine (end-to-end smoke)', () => {
     expect(flat.length).toBeGreaterThan(0);
     expect(grouped['daily-wellness'].length).toBeGreaterThan(0);
     expect(grouped['healthy-aging'].length).toBeGreaterThan(0);
-    expect(grouped['body-optimization'].length).toBeGreaterThan(0);
+    expect(grouped['athletic-performance'].length).toBeGreaterThan(0);
     expect(grouped['food-sensitivity'].length).toBeGreaterThan(0);
   });
 

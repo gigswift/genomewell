@@ -15,7 +15,7 @@ const GW_ARCHETYPE = {
 const GW_TABS = [
   { id: 'daily', label: 'Daily Wellness', glyph: '◐' },
   { id: 'aging', label: 'Healthy Aging', glyph: '◔' },
-  { id: 'body', label: 'Body Optimization', glyph: '◉' },
+  { id: 'athletic', label: 'Athletic Performance', glyph: '◉' },
   { id: 'food', label: 'Food Sensitivity', glyph: '◑' },
 ];
 
@@ -98,7 +98,7 @@ const GW_SUPPLEMENTS = {
       partners: [],
     },
   ],
-  body: [
+  athletic: [
     {
       name: 'Creatine Monohydrate',
       tag: 'Performance',

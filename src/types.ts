@@ -66,7 +66,7 @@ export interface BrandOption {
 export type SupplementCategory =
   | 'daily-wellness'
   | 'healthy-aging'
-  | 'body-optimization'
+  | 'athletic-performance'
   | 'food-sensitivity';
 
 export type SupplementPriorityTier =
