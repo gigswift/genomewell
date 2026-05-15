@@ -5,6 +5,9 @@ import { wrapGlossary } from '../lib/glossary';
 import type { BrandOption } from '../types';
 import type { DesignCardSupplement, DesignCardVariant } from '../lib/designDataAdapter';
 
+const NORMAL_LABEL_DEF = 'The reference version of this position — what most people inherit.';
+const YOURS_LABEL_DEF = 'What we read in your DNA file at this position.';
+
 interface SupplementCardProps {
   supp: DesignCardSupplement;
 }
@@ -231,12 +234,16 @@ function VariantRow({ v }: { v: DesignCardVariant }) {
       <span style={{ color: 'var(--cw-ink-soft)' }}>
         {' ('}
       </span>
-      <span style={tagStyle}>Normal:</span>
+      <span style={tagStyle} onClickCapture={(e) => e.preventDefault()}>
+        <CWTooltip content={NORMAL_LABEL_DEF}>Normal</CWTooltip>:
+      </span>
       <span style={{ color: labelColor, transition: 'color 0.15s ease' }}>
         {' '}{v.referenceGenotype}
       </span>
       <span style={{ color: 'var(--cw-ink-soft)' }}>{' · '}</span>
-      <span style={tagStyle}>Yours:</span>
+      <span style={tagStyle} onClickCapture={(e) => e.preventDefault()}>
+        <CWTooltip content={YOURS_LABEL_DEF}>Yours</CWTooltip>:
+      </span>
       <span style={{ color: labelColor, transition: 'color 0.15s ease' }}>
         {' '}{v.firedGenotype}
       </span>

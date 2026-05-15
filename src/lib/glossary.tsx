@@ -11,6 +11,8 @@ export const GLOSSARY: Record<string, string> = {
   'apoe ε2': 'A protective version of the APOE gene linked to slower cognitive aging — the opposite end of the APOE spectrum from ε4.',
   'ε2': 'A protective version of the APOE gene linked to slower cognitive aging.',
   'hemochromatosis': 'A condition where the body absorbs and stores too much iron over time, slowly damaging organs. HFE gene variants raise this risk.',
+  'dominant': 'A version of a variant that shows its effect even when you only inherit one copy.',
+  'recessive': 'A version of a variant that only shows its full effect when you inherit two copies (one from each parent).',
 };
 
 const TERMS_BY_LENGTH = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
