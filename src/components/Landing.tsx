@@ -51,7 +51,7 @@ export function Landing({
       }}>
         <CWLogo size={surface === 'mobile' ? 17 : 19} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <CWPrivacyLockup variant="inline" onClick={() => setPrivacyOpen(true)} />
+          <CWPrivacyLockup variant="badge" dense onClick={() => setPrivacyOpen(true)} />
           <CWButton variant="ghost" size="sm" onClick={() => setFeedbackOpen(true)}>
             Feedback
           </CWButton>
