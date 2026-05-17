@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { CWButton, CWLogo, CWPrivacyLockup, CWTooltip, SNP_DEF } from './ui';
+import { AncestryInstructionsModal } from './AncestryInstructionsModal';
 import { FeedbackModal } from './FeedbackModal';
 import { PrivacyModal } from './PrivacyModal';
+import { TwentyThreeAndMeInstructionsModal } from './TwentyThreeAndMeInstructionsModal';
 
 export type ParseState = 'idle' | 'parsing' | 'done';
 
@@ -36,6 +38,8 @@ export function Landing({
   const surface = isMobile ? 'mobile' : 'desktop';
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [ancestryOpen, setAncestryOpen] = useState(false);
+  const [twentyThreeAndMeOpen, setTwentyThreeAndMeOpen] = useState(false);
 
   return (
     <div style={{
@@ -63,6 +67,14 @@ export function Landing({
         isOpen={feedbackOpen}
         onClose={() => setFeedbackOpen(false)}
         onOpenPrivacy={() => setPrivacyOpen(true)}
+      />
+      <AncestryInstructionsModal
+        isOpen={ancestryOpen}
+        onClose={() => setAncestryOpen(false)}
+      />
+      <TwentyThreeAndMeInstructionsModal
+        isOpen={twentyThreeAndMeOpen}
+        onClose={() => setTwentyThreeAndMeOpen(false)}
       />
 
       <HeroSplit surface={surface} />
@@ -93,6 +105,8 @@ export function Landing({
           variantsMatched={variantsMatched}
           onFile={onFile}
           surface={surface}
+          onOpenAncestry={() => setAncestryOpen(true)}
+          onOpenTwentyThreeAndMe={() => setTwentyThreeAndMeOpen(true)}
         />
 
         <div style={{ margin: surface === 'mobile' ? '40px 0 28px' : '56px 0 36px' }}>
@@ -201,6 +215,8 @@ interface UploadZoneProps {
   variantsMatched: number;
   onFile: (file: File) => void;
   surface: 'mobile' | 'desktop';
+  onOpenAncestry: () => void;
+  onOpenTwentyThreeAndMe: () => void;
 }
 
 function UploadZone({
@@ -209,6 +225,8 @@ function UploadZone({
   variantsMatched,
   onFile,
   surface,
+  onOpenAncestry,
+  onOpenTwentyThreeAndMe,
 }: UploadZoneProps) {
   const active = parseState === 'parsing';
   const done = parseState === 'done';
@@ -216,6 +234,12 @@ function UploadZone({
 
   function handleBrowse() {
     fileInput.current?.click();
+  }
+  async function handleDemo() {
+    const res = await fetch('/demo-23andme.txt');
+    const text = await res.text();
+    const file = new File([text], 'demo-23andme.txt', { type: 'text/plain' });
+    onFile(file);
   }
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -265,6 +289,17 @@ function UploadZone({
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
             <CWButton variant="primary" onClick={handleBrowse}>Choose a file</CWButton>
+          </div>
+          <div style={{
+            display: 'flex',
+            flexDirection: surface === 'mobile' ? 'column' : 'row',
+            gap: 8,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <CWButton variant="ghost" size="sm" onClick={handleDemo}>Try a demo file</CWButton>
+            <CWButton variant="ghost" size="sm" onClick={onOpenAncestry}>Find Ancestry file</CWButton>
+            <CWButton variant="ghost" size="sm" onClick={onOpenTwentyThreeAndMe}>Find 23andme file</CWButton>
           </div>
           <input
             ref={fileInput}
