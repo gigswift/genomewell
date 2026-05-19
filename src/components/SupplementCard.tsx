@@ -183,17 +183,15 @@ function VariantList({ variants }: { variants: DesignCardVariant[] }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-controls={panelId}
           style={{
-            flex: 1,
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
             gap: 8,
             padding: 0,
             background: 'transparent',
@@ -201,9 +199,7 @@ function VariantList({ variants }: { variants: DesignCardVariant[] }) {
             cursor: 'pointer',
             textAlign: 'left',
             fontFamily: 'var(--cw-font-mono)',
-            fontSize: 10,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
+            fontSize: 13,
             color: 'var(--cw-ink-soft)',
             transition: 'color 0.15s ease',
           }}
@@ -214,7 +210,7 @@ function VariantList({ variants }: { variants: DesignCardVariant[] }) {
         >
           <span>Your Variants ({variants.length})</span>
           <svg
-            width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"
+            width="13" height="13" viewBox="0 0 10 10" aria-hidden="true"
             style={{
               transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.2s ease',
@@ -225,7 +221,7 @@ function VariantList({ variants }: { variants: DesignCardVariant[] }) {
           </svg>
         </button>
         <CWTooltip content={SNP_DEF}>
-          <span style={{ fontFamily: 'var(--cw-font-mono)', fontSize: 10, color: 'var(--cw-ink-soft)' }}>(i)</span>
+          <span style={{ fontFamily: 'var(--cw-font-mono)', fontSize: 13, color: 'var(--cw-ink-soft)', cursor: 'help' }}>(i)</span>
         </CWTooltip>
       </div>
       <div
