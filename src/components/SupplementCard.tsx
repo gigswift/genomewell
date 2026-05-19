@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import { CWPriorityChip, CWTooltip, SNP_DEF } from './ui';
 import { getBrandDisplayName } from '../lib/affiliateLinks';
 import { wrapGlossary } from '../lib/glossary';
@@ -178,19 +178,74 @@ function BrandRow({ opt }: { opt: BrandOption }) {
 }
 
 function VariantList({ variants }: { variants: DesignCardVariant[] }) {
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
-      <span style={{
-        fontFamily: 'var(--cw-font-mono)', fontSize: 10,
-        letterSpacing: '0.1em', textTransform: 'uppercase',
-        color: 'var(--cw-ink-soft)',
-      }}>
-        <CWTooltip content={SNP_DEF}>Your Variants</CWTooltip>
-      </span>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-        {variants.map((v) => (
-          <VariantRow key={`${v.variantLabel}-${v.firedGenotype}`} v={v} />
-        ))}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={panelId}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 8,
+            padding: 0,
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            textAlign: 'left',
+            fontFamily: 'var(--cw-font-mono)',
+            fontSize: 10,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--cw-ink-soft)',
+            transition: 'color 0.15s ease',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--cw-ink)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--cw-ink-soft)'; }}
+          onFocus={(e) => { e.currentTarget.style.color = 'var(--cw-ink)'; }}
+          onBlur={(e) => { e.currentTarget.style.color = 'var(--cw-ink-soft)'; }}
+        >
+          <span>Your Variants ({variants.length})</span>
+          <svg
+            width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"
+            style={{
+              transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s ease',
+              flexShrink: 0,
+            }}
+          >
+            <path d="M2 3.5 L5 6.5 L8 3.5" stroke="currentColor" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <CWTooltip content={SNP_DEF}>
+          <span style={{ fontFamily: 'var(--cw-font-mono)', fontSize: 10, color: 'var(--cw-ink-soft)' }}>(i)</span>
+        </CWTooltip>
+      </div>
+      <div
+        id={panelId}
+        role="region"
+        style={{
+          maxHeight: open ? 2000 : 0,
+          overflow: 'hidden',
+          transition: 'max-height 250ms ease',
+        }}
+      >
+        <div style={{
+          display: 'flex', flexDirection: 'column', gap: 0,
+          paddingTop: open ? 6 : 0,
+          transition: 'padding-top 250ms ease',
+        }}>
+          {variants.map((v) => (
+            <VariantRow key={`${v.variantLabel}-${v.firedGenotype}`} v={v} />
+          ))}
+        </div>
       </div>
     </div>
   );
