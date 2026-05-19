@@ -53,7 +53,7 @@ export const CWPrivacyLockup = ({ variant = 'inline', dense = false, onClick }: 
     const inner = (
       <>
         {lockIcon}
-        <span>Processed locally</span>
+        <span>HOW WE HANDLE DATA</span>
       </>
     );
     const baseStyle: CSSProperties = {
@@ -101,7 +101,7 @@ export const CWPrivacyLockup = ({ variant = 'inline', dense = false, onClick }: 
       }}>
         <span style={{ flex: 1, height: 1, background: 'var(--cw-line)' }} />
         {lockIcon}
-        <span>Your DNA never leaves your device</span>
+        <span>How we handle data</span>
         <span style={{ flex: 1, height: 1, background: 'var(--cw-line)' }} />
       </div>
     );
@@ -109,7 +109,7 @@ export const CWPrivacyLockup = ({ variant = 'inline', dense = false, onClick }: 
   const inlineInner = (
     <>
       {lockIcon}
-      <span>100% on-device</span>
+      <span>HOW WE HANDLE DATA</span>
     </>
   );
   const inlineBase: CSSProperties = {
