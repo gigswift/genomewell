@@ -75,3 +75,63 @@ The script is rate-limited to ~1 req/sec, takes ~80 seconds for the current 70-r
 
 ### Commission rate
 Commission structure TBD pending Rakuten LinkShare partner confirmation — the prior tiered direct-program model (see `parking-lot.md` for historical detail) is obsolete; see `commerce-practitioner.md` for the current strategy.
+
+## Behavioral tracking & Google Ads attribution
+
+The app implements first-party behavioral tracking and Google Ads conversion reporting under the "Option C" privacy posture: DNA stays on device (unchanged), but click/page events, session IDs, and `gclid` values are logged server-side and reported to Google Ads.
+
+**Privacy invariant (must hold across all future changes):** DNA bytes, genotypes, rsids, and SNPResult arrays NEVER appear in any tracking payload. The `TrackPayload` type in `src/lib/tracking.ts` is closed to a fixed shape; `api/track.ts` drops unknown fields. No third-party analytics SDKs (Mixpanel/Segment/Amplitude/Heap/Plausible/Hotjar/FullStory/Facebook Pixel/TikTok Pixel) are loaded.
+
+### `/api/track` endpoint
+
+Vercel serverless function at `api/track.ts`. Accepts POST only (non-POST → 405). Fire-and-forget from the client: errors are swallowed, navigation is never blocked.
+
+**Request body (JSON):**
+
+```ts
+{
+  event: 'affiliate_click' | 'page_view' | 'file_upload' | 'parse_complete',
+  partner?: string,         // brand slug, e.g. 'now-foods'
+  supplementId?: string,    // supplement display name
+  sessionId: string,        // UUID v4 from cw_session cookie
+  gclid?: string,           // from cw_gclid cookie if present
+  timestamp: string,        // ISO 8601
+  page: string              // window.location.pathname
+}
+```
+
+Unknown event names are rejected with 400. All strings are truncated server-side at 256 chars. The server logs a single-line JSON record (`type: 'track'`) plus user-agent and referer to stdout.
+
+### Cookies
+
+| Name | Lifetime | Purpose |
+| --- | --- | --- |
+| `cw_session` | 30 days | UUID v4 per browser. Set on first page load if missing. SameSite=Lax, first-party, path=/. |
+| `cw_gclid`   | 90 days | Captured from `?gclid=` query string on landing. Used to attribute downstream affiliate clicks back to the Google Ads click that drove the visit. SameSite=Lax, first-party, path=/. |
+
+Both are set by `src/lib/tracking.ts` via `initTracking()`, called from `src/main.tsx` at app bootstrap.
+
+### Google Ads (gtag.js)
+
+`initTracking()` injects `https://www.googletagmanager.com/gtag/js?id=${VITE_GOOGLE_ADS_ID}` once at boot when both env vars are set. Every affiliate-click also fires:
+
+```js
+gtag('event', 'conversion', { send_to: `${VITE_GOOGLE_ADS_ID}/${VITE_GOOGLE_ADS_LABEL}` })
+```
+
+If either env var is unset, gtag is skipped silently and `/api/track` still fires.
+
+**Env vars (Vercel project settings — `VITE_` prefix so Vite inlines them at build time):**
+- `VITE_GOOGLE_ADS_ID` — AdWords account conversion ID (e.g. `AW-1234567890`).
+- `VITE_GOOGLE_ADS_LABEL` — Conversion label for the affiliate-click conversion event.
+
+### Querying events
+
+In the Vercel dashboard → Project → Logs (Runtime Logs), filter by function `api/track` or grep for `"type":"track"`. Each event is a single JSON line.
+
+### Verifying the Google Ads conversion is firing
+
+1. Install the Chrome extension **Tag Assistant Companion** (or use **Tag Assistant** at tagassistant.google.com).
+2. Open the deployed site, accept the gtag tags, then click any "Shop" button on a supplement card.
+3. Tag Assistant should show a `conversion` event for the configured `AW-…/<label>` send_to. In the Network tab, you can also confirm a request to `https://www.google.com/pagead/conversion/...` fires alongside the `/api/track` POST.
+4. The new tab to the partner URL must still open normally — tracking is fire-and-forget and never blocks navigation.

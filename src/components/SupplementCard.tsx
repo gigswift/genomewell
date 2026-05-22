@@ -2,6 +2,7 @@ import { useId, useState, type ReactNode } from 'react';
 import { CWPriorityChip, CWTooltip, SNP_DEF } from './ui';
 import { getBrandDisplayName } from '../lib/affiliateLinks';
 import { wrapGlossary } from '../lib/glossary';
+import { track } from '../lib/tracking';
 import type { BrandOption } from '../types';
 import type { DesignCardSupplement, DesignCardVariant } from '../lib/designDataAdapter';
 
@@ -73,7 +74,7 @@ export function SupplementCard({ supp }: SupplementCardProps) {
         {!suppressShop && brandOptions.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {brandOptions.map((opt, i) => (
-              <BrandRow key={`${opt.brand}-${i}`} opt={opt} />
+              <BrandRow key={`${opt.brand}-${i}`} opt={opt} supplementName={name} />
             ))}
           </div>
         )}
@@ -83,10 +84,16 @@ export function SupplementCard({ supp }: SupplementCardProps) {
   );
 }
 
-function BrandRow({ opt }: { opt: BrandOption }) {
+function BrandRow({ opt, supplementName }: { opt: BrandOption; supplementName: string }) {
   const brandLabel = getBrandDisplayName(opt.brand);
 
   function openProduct() {
+    // Fire-and-forget: track() never blocks or delays the navigation below.
+    track({
+      event: 'affiliate_click',
+      partner: opt.brand,
+      supplementId: supplementName,
+    });
     window.open(opt.productUrl, '_blank', 'noopener,noreferrer');
   }
 
