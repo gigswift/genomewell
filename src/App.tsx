@@ -4,6 +4,7 @@ import { Dashboard } from './components/Dashboard';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { parseRawDNA } from './services/parseRawDNA';
 import { recommendSupplements } from './services/recommendSupplements';
+import { track } from './lib/tracking';
 import type {
   Genotype,
   GroupedRecommendations,
@@ -83,6 +84,7 @@ export default function App() {
 
       stopProgressAndFinalize();
       setParseState('done');
+      track({ event: 'file_parsed' });
 
       setTimeout(() => setShowResults(true), DONE_HOLD_MS);
     } catch (err) {

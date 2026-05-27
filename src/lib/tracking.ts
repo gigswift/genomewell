@@ -15,11 +15,7 @@ const GCLID_COOKIE = 'cw_gclid';
 const SESSION_TTL_DAYS = 30;
 const GCLID_TTL_DAYS = 90;
 
-type TrackEvent =
-  | 'affiliate_click'
-  | 'page_view'
-  | 'file_upload'
-  | 'parse_complete';
+type TrackEvent = 'affiliate_click' | 'file_parsed';
 
 interface TrackPayload {
   event: TrackEvent;
@@ -96,7 +92,12 @@ function getGclid(): string | undefined {
   return v ?? undefined;
 }
 
-function getEnv(name: 'VITE_GOOGLE_ADS_ID' | 'VITE_GOOGLE_ADS_LABEL'): string | undefined {
+function getEnv(
+  name:
+    | 'VITE_GOOGLE_ADS_ID'
+    | 'VITE_GOOGLE_ADS_LABEL_AFFILIATE_CLICK'
+    | 'VITE_GOOGLE_ADS_LABEL_FILE_PARSED',
+): string | undefined {
   const v = import.meta.env[name] as string | undefined;
   if (typeof v !== 'string') return undefined;
   const trimmed = v.trim();
@@ -104,6 +105,12 @@ function getEnv(name: 'VITE_GOOGLE_ADS_ID' | 'VITE_GOOGLE_ADS_LABEL'): string | 
 }
 
 let bootstrapped = false;
+
+// file_parsed represents one genuine parse-success per page session. The
+// success codepath can run more than once (e.g. a remount re-invoking it), so
+// we fire this event at most once per loaded page to avoid double-counting the
+// Google Ads conversion. A full reload starts a fresh session and resets this.
+let fileParsedFired = false;
 
 export function initTracking(): void {
   if (bootstrapped) return;
@@ -138,9 +145,14 @@ function loadGtag(): void {
   document.head.appendChild(script);
 }
 
-function fireGoogleAdsConversion(): void {
+function fireGoogleAdsConversion(event: TrackEvent): void {
   const adsId = getEnv('VITE_GOOGLE_ADS_ID');
-  const label = getEnv('VITE_GOOGLE_ADS_LABEL');
+  const label =
+    event === 'affiliate_click'
+      ? getEnv('VITE_GOOGLE_ADS_LABEL_AFFILIATE_CLICK')
+      : event === 'file_parsed'
+        ? getEnv('VITE_GOOGLE_ADS_LABEL_FILE_PARSED')
+        : undefined;
   if (!adsId || !label) return;
   if (typeof window === 'undefined' || !window.gtag) return;
   try {
@@ -154,6 +166,11 @@ function fireGoogleAdsConversion(): void {
 
 export function track(payload: TrackPayload): void {
   try {
+    if (payload.event === 'file_parsed') {
+      if (fileParsedFired) return;
+      fileParsedFired = true;
+    }
+
     const sessionId = getOrCreateSessionId();
     const body = {
       event: payload.event,
@@ -177,9 +194,7 @@ export function track(payload: TrackPayload): void {
       });
     }
 
-    if (payload.event === 'affiliate_click') {
-      fireGoogleAdsConversion();
-    }
+    fireGoogleAdsConversion(payload.event);
   } catch {
     // tracking must never throw
   }

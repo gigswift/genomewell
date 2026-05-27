@@ -49,6 +49,15 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
             email API) so we can read and reply.
           </li>
           <li style={listItem}>
+            <strong style={emphasis}>When your file finishes parsing</strong>,
+            an anonymous "file parsed" event is logged to{' '}
+            <code style={mono}>/api/track</code> and counted as a Google Ads
+            conversion via <code style={mono}>gtag.js</code>. This records only
+            that a parse happened — never the file, your genotypes, or your
+            results. The anonymous session ID and, if present, the Google
+            ad-click ID are included; nothing else.
+          </li>
+          <li style={listItem}>
             <strong style={emphasis}>If you click a "Shop" button</strong>,
             the affiliate network (Rakuten LinkShare) records the click
             and any resulting purchase so we can earn a commission. They
