@@ -133,8 +133,12 @@ function loadGtag(): void {
   if (window.gtag) return; // already loaded
 
   window.dataLayer = window.dataLayer || [];
-  const gtag: GtagFn = function (...args: unknown[]) {
-    window.dataLayer!.push(args);
+  // Matches Google's official gtag stub verbatim (developers.google.com/tag-platform/gtagjs/install).
+  // Must push the `arguments` object, not a rest-params array — rest params were the suspected cause
+  // of conversion pings never firing (gtag.js did not recognize the pushed commands).
+  const gtag = function gtag(): void {
+    // eslint-disable-next-line prefer-rest-params, @typescript-eslint/prefer-rest-params
+    window.dataLayer!.push(arguments);
   } as unknown as GtagFn;
   window.gtag = gtag;
 
