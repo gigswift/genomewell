@@ -8,16 +8,16 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'tests/**', 'scripts/**']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
-      reactHooks.configs.flat.recommended,
+      reactHooks.configs.flat['recommended-latest'],
       reactRefresh.configs.vite,
-      reactX.configs['flat/recommended-typescript'],
-      reactDom.configs['flat/recommended'],
+      reactX.configs['recommended-typescript'],
+      reactDom.configs['recommended'],
     ],
     languageOptions: {
       ecmaVersion: 2020,

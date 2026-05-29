@@ -137,7 +137,7 @@ function loadGtag(): void {
   // Must push the `arguments` object, not a rest-params array — rest params were the suspected cause
   // of conversion pings never firing (gtag.js did not recognize the pushed commands).
   const gtag = function gtag(): void {
-    // eslint-disable-next-line prefer-rest-params, @typescript-eslint/prefer-rest-params
+    // eslint-disable-next-line prefer-rest-params
     window.dataLayer!.push(arguments);
   } as unknown as GtagFn;
   window.gtag = gtag;
