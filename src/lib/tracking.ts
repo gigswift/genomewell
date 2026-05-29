@@ -15,7 +15,7 @@ const GCLID_COOKIE = 'cw_gclid';
 const SESSION_TTL_DAYS = 30;
 const GCLID_TTL_DAYS = 90;
 
-type TrackEvent = 'affiliate_click' | 'file_parsed';
+type TrackEvent = 'affiliate_click' | 'file_parsed' | 'page_view';
 
 interface TrackPayload {
   event: TrackEvent;
@@ -96,7 +96,8 @@ function getEnv(
   name:
     | 'VITE_GOOGLE_ADS_ID'
     | 'VITE_GOOGLE_ADS_LABEL_AFFILIATE_CLICK'
-    | 'VITE_GOOGLE_ADS_LABEL_FILE_PARSED',
+    | 'VITE_GOOGLE_ADS_LABEL_FILE_PARSED'
+    | 'VITE_GOOGLE_ADS_LABEL_PAGE_VIEW',
 ): string | undefined {
   const v = import.meta.env[name] as string | undefined;
   if (typeof v !== 'string') return undefined;
@@ -119,6 +120,7 @@ export function initTracking(): void {
     captureGclidFromUrl();
     getOrCreateSessionId();
     loadGtag();
+    track({ event: 'page_view' });
   } catch {
     // bootstrap must never throw
   }
@@ -152,7 +154,9 @@ function fireGoogleAdsConversion(event: TrackEvent): void {
       ? getEnv('VITE_GOOGLE_ADS_LABEL_AFFILIATE_CLICK')
       : event === 'file_parsed'
         ? getEnv('VITE_GOOGLE_ADS_LABEL_FILE_PARSED')
-        : undefined;
+        : event === 'page_view'
+          ? getEnv('VITE_GOOGLE_ADS_LABEL_PAGE_VIEW')
+          : undefined;
   if (!adsId || !label) return;
   if (typeof window === 'undefined' || !window.gtag) return;
   try {

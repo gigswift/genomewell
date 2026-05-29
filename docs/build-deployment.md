@@ -90,7 +90,7 @@ Vercel serverless function at `api/track.ts`. Accepts POST only (non-POST → 40
 
 ```ts
 {
-  event: 'affiliate_click' | 'file_parsed',
+  event: 'affiliate_click' | 'file_parsed' | 'page_view',
   partner?: string,         // brand slug, e.g. 'now-foods' (affiliate_click only)
   supplementId?: string,    // supplement display name (affiliate_click only)
   sessionId: string,        // UUID v4 from cw_session cookie
@@ -113,10 +113,11 @@ Both are set by `src/lib/tracking.ts` via `initTracking()`, called from `src/mai
 
 ### Google Ads (gtag.js)
 
-`initTracking()` injects `https://www.googletagmanager.com/gtag/js?id=${VITE_GOOGLE_ADS_ID}` once at boot when `VITE_GOOGLE_ADS_ID` is set. There are **two distinct conversion events**, each mapped to its own Google Ads Conversion Action / label by `fireGoogleAdsConversion(event)` in `src/lib/tracking.ts`:
+`initTracking()` injects `https://www.googletagmanager.com/gtag/js?id=${VITE_GOOGLE_ADS_ID}` once at boot when `VITE_GOOGLE_ADS_ID` is set. There are **three distinct conversion events**, each mapped to its own Google Ads Conversion Action / label by `fireGoogleAdsConversion(event)` in `src/lib/tracking.ts`:
 
 | Event | Fires when | Wired in | Label env var |
 | --- | --- | --- | --- |
+| `page_view` | App bootstrap — exactly once per page load | `track({ event: 'page_view' })` at the end of `initTracking()` in `src/lib/tracking.ts` | `VITE_GOOGLE_ADS_LABEL_PAGE_VIEW` |
 | `affiliate_click` | A "Shop" button on a supplement card is clicked | `track({ event: 'affiliate_click', ... })` in `src/components/SupplementCard.tsx` (`BrandRow.openProduct`) | `VITE_GOOGLE_ADS_LABEL_AFFILIATE_CLICK` |
 | `file_parsed` | A 23andMe/AncestryDNA file is parsed successfully (valid file, SNPs extracted) | `track({ event: 'file_parsed' })` at the parse-success line in `src/App.tsx` (`handleFile`), right after `setParseState('done')` | `VITE_GOOGLE_ADS_LABEL_FILE_PARSED` |
 
@@ -128,12 +129,15 @@ gtag('event', 'conversion', { send_to: `${VITE_GOOGLE_ADS_ID}/<label for this ev
 
 `file_parsed` is guarded by a module-level session flag in `tracking.ts` so it fires at most once per loaded page — the parse-success codepath running twice (e.g. a remount) will not double-count the conversion. A full reload resets the flag. `file_parsed` fires only on a **successful** parse, never on parse failure and never merely on file selection.
 
+`page_view` fires exactly once per page load via the `bootstrapped` re-entry guard in `initTracking()` (no separate dedup flag needed — `initTracking()` short-circuits on the second call within the same loaded page). A full reload starts a fresh page and fires it again.
+
 If `VITE_GOOGLE_ADS_ID` or the label for a given event is unset, that event's gtag conversion is skipped silently and the `/api/track` POST still fires.
 
 **Env vars (Vercel project settings — `VITE_` prefix so Vite inlines them at build time):**
 - `VITE_GOOGLE_ADS_ID` — AdWords account conversion ID (e.g. `AW-1234567890`).
 - `VITE_GOOGLE_ADS_LABEL_AFFILIATE_CLICK` — Conversion label for the affiliate-click conversion event.
 - `VITE_GOOGLE_ADS_LABEL_FILE_PARSED` — Conversion label for the file-parsed conversion event.
+- `VITE_GOOGLE_ADS_LABEL_PAGE_VIEW` — Conversion label for the page-view conversion event.
 
 ### Querying events
 
@@ -142,6 +146,6 @@ In the Vercel dashboard → Project → Logs (Runtime Logs), filter by function 
 ### Verifying the Google Ads conversion is firing
 
 1. Install the Chrome extension **Tag Assistant Companion** (or use **Tag Assistant** at tagassistant.google.com).
-2. Open the deployed site and accept the gtag tags. Upload a valid DNA file (or use the demo file) — on a successful parse, a `conversion` event for the `file_parsed` label should fire once. Then click any "Shop" button on a supplement card to fire the `affiliate_click` label.
+2. Open the deployed site and accept the gtag tags. On initial load, a `conversion` event for the `page_view` label should fire once. Upload a valid DNA file (or use the demo file) — on a successful parse, a `conversion` event for the `file_parsed` label should fire once. Then click any "Shop" button on a supplement card to fire the `affiliate_click` label.
 3. Tag Assistant should show a `conversion` event for the configured `AW-…/<label>` send_to (one per event, with the matching label). In the Network tab, you can also confirm a request to `https://www.google.com/pagead/conversion/...` fires alongside each `/api/track` POST.
 4. The new tab to the partner URL must still open normally — tracking is fire-and-forget and never blocks navigation.

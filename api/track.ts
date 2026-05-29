@@ -33,6 +33,7 @@ interface VercelResponse {
 const ALLOWED_EVENTS = new Set([
   'affiliate_click',
   'file_parsed',
+  'page_view',
 ]);
 
 const MAX_STR = 256;
